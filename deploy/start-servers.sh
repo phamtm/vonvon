@@ -1,6 +1,8 @@
 cd ~/nodejs/daemon
 python daemon.py >> ~/nodejs/daemon.log
 
+# Redis
+redis-server >> ~/nodejs/redis-server.log
 
 # Client - 8000
 cd ~/nodejs/client
