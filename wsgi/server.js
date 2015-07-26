@@ -1,4 +1,4 @@
-const PORT = 3000;
+const PORT = 8002;
 
 const redis = require('redis');
 const app = require('express')();

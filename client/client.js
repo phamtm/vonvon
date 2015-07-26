@@ -20,11 +20,11 @@ var WEBRTC_MEDIA_CONSTRAINTS = {
 
 var PEER_SERVER_OPTIONS = {
   host: 'trananhcuong.com',
-  port: 9000,
+  port: 9001,
   key: 'peerjs'
 }
 
-var WEB_SERVER = 'localhost:3000';
+var WEB_SERVER = 'toidocbao.org:3001';
 var socket = io(WEB_SERVER);
 var LOCAL_STREAM = null;
 
