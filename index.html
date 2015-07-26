@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    video {
+      width: 320px;
+      height: 200px;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Video</h2>
+  <div>
+    <button id="next" type="button">Next</button>
+  </div>
+
+  <!-- Video -->
+  <h3>Local video</h3>
+  <video autoplay id="local" muted="muted"></video>
+
+  <h3>Remote video</h3>
+  <video autoplay id="remote"></video>
+
+  <!-- Javascript -->
+  <script src="libs/peer.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
