@@ -24,7 +24,7 @@ var PEER_SERVER_OPTIONS = {
   key: 'peerjs'
 }
 
-var WEB_SERVER = 'toidocbao.org:3001';
+var WEB_SERVER = 'toidocbao.org:9002';
 var socket = io(WEB_SERVER);
 var LOCAL_STREAM = null;
 

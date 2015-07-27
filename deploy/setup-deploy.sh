@@ -15,3 +15,7 @@ ln -s /etc/nginx/sites-available/vonvon/peer.conf /etc/nginx/sites-enabled/vonvo
 
 mkdir -p ~/nodejs/log
 
+
+# Setup nodejs packages
+cd ~/nodejs/wsgi
+npm install

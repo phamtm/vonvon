@@ -11,9 +11,9 @@ python -m SimpleHTTPServer >> ~/nodejs/client.log
 
 # Peer server - 8001
 cd ~/peerjs-server
-peerjs --port 8001 --key peerjs &
+peerjs --port 8000 --key peerjs &
 
 
 # Server - 8002
-cd ~/wsgi
+cd ~/nodejs/wsgi
 node server.js >> ~/nodejs/wsgi.log
