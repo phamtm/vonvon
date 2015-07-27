@@ -19,12 +19,12 @@ var WEBRTC_MEDIA_CONSTRAINTS = {
 };
 
 var PEER_SERVER_OPTIONS = {
-  host: 'trananhcuong.com',
+  host: 'toidocbao.org',
   port: 9001,
   key: 'peerjs'
 }
 
-var WEB_SERVER = 'toidocbao.org:9002';
+var WEB_SERVER = 'toidocbao.org:8002';
 var socket = io(WEB_SERVER);
 var LOCAL_STREAM = null;
 
