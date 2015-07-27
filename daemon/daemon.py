@@ -23,7 +23,6 @@ def dequeue():
         return
 
     ids = rs.zrange(RANDOM_QUEUE_NAME, 0, -1)
-    print 'ids', ids
 
     if not ids or len(ids) < 1:
         return
