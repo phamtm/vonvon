@@ -12,7 +12,7 @@ python -m SimpleHTTPServer >> ~/nodejs/log/client.log &
 
 # Peer server - 8001
 cd ~/peerjs-server
-peerjs --port 8000 --key peerjs >> ~/nodejs/log/peerjs.log &
+peerjs --port 8001 --key peerjs >> ~/nodejs/log/peerjs.log &
 
 
 # Server - 8002
