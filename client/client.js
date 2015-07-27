@@ -43,6 +43,7 @@ $('document').ready(function() {
 
   // 2. Request for new partner id
   $nextButton.click(function() {
+    console.log('Requesting new partner..')
     socket.emit('request-new-partner');
   })
 
