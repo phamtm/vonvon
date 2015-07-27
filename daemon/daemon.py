@@ -31,7 +31,7 @@ def dequeue():
     while (i + 1 < len(ids)):
         id1 = ids[i]
         id2 = ids[i + 1]
-        print id1, id2
+        print 'Matching:: %s # %s' % (id1, id2)
 
         p = rs.pipeline(transaction=True)
         p.zrem(RANDOM_QUEUE_NAME, id1)
