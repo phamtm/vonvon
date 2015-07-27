@@ -1,20 +1,9 @@
-import random
 import time
 
 import redis
 
 rs = redis.Redis()
 RANDOM_QUEUE_NAME = 'queue'
-
-
-def populate():
-    """ Populate the queue with some dummy ids. """
-    rs.zadd(RANDOM_QUEUE_NAME, 'a', random.random())
-    rs.zadd(RANDOM_QUEUE_NAME, 'b', random.random())
-    rs.zadd(RANDOM_QUEUE_NAME, 'c', random.random())
-    rs.zadd(RANDOM_QUEUE_NAME, 'd', random.random())
-    rs.zadd(RANDOM_QUEUE_NAME, 'e', random.random())
-    rs.zadd(RANDOM_QUEUE_NAME, 'f', random.random())
 
 
 def dequeue():

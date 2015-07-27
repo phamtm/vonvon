@@ -5,12 +5,12 @@ navigator.getUserMedia = navigator.getUserMedia ||
 
 var err = function(err) {
   console.log(err);
-}
+};
 
 
 // =============== GLOBAL VARIABLES ================ //
-var $localVideo = $('#local');
-var $remoteVideo = $('#remote');
+var $localVideo = document.getElementById('local');
+var $remoteVideo = document.getElementById('remote');
 var $nextButton = $('#next');
 
 var WEBRTC_MEDIA_CONSTRAINTS = {
@@ -20,9 +20,9 @@ var WEBRTC_MEDIA_CONSTRAINTS = {
 
 var PEER_SERVER_OPTIONS = {
   host: 'toidocbao.org',
-  port: 9001,
+  port: 8001,
   key: 'peerjs'
-}
+};
 
 var WEB_SERVER = 'toidocbao.org:8002';
 var socket = io(WEB_SERVER);
@@ -35,6 +35,7 @@ $('document').ready(function() {
     WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
       // render local stream in browser
+      console.log('create local stream');
       LOCAL_STREAM = localStream;
       $localVideo.src = window.URL.createObjectURL(localStream);
     },
@@ -83,6 +84,5 @@ $('document').ready(function() {
         );
       });
     })
-  })
+  });
 })
-

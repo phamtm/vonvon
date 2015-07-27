@@ -1,5 +1,6 @@
 const PORT = 8002;
 
+const async = require('async');
 const redis = require('redis');
 const app = require('express')();
 const server = require('http').createServer(app);
@@ -30,10 +31,15 @@ io.on('connection', function (socket) {
 
   socket.on('request-new-partner', function(data) {
     // Subscribe to redis channel
-    redisClient.subscribe(clientId);
-  })
-
-  redisClient.zadd('queue', Math.random(), clientId);
+    async.series([
+      function() {
+        redisClient.zadd('queue', Math.random(), clientId);
+      },
+      function() {
+        redisClient.subscribe(clientId)
+      }
+    ]);
+  });
 
   redisClient.on('message', function (channel, message) {
     console.log('Partner created::' + message);
@@ -41,5 +47,5 @@ io.on('connection', function (socket) {
     socket.emit('matched', {
       partnerId: message
     });
-  })
-})
+  });
+});
