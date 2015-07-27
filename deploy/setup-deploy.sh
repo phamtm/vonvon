@@ -14,12 +14,11 @@ rm -f /etc/nginx/sites-enabled/vonvon/*.conf
 
 # Copy nginx configuration files
 mkdir -p /etc/nginx/sites-available/vonvon
-mkdir -p /etc/nginx/sites-enabled/vonvon
 cp -r nginx/*.conf /etc/nginx/sites-available/vonvon
 cp -r nginx/*.conf /etc/nginx/sites-enabled/vonvon
-ln -sf /etc/nginx/sites-available/vonvon/client.conf /etc/nginx/sites-enabled/vonvon/client.conf
-ln -sf /etc/nginx/sites-available/vonvon/wsgi.conf /etc/nginx/sites-enabled/vonvon/wsgi.conf
-ln -sf /etc/nginx/sites-available/vonvon/peer.conf /etc/nginx/sites-enabled/vonvon/peer.conf
+ln -sf /etc/nginx/sites-available/vonvon/client.conf /etc/nginx/sites-enabled/client.conf
+ln -sf /etc/nginx/sites-available/vonvon/wsgi.conf /etc/nginx/sites-enabled/wsgi.conf
+ln -sf /etc/nginx/sites-available/vonvon/peer.conf /etc/nginx/sites-enabled/peer.conf
 
 
 echo 'Creating log folder..'
