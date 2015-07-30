@@ -43,12 +43,8 @@ io.on('connection', function (socket) {
     isWaiting[clientId] = true;
 
     // Subscribe to redis channel
-    async.series([
-      function() {
-        redisClient.zadd('queue', Math.random(), clientId);
-        redisClient.subscribe(clientId);
-      }
-    ]);
+    redisClient.zadd('queue', Math.random(), clientId);
+    redisClient.subscribe(clientId);
   });
 
   // the user has been matched with another
