@@ -43,22 +43,35 @@ $('document').ready(function() {
     err
   );
 
-  // 2. Request for new partner id
-  $nextButton.click(function() {
-    console.log('Requesting new partner..')
-    CALL_RECEIVED = false;
-    socket.emit('request-new-partner');
-  })
 
   socket.on('connection-created', function (data) {
+    var peerConnection;
+    var partnerId;
+
+    $nextButton.click(function() {
+      console.log('Requesting new partner..')
+      CALL_RECEIVED = false;
+      socket.emit('request-new-partner', {
+        id: data.id
+      });
+
+      if (typeof(peerConnection) !== 'undefined') {
+        peerConnection.destroy();
+        socket.emit('request-new-partner', {
+          id: partnerId
+        })
+      }
+    });
+
     const localId = data.id;
     console.log('Connection created, id::' + localId);
+
     // 1. Create a new connection to the PeerJs-server
-    var peerConnection = new Peer(data.id, PEER_SERVER_OPTIONS);
+    peerConnection = new Peer(data.id, PEER_SERVER_OPTIONS);
 
     // 2. When received a new partner id
     socket.on('matched', function (data) {
-      const partnerId = data.partnerId;
+      partnerId = data.partnerId;
 
       // bogus partnerId
       if (typeof(partnerId) === 'undefined') {
