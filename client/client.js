@@ -46,7 +46,6 @@ $('document').ready(function() {
 
   socket.on('connection-created', function (data) {
     var peerConnection;
-    var partnerId;
 
     $nextButton.click(function() {
       console.log('Requesting new partner..')
@@ -57,9 +56,6 @@ $('document').ready(function() {
 
       if (typeof(peerConnection) !== 'undefined') {
         peerConnection.destroy();
-        socket.emit('request-new-partner', {
-          id: partnerId
-        })
       }
     });
 

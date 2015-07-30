@@ -10,7 +10,6 @@ const uuid = require('node-uuid');
 const bodyParser = require('body-parser');
 // Who is waiting
 var isWaiting = {};
-var isChatting = {};
 
 app.use(bodyParser.json()); // for parsing application/json
 
@@ -35,8 +34,6 @@ io.on('connection', function (socket) {
   });
 
   socket.on('request-new-partner', function(data) {
-    var partnerId = data.id;
-
     // the user is already in waiting queue
     if (isWaiting[clientId]) {
       return;
@@ -44,7 +41,6 @@ io.on('connection', function (socket) {
 
     // register the user in the waiting queue
     isWaiting[clientId] = true;
-    isChatting[clientId] = false;
 
     // Subscribe to redis channel
     redisClient.zadd('queue', Math.random(), clientId);
@@ -53,7 +49,6 @@ io.on('connection', function (socket) {
 
   // the user has been matched with another
   redisClient.on('message', function (channel, message) {
-    isChatting[clientId] = true;
     isWaiting[clientId] = false;
 
     console.log('Partner created::' + message);
