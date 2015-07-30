@@ -67,7 +67,7 @@ $('document').ready(function() {
 
       console.log('Partner matched, partner-id::' + data.partnerId);
 
-      if (partlocalId.localeCompare(partner) < 0) {
+      if (localId.localeCompare(partnerId) < 0) {
         console.log("Calling peer::" + data.partnerId);
         var call = peerConnection.call(data.partnerId, LOCAL_STREAM);
         // user with lower id call user with higher id
