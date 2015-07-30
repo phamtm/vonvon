@@ -25,8 +25,9 @@ var PEER_SERVER_OPTIONS = {
 };
 
 var WEB_SERVER = 'toidocbao.org:8002';
-var socket = io(WEB_SERVER);
+var socket = io.connect(WEB_SERVER);
 var LOCAL_STREAM = null;
+var CALL_RECEIVED = false;
 
 // =============== SOCKET EVENT HANDLERS =============== //
 $('document').ready(function() {
@@ -45,6 +46,7 @@ $('document').ready(function() {
   // 2. Request for new partner id
   $nextButton.click(function() {
     console.log('Requesting new partner..')
+    CALL_RECEIVED = false;
     socket.emit('request-new-partner');
   })
 
@@ -68,6 +70,7 @@ $('document').ready(function() {
 
       // Answer
       peerConnection.on('call', function(call) {
+        CALL_RECEIVED = true;
         navigator.getUserMedia(
           WEBRTC_MEDIA_CONSTRAINTS,
 
