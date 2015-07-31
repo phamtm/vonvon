@@ -49,6 +49,11 @@ io.on('connection', function (socket) {
     redisClient.zrem('queue', clientId);
   });
 
+  io.on('disconnect', function() {
+    redisClient.unsubscribe(clientId);
+    redisClient.zrem('queue', clientId);
+  });
+
   socket.emit('connection-created', {
     id: clientId
   });
