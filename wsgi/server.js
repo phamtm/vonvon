@@ -29,6 +29,26 @@ io.on('connection', function (socket) {
   socket.clientId = clientId;
   console.log('Client::' + clientId);
 
+  io.on('connect_error', function() {
+    redisClient.unsubscribe(clientId);
+    redisClient.zrem('queue', clientId);
+  });
+
+  io.on('connect_timeout', function() {
+    redisClient.unsubscribe(clientId);
+    redisClient.zrem('queue', clientId);
+  });
+
+  io.on('reconnect_error', function() {
+    redisClient.unsubscribe(clientId);
+    redisClient.zrem('queue', clientId);
+  });
+
+  io.on('reconnect_failed', function() {
+    redisClient.unsubscribe(clientId);
+    redisClient.zrem('queue', clientId);
+  });
+
   socket.emit('connection-created', {
     id: clientId
   });
@@ -43,8 +63,9 @@ io.on('connection', function (socket) {
     isWaiting[clientId] = true;
 
     // Subscribe to redis channel
-    redisClient.zadd('queue', Math.random(), clientId);
-    redisClient.subscribe(clientId);
+    redisClient.zadd('queue', Math.random(), clientId, function() {
+      redisClient.subscribe(clientId);
+    });
   });
 
   // the user has been matched with another
