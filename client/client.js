@@ -24,11 +24,14 @@ var PEER_SERVER_OPTIONS = {
   key: 'peerjs'
 };
 
-var WEB_SERVER = 'toidocbao.org:8002';
+var WEB_SERVER = 'localhost:8002';
 var socket = io.connect(WEB_SERVER);
 var LOCAL_STREAM = null;
-var CALL_RECEIVED = false;
 
+var buttonListener = function(event) {
+    console.log('Requesting new partner 1..')
+    socket.emit('request-new-partner');
+}
 // =============== SOCKET EVENT HANDLERS =============== //
 $('document').ready(function() {
   // Capture local media
@@ -43,66 +46,82 @@ $('document').ready(function() {
     err
   );
 
-
+  // 2. Request for new partner id
+  $nextButton.click(buttonListener);
   socket.on('connection-created', function (data) {
-    var peerConnection;
-
-    $nextButton.click(function() {
-      console.log('Requesting new partner..')
-      CALL_RECEIVED = false;
-      socket.emit('request-new-partner', {
-        id: data.id
-      });
-
-      if (typeof(peerConnection) !== 'undefined') {
-        peerConnection.destroy();
-      }
-    });
-
     const localId = data.id;
-    console.log('Connection created, id::' + localId);
+    var partnerId;
+    var call;
+
 
     // 1. Create a new connection to the PeerJs-server
-    peerConnection = new Peer(data.id, PEER_SERVER_OPTIONS);
+    console.log('Connection created, id::' + localId);
+    var peerConnection = new Peer(data.id, PEER_SERVER_OPTIONS);
+
 
     // 2. When received a new partner id
     socket.on('matched', function (data) {
-      partnerId = data.partnerId;
-
       // bogus partnerId
-      if (typeof(partnerId) === 'undefined') {
+      if (typeof(data) === 'undefined' || !data.hasOwnProperty('partnerId')) {
         return;
       }
-
+      partnerId = data.partnerId;
       console.log('Partner matched, partner-id::' + data.partnerId);
 
       if (localId.localeCompare(partnerId) < 0) {
         console.log("Calling peer::" + data.partnerId);
-        var call = peerConnection.call(data.partnerId, LOCAL_STREAM);
+        call = peerConnection.call(data.partnerId, LOCAL_STREAM);
+
+        call.on('close', function() {
+          console.log('ending your call');
+          call.close();
+        });
+
+        // 2. Request for new partner id
+        $nextButton.off('click');
+        $nextButton.click(function() {
+          console.log('Requesting new partner 2..');
+          console.log('Ending a call by caller..');
+          call.close();
+          socket.emit('request-new-partner');
+        });
+
         // user with lower id call user with higher id
         call.on('stream', function(remoteStream) {
           // Show stream in some video/canvas element.
           console.log("Receiving remote stream");
           $remoteVideo.src = window.URL.createObjectURL(remoteStream);
         });
-      } else {
-        // Answer
-        peerConnection.on('call', function(call) {
-          CALL_RECEIVED = true;
-          navigator.getUserMedia(
-            WEBRTC_MEDIA_CONSTRAINTS,
+      }
 
-            function(localStream) {
-              console.log("Receiving a call..")
-              call.answer(localStream); // Answer the call with an A/V stream.
-              call.on('stream', function(remoteStream) {
-                // Show stream in some video/canvas element.
-                console.log("Receiving remote stream");
-                $remoteVideo.src = window.URL.createObjectURL(remoteStream);
-              });
-            },
-            err
-          );
+      // Answer
+      else {
+        peerConnection.on('call', function(call) {
+          // 2. Request for new partner id
+          $nextButton.off('click');
+          $nextButton.click(function() {
+            console.log('Requesting new partner..');
+            console.log('ending a call from receiver');
+            call.close();
+            socket.emit('request-new-partner');
+          });
+
+          call.on('close', function() {
+            call.close();
+          });
+
+          console.log("Receiving a call..")
+          console.log(LOCAL_STREAM);
+          call.answer(LOCAL_STREAM); // Answer the call with an A/V stream.
+          call.on('stream', function(remoteStream) {
+            // Show stream in some video/canvas element.
+            console.log("Receiving remote stream");
+            if (typeof(remoteStream) !== 'undefined') {
+              console.log('GOOD remote stream');
+              console.log(remoteStream);
+            }
+            $remoteVideo.src = window.URL.createObjectURL(remoteStream);
+          });
         });
       }
     })
