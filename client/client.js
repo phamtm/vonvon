@@ -25,7 +25,9 @@ var PEER_SERVER_OPTIONS = {
 };
 
 var WEB_SERVER = 'toidocbao.org:8002';
-var socket = io.connect(WEB_SERVER);
+var socket = io.connect(WEB_SERVER, {
+  'sync disconnect on unload': true
+});
 var LOCAL_STREAM = null;
 
 var buttonListener = function(event) {
