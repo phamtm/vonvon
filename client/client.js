@@ -35,7 +35,7 @@ var requestNewPartner = function(event) {
     console.log('Requesting new partner 1..');
     if (!isRequesting) {
       $nextButton.attr('disabled', true);
-      $nextButton.html('requesting new partner..')
+      $nextButton.html('requesting new partner..');
       isRequesting = true;
       socket.emit('request-new-partner');
     }
@@ -70,6 +70,7 @@ $('document').ready(function() {
     socket.on('matched', function (data) {
       isRequesting = false;
       $nextButton.removeAttr('disabled');
+      $nextButton.html('Next');
       // bogus partnerId
       if (typeof(data) === 'undefined' || !data.hasOwnProperty('partnerId')) {
         return;
