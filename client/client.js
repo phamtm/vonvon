@@ -24,15 +24,20 @@ var PEER_SERVER_OPTIONS = {
   key: 'peerjs'
 };
 
+var isRequesting = false;
 var WEB_SERVER = 'toidocbao.org:8002';
 var socket = io.connect(WEB_SERVER, {
   'sync disconnect on unload': true
 });
 var LOCAL_STREAM = null;
 
-var buttonListener = function(event) {
-    console.log('Requesting new partner 1..')
-    socket.emit('request-new-partner');
+var requestNewPartner = function(event) {
+    console.log('Requesting new partner 1..');
+    if (!isRequesting) {
+      $nextButton.attr('disabled', true);
+      isRequesting = true;
+      socket.emit('request-new-partner');
+    }
 }
 // =============== SOCKET EVENT HANDLERS =============== //
 $('document').ready(function() {
@@ -49,12 +54,11 @@ $('document').ready(function() {
   );
 
   // 2. Request for new partner id
-  $nextButton.click(buttonListener);
+  $nextButton.click(requestNewPartner);
   socket.on('connection-created', function (data) {
     const localId = data.id;
     var partnerId;
     var call;
-
 
     // 1. Create a new connection to the PeerJs-server
     console.log('Connection created, id::' + localId);
@@ -63,6 +67,8 @@ $('document').ready(function() {
 
     // 2. When received a new partner id
     socket.on('matched', function (data) {
+      isRequesting = false;
+      $nextButton.removeAttr('disabled');
       // bogus partnerId
       if (typeof(data) === 'undefined' || !data.hasOwnProperty('partnerId')) {
         return;
@@ -77,15 +83,15 @@ $('document').ready(function() {
         call.on('close', function() {
           console.log('ending your call');
           call.close();
+          requestNewPartner();
         });
 
         // 2. Request for new partner id
         $nextButton.off('click');
         $nextButton.click(function() {
-          console.log('Requesting new partner 2..');
           console.log('Ending a call by caller..');
           call.close();
-          socket.emit('request-new-partner');
+          requestNewPartner();
         });
 
         // user with lower id call user with higher id
@@ -102,14 +108,14 @@ $('document').ready(function() {
           // 2. Request for new partner id
           $nextButton.off('click');
           $nextButton.click(function() {
-            console.log('Requesting new partner..');
             console.log('ending a call from receiver');
             call.close();
-            socket.emit('request-new-partner');
+            requestNewPartner();
           });
 
           call.on('close', function() {
             call.close();
+            requestNewPartner();
           });
 
           console.log("Receiving a call..")
