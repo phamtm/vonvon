@@ -35,6 +35,7 @@ var requestNewPartner = function(event) {
     console.log('Requesting new partner 1..');
     if (!isRequesting) {
       $nextButton.attr('disabled', true);
+      $nextButton.html('requesting new partner..')
       isRequesting = true;
       socket.emit('request-new-partner');
     }
