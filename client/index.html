@@ -2,40 +2,65 @@
 <html>
 <head>
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 </head>
 
 <body>
 
-  <h2>Video</h2>
-  <div>
-    <button id="next" type="button">Next</button>
-  </div>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">VonVon.vn</a>
+    </div>
+  </nav>
+
 
   <!-- Wrapper -->
-  <div class="wrapper">
+  <div class="row">
 
     <!-- Left videos -->
-    <div class="left">
-      <h3>Local video</h3>
-      <video autoplay id="local" muted="muted"></video>
+    <div class="col s12 m6 l4" style="padding-left:0">
 
-      <h3>Remote video</h3>
-      <video autoplay id="remote"></video>
-    </div>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <video autoplay id="remote"></video>
+        </div>
+        <div class="card-content">
+          <button class="waves-effect waves-light btn" type="button" id="next">Next</button>
+        </div>
+      </div>
 
-    <!-- Right chatbox -->
-    <div class="right">
-      <div id="chat-box">
-        <h4>Chat box</h4>
-        <ul id="chat-messages">
-        </ul>
-        <input type="text" id="chat-input">
-        <button type="button" id="btn-submit">Submit</button>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <video autoplay id="local" muted="muted"></video>
+        </div>
       </div>
     </div>
 
-  </div>
+    <!-- Right chatbox -->
+    <div class="col s12 m6 l8">
 
+
+      <div class="card">
+        <div class="card-content">
+          <div id="chat-box">
+            <h4>Chat box</h4>
+            <ul id="chat-messages">
+            </ul>
+            <input type="text" id="chat-input">
+            <button class="waves-effect waves-light btn" type="button" id="btn-submit">Submit</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 
   <!-- Javascript -->
   <script src="libs/peer.min.js"></script>
