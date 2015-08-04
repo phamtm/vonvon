@@ -12,6 +12,9 @@ var err = function(err) {
 var $localVideo = document.getElementById('local');
 var $remoteVideo = document.getElementById('remote');
 var $nextButton = $('#next');
+var $chatSubmitButton = $('#btn-submit');
+var $chatMessagesUl = $('#chat-messages');
+var $chatInput = $('#chat-input');
 
 var WEBRTC_MEDIA_CONSTRAINTS = {
   video: true,
@@ -32,7 +35,7 @@ var socket = io.connect(WEB_SERVER, {
 var LOCAL_STREAM = null;
 
 var requestNewPartner = function(event) {
-    console.log('Requesting new partner 1..');
+    console.log('Requesting new partner..');
     if (!isRequesting) {
       $nextButton.attr('disabled', true);
       $nextButton.html('requesting new partner..');
@@ -60,6 +63,7 @@ $('document').ready(function() {
     const localId = data.id;
     var partnerId;
     var call;
+    var peerDataConnection;
 
     // 1. Create a new connection to the PeerJs-server
     console.log('Connection created, id::' + localId);
@@ -81,6 +85,8 @@ $('document').ready(function() {
       if (localId.localeCompare(partnerId) < 0) {
         console.log("Calling peer::" + data.partnerId);
         call = peerConnection.call(data.partnerId, LOCAL_STREAM);
+        peerDataConnection = peerConnection.connect(partnerId);
+        setUpChat(peerDataConnection);
 
         call.on('close', function() {
           console.log('ending your call');
@@ -121,19 +127,39 @@ $('document').ready(function() {
           });
 
           console.log("Receiving a call..")
-          console.log(LOCAL_STREAM);
           call.answer(LOCAL_STREAM); // Answer the call with an A/V stream.
           call.on('stream', function(remoteStream) {
             // Show stream in some video/canvas element.
             console.log("Receiving remote stream");
-            if (typeof(remoteStream) !== 'undefined') {
-              console.log('GOOD remote stream');
-              console.log(remoteStream);
-            }
             $remoteVideo.src = window.URL.createObjectURL(remoteStream);
           });
+        });
+
+        peerConnection.on('connection', function(dataConnection) {
+          setUpChat(dataConnection);
         });
       }
     })
   });
 });
+
+/*=============================== UTILITY ===================================*/
+var setUpChat = function (peerDataConnection) {
+  console.log('setting up chat');
+
+  $chatSubmitButton.click(function() {
+    var text = $chatInput.val();
+    if (text !== null && text !== '') {
+      var localText = '<li><strong>You: </strong>' + text + '</li>';
+      $chatMessagesUl.append(localText);
+      console.log('sending chat message::' + text);
+      peerDataConnection.send(text);
+    }
+  });
+
+  peerDataConnection.on('data', function (data) {
+    console.log('receiving chat message' + data);
+    var remoteText = '<li><strong>Von: </strong>' + data + '</li>';
+    $chatMessagesUl.append(remoteText);
+  });
+};

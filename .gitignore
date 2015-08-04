@@ -4,4 +4,4 @@ log/
 tmp
 node_modules/
 bower_components/
-dump.rdb:
+dump.rdb

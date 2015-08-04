@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    video {
-      width: 320px;
-      height: 200px;
-      border: 1px solid gray;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -17,12 +11,31 @@
     <button id="next" type="button">Next</button>
   </div>
 
-  <!-- Video -->
-  <h3>Local video</h3>
-  <video autoplay id="local" muted="muted"></video>
+  <!-- Wrapper -->
+  <div class="wrapper">
 
-  <h3>Remote video</h3>
-  <video autoplay id="remote"></video>
+    <!-- Left videos -->
+    <div class="left">
+      <h3>Local video</h3>
+      <video autoplay id="local" muted="muted"></video>
+
+      <h3>Remote video</h3>
+      <video autoplay id="remote"></video>
+    </div>
+
+    <!-- Right chatbox -->
+    <div class="right">
+      <div id="chat-box">
+        <h4>Chat box</h4>
+        <ul id="chat-messages">
+        </ul>
+        <input type="text" id="chat-input">
+        <button type="button" id="btn-submit">Submit</button>
+      </div>
+    </div>
+
+  </div>
+
 
   <!-- Javascript -->
   <script src="libs/peer.min.js"></script>

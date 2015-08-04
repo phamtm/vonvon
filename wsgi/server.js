@@ -7,10 +7,10 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const uuid = require('node-uuid');
 
-const bodyParser = require('body-parser');
 // Who is waiting
 var isWaiting = {};
 
+const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 
 // Redis setup
