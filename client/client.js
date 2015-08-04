@@ -171,5 +171,8 @@ var handleChatSubmission = function(peerDataConnection) {
     $chatMessagesUl.append(localText);
     console.log('sending chat message::' + text);
     peerDataConnection.send(text);
+
+    // clear local input
+    $chatInput.val('');
   }
 };
