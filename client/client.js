@@ -147,14 +147,14 @@ $('document').ready(function() {
 var setUpChat = function (peerDataConnection) {
   console.log('setting up chat');
 
-  $chatSubmitButton.click(function() {
-    var text = $chatInput.val();
-    if (text !== null && text !== '') {
-      var localText = '<li><strong>You: </strong>' + text + '</li>';
-      $chatMessagesUl.append(localText);
-      console.log('sending chat message::' + text);
-      peerDataConnection.send(text);
+  $chatInput.keypress(function (e) {
+    if (e.which == 13) {
+      handleChatSubmission(peerDataConnection);
     }
+  });
+
+  $chatSubmitButton.click(function() {
+    handleChatSubmission(peerDataConnection);
   });
 
   peerDataConnection.on('data', function (data) {
@@ -162,4 +162,14 @@ var setUpChat = function (peerDataConnection) {
     var remoteText = '<li><strong>Von: </strong>' + data + '</li>';
     $chatMessagesUl.append(remoteText);
   });
+};
+
+var handleChatSubmission = function(peerDataConnection) {
+  var text = $chatInput.val();
+  if (text !== null && text !== '') {
+    var localText = '<li><strong>You: </strong>' + text + '</li>';
+    $chatMessagesUl.append(localText);
+    console.log('sending chat message::' + text);
+    peerDataConnection.send(text);
+  }
 };
