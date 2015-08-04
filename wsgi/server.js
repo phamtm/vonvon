@@ -29,30 +29,7 @@ io.on('connection', function (socket) {
   socket.clientId = clientId;
   console.log('Client::' + clientId);
 
-  io.on('connect_error', function() {
-    redisClient.unsubscribe(clientId);
-    redisClient.zrem('queue', clientId);
-  });
-
-  io.on('connect_timeout', function() {
-    redisClient.unsubscribe(clientId);
-    redisClient.zrem('queue', clientId);
-  });
-
-  io.on('reconnect_error', function() {
-    redisClient.unsubscribe(clientId);
-    redisClient.zrem('queue', clientId);
-  });
-
-  io.on('reconnect_failed', function() {
-    redisClient.unsubscribe(clientId);
-    redisClient.zrem('queue', clientId);
-  });
-
-  io.on('disconnect', function() {
-    redisClient.unsubscribe(clientId);
-    redisClient.zrem('queue', clientId);
-  });
+  handleSocketConnectionError(socket, redisClient, clientId);
 
   socket.emit('connection-created', {
     id: clientId
@@ -84,3 +61,48 @@ io.on('connection', function (socket) {
     });
   });
 });
+
+/*=============================== UTILITY ===================================*/
+/**
+ * Unsubscribe from redis, remove waiting id, end the redis connection
+ * @param  {[type]} redisClient [description]
+ * @param  {[type]} clientId    [description]
+ * @return {[type]}             [description]
+ */
+var cleanUpRedis = function (redisClient, clientId) {
+  redisClient.unsubscribe(clientId, function () {
+    redisClient.zrem('queue', clientId, function () {
+      redisClient.end();
+    });
+  });
+};
+
+/**
+ * Handle SocketIO Connection error
+ * @param  socket      socket connection
+ * @param  redisClient redis connection
+ * @param  clientId    id of the current user`
+ */
+var handleSocketConnectionError = function (socket, redisClient, clientId) {
+  // SocketIO Connection error handling
+  socket.on('connect_error', function() {
+    cleanUpRedis(redisClient, clientId);
+  });
+
+  socket.on('connect_timeout', function() {
+    cleanUpRedis(redisClient, clientId);
+  });
+
+  socket.on('reconnect_error', function() {
+    cleanUpRedis(redisClient, clientId);
+  });
+
+  socket.on('reconnect_failed', function() {
+    cleanUpRedis(redisClient, clientId);
+  });
+
+  socket.on('disconnect', function() {
+    cleanUpRedis(redisClient, clientId);
+  });
+  // End of SocketIO Connection error handling
+};

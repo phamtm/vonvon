@@ -25,7 +25,7 @@ var PEER_SERVER_OPTIONS = {
 };
 
 var isRequesting = false;
-var WEB_SERVER = 'toidocbao.org:8002';
+var WEB_SERVER = 'localhost:8002';
 var socket = io.connect(WEB_SERVER, {
   'sync disconnect on unload': true
 });
@@ -136,4 +136,4 @@ $('document').ready(function() {
       }
     })
   });
-})
+});
