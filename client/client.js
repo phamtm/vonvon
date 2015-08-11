@@ -59,7 +59,7 @@ $('document').ready(function() {
       $localVideo.attr('src', window.URL.createObjectURL(localStream));
     },
     function(error) {
-      $warningModal.openModal();
+      window.location.replace("not-supported.html");
     }
   );
 
