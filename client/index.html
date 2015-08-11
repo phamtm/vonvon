@@ -24,57 +24,56 @@
     </div>
   </div>
 
+  <div class="container">
+    <!-- Wrapper -->
+    <div class="row">
 
-  <!-- Wrapper -->
-  <div class="row">
+      <!-- Left videos -->
+      <div class="col s12 m12 l4">
 
-    <!-- Left videos -->
-    <div class="col s12 m12 l4">
-
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light" style="background:#2c3e50">
-          <div id="loader">
-            <div class="sk-fading-circle">
-              <div class="sk-circle1 sk-circle"></div>
-              <div class="sk-circle2 sk-circle"></div>
-              <div class="sk-circle3 sk-circle"></div>
-              <div class="sk-circle4 sk-circle"></div>
-              <div class="sk-circle5 sk-circle"></div>
-              <div class="sk-circle6 sk-circle"></div>
-              <div class="sk-circle7 sk-circle"></div>
-              <div class="sk-circle8 sk-circle"></div>
-              <div class="sk-circle9 sk-circle"></div>
-              <div class="sk-circle10 sk-circle"></div>
-              <div class="sk-circle11 sk-circle"></div>
-              <div class="sk-circle12 sk-circle"></div>
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light" style="background:#2c3e50">
+            <div id="loader">
+              <div class="sk-fading-circle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+              </div>
             </div>
+            <video autoplay id="remote"></video>
           </div>
-          <video autoplay id="remote"></video>
+          <div class="card-content">
+            <button class="waves-effect waves-light btn" type="button" id="next">Next</button>
+          </div>
         </div>
-        <div class="card-content">
-          <button class="waves-effect waves-light btn" type="button" id="next">Next</button>
+
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <video autoplay id="local" muted="muted"></video>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <video autoplay id="local" muted="muted"></video>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right chatbox -->
-    <div class="col s12 m12 l8">
-
-
-      <div class="card">
-        <div class="card-content">
-          <div id="chat-box">
-            <h4>Chat box</h4>
-            <ul id="chat-messages">
-            </ul>
-            <input type="text" id="chat-input">
-            <button class="waves-effect waves-light btn" type="button" id="btn-submit">Submit</button>
+      <!-- Right chatbox -->
+      <div class="col s12 m12 l8">
+        <div class="card">
+          <div class="card-content">
+            <div id="chat-box">
+              <h4>Chat box</h4>
+              <ul id="chat-messages">
+              </ul>
+              <input type="text" id="chat-input">
+              <button class="waves-effect waves-light btn" type="button" id="btn-submit">Submit</button>
+            </div>
           </div>
         </div>
       </div>
