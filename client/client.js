@@ -18,6 +18,7 @@ var $chatSubmitButton = $('#btn-submit');
 var $chatMessagesUl = $('#chat-messages');
 var $chatInput = $('#chat-input');
 var $loader = $('#loader');
+var $warningModal = $('#warning-modal');
 
 var WEBRTC_MEDIA_CONSTRAINTS = {
   video: true,
@@ -57,7 +58,9 @@ $('document').ready(function() {
       LOCAL_STREAM = localStream;
       $localVideo.attr('src', window.URL.createObjectURL(localStream));
     },
-    err
+    function(error) {
+      $warningModal.openModal();
+    }
   );
 
   // 2. Request for new partner id
