@@ -1,7 +1,8 @@
 *.pyc
 *.o
 log/
-tmp
+tmp/
 node_modules/
 bower_components/
 dump.rdb
+bundle.js
