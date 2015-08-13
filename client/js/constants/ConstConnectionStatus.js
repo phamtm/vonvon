@@ -1,5 +1,5 @@
 var ConnectionStatus = {
-	NONE: 'none',
+	NOT_CONNECTED: 'not connected',
 	REQUESTING: 'requesting',
 	MATCHED: 'matched',
 	CONNECTED: 'connected'

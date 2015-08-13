@@ -1,22 +1,22 @@
 var React = require('react');
-var StreamStore = require('../stores/StreamStore');
+var State = require('../State');
 
 
 var VideoBoxLocal = React.createClass({
 	getInitialState: function() {
 		return {
-			localStream: StreamStore.getLocalStream()
+			localStream: State.getLocalStream()
 		};
 	},
 
 	_onStreamChange: function() {
 		this.setState({
-			localStream: StreamStore.getLocalStream()
+			localStream: State.getLocalStream()
 		});
 	},
 
 	componentDidMount: function() {
-		StreamStore.addChangeListener(this._onStreamChange);
+		State.onStreamLocalReceived(this._onStreamChange);
 	},
 
 	render: function() {
