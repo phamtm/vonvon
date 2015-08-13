@@ -83,6 +83,7 @@ var ChatInput = React.createClass({
     return (
       <div>
         <input type="text" value={this.state.message}
+               disabled={this.state.disabled}
                onChange={this.handleValueChange}
                onKeyDown={this.handleKeyDown} />
         <button className={"waves-effect waves-light btn"}
