@@ -104,8 +104,8 @@ State.prototype._getLocalMedia = function() {
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
-      this._localStream = null;
-      // this._localStream = localStream;
+      // this._localStream = null;
+      this._localStream = localStream;
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
     console.log
@@ -223,8 +223,6 @@ State.prototype.init = function() {
             _self.emit(Topics.STREAM_REMOTE_RECEIVED);
           });
         }
-
-
       }
     });
   });
