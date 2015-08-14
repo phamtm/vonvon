@@ -137,6 +137,8 @@ State.prototype._requestNewPartner = function() {
 };
 
 State.prototype._cleanUpAndRequestNewPartner = function() {
+  this._messages = [];
+  this.emit(Topics.MESSAGE_CHANGED);
 	this._closeConn();
 	this._clearMessages();
 	this._requestNewPartner();
@@ -212,8 +214,6 @@ State.prototype.init = function() {
         if (_self._peerCallConn) {
           _self._peerCallConn.on('close', function() {
             console.log('ending your call');
-            _self._messages = [];
-            _self.emit(Topics.MESSAGE_CHANGED);
             _self._cleanUpAndRequestNewPartner();
           });
 
