@@ -104,7 +104,8 @@ State.prototype._getLocalMedia = function() {
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
-      this._localStream = localStream;
+      this._localStream = null;
+      // this._localStream = localStream;
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
     console.log
@@ -145,6 +146,10 @@ State.prototype._setUpChat = function() {
   this._peerDataConn.on('data', function(data) {
   	this._messages.push(data);
   	this.emit(Topics.MESSAGE_CHANGED);
+  }.bind(this));
+
+  this._peerDataConn.on('close', function() {
+    this._cleanUpAndRequestNewPartner();
   }.bind(this));
 };
 
@@ -198,22 +203,28 @@ State.prototype.init = function() {
 
       if (LOCAL_ID.localeCompare(PARTNER_ID) < 0) {
         console.log("Calling peer::" + PARTNER_ID);
-        _self._peerCallConn = _self._peerConn.call(PARTNER_ID, _self._localStream);
         _self._peerDataConn = _self._peerConn.connect(PARTNER_ID);
         _self._setUpChat(_self._peerDataConn);
 
-        _self._peerCallConn.on('close', function() {
-          console.log('ending your call');
-          _self._messages = [];
-          _self.emit(Topics.MESSAGE_CHANGED);
-          _self._cleanUpAndRequestNewPartner();
-        });
+        // If the user disable localStream, or no device -> do not call media
+        _self._peerCallConn = _self._peerConn.call(PARTNER_ID, _self._localStream);
 
-        // user with lower id call user with higher id
-        _self._peerCallConn.on('stream', function(remoteStream) {
-        	_self._remoteStream = remoteStream;
-        	_self.emit(Topics.STREAM_REMOTE_RECEIVED);
-        });
+        if (_self._peerCallConn) {
+          _self._peerCallConn.on('close', function() {
+            console.log('ending your call');
+            _self._messages = [];
+            _self.emit(Topics.MESSAGE_CHANGED);
+            _self._cleanUpAndRequestNewPartner();
+          });
+
+          // user with lower id call user with higher id
+          _self._peerCallConn.on('stream', function(remoteStream) {
+            _self._remoteStream = remoteStream;
+            _self.emit(Topics.STREAM_REMOTE_RECEIVED);
+          });
+        }
+
+
       }
     });
   });
