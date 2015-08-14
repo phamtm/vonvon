@@ -4,6 +4,7 @@ var EventEmitter = require("events").EventEmitter;
 var io = require('socket.io-client');
 var Peer = require('peerjs');
 var Topics = require('./constants/Topics');
+var Message = require('./Message');
 
 
 /**
@@ -84,14 +85,16 @@ State.prototype.onRequestNextPartner = function(cb) {
 };
 
 State.prototype.sendChat = function(message) {
-	if (message && message.hasOwnProperty(length) && message.length) {
-		if (this._peerDataConn &&
-				this._peerDataConn.open &&
-				this._state == ConnectionStatus.MATCHED) {
-			this._peerDataConn.send(message);
-			this._messages.push(message);
-			this.emit(Topics.MESSAGE_CHANGED);
-		}
+	if (message &&
+      this._peerDataConn &&
+			this._peerDataConn.open &&
+			this._state == ConnectionStatus.MATCHED) {
+    console.log('sending msg');
+    console.log(message);
+    this._peerDataConn.send(message);
+    var authoredMessage = Message.convertRawMessage(message, true);
+		this._messages.push(authoredMessage);
+		this.emit(Topics.MESSAGE_CHANGED);
 	}
 };
 
@@ -146,7 +149,10 @@ State.prototype._cleanUpAndRequestNewPartner = function() {
 
 State.prototype._setUpChat = function() {
   this._peerDataConn.on('data', function(data) {
-  	this._messages.push(data);
+    console.log('recv');
+    console.log(data);
+    var rawMessage = Message.convertRawMessage(data, false);
+  	this._messages.push(rawMessage);
   	this.emit(Topics.MESSAGE_CHANGED);
   }.bind(this));
 

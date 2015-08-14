@@ -2,6 +2,7 @@ var React = require('react');
 
 var State = require('../State');
 var ConnectionStatus = require('../constants/ConstConnectionStatus');
+var Message = require('../Message');
 
 
 const ENTER_KEY_CODE = 13;
@@ -26,7 +27,7 @@ var ChatMessageList = React.createClass({
 
   render: function() {
     var items = this.state.chatMessages.map(function(msg) {
-      return <li>{msg}</li>;
+      return <li><strong style={{color:'#666'}}>{msg.authorName}:</strong> {msg.text}</li>;
     });
     return (
       <ul>
@@ -52,7 +53,9 @@ var ChatInput = React.createClass({
         message: '',
         disabled: State.getState() !== ConnectionStatus.MATCHED
       });
-      State.sendChat(this.state.message);
+      var rawMessage = Message.getCreatedMessageData(this.state.message);
+      console.log(rawMessage);
+      State.sendChat(rawMessage);
     }
   },
 
@@ -68,11 +71,13 @@ var ChatInput = React.createClass({
   },
 
   handleClick: function() {
+    var rawMessage = Message.getCreatedMessageData(this.state.message);
+    console.log(rawMessage);
+    State.sendChat(rawMessage);
     this.setState({
       message: '',
       disabled: State.getState() !== ConnectionStatus.MATCHED
     });
-    State.sendChat(this.state.message);
   },
 
   componentDidMount: function() {
