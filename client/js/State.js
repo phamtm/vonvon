@@ -167,13 +167,13 @@ State.prototype.init = function() {
       this.emit(Topics.STREAM_LOCAL_CHANGED);
     }
 
-    if (this._state === ConnectionStatus.MATCHED) {
-      if (!this._peerCallConn.open || !this._peerDataConn.open) {
-        console.log("YAHOOOOOOOOOOOOOOOO");
-        this._cleanUpAndRequestNewPartner();
-      }
-    }
-  }.bind(this), 3000);
+    // if (this._state === ConnectionStatus.MATCHED) {
+    //   if (!this._peerCallConn.open || !this._peerDataConn.open) {
+    //     console.log("YAHOOOOOOOOOOOOOOOO");
+    //     this._cleanUpAndRequestNewPartner();
+    //   }
+    // }
+  }.bind(this), 10000);
 
   this._getLocalMedia();
 

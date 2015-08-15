@@ -4,6 +4,7 @@ video {
 
 .remote-video-holder {
   position: relative;
+  min-height:240px;
 }
 
 .connection-status {
@@ -25,6 +26,14 @@ ul#chat-messages {
 body {
 	background-image: url('../img/swirl_pattern.png');
 	background-repeat:  repeat-x repeat-y;
+}
+
+.chat-author {
+  color: #666;
+}
+
+.chat-text {
+
 }
 
 .sk-fading-circle {

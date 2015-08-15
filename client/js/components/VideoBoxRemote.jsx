@@ -61,7 +61,7 @@ var VideoBoxRemote = React.createClass({
 
       default:
         console.log(this.state.connectionState);
-        return <span>DEFAULT</span>;
+        return <div className='remote-video-holder'></div>;
         break;
     }
   },
@@ -69,7 +69,9 @@ var VideoBoxRemote = React.createClass({
   render: function() {
     return (
       <div className={"card"}>
-        <div className={"card-image waves-effect waves-block waves-light"} style={this.state.options}>
+        <div
+          className={"card-image waves-effect waves-block waves-light"}
+          style={this.state.options}>
           <VideoBoxRemoteStatus connectionState={this.state.connectionState}/>
           {this._getVideoHolder()}
         </div>

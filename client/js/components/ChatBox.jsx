@@ -7,6 +7,17 @@ var Message = require('../Message');
 
 const ENTER_KEY_CODE = 13;
 
+var ChatMessage = React.createClass({
+  render: function() {
+    return (
+      <li className={'chat-message'}>
+        <strong className={'chat-author'}>{this.props.message.authorName}:</strong>
+        <span class={'chat-text'}>{this.props.message.text}</span>
+      </li>
+    );
+  }
+});
+
 var ChatMessageList = React.createClass({
 
   getInitialState: function() {
@@ -27,7 +38,7 @@ var ChatMessageList = React.createClass({
 
   render: function() {
     var items = this.state.chatMessages.map(function(msg) {
-      return <li><strong style={{color:'#666'}}>{msg.authorName}:</strong> {msg.text}</li>;
+      return <ChatMessage key={msg.id} message={msg} />
     });
     return (
       <ul>
