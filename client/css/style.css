@@ -28,12 +28,29 @@ body {
 	background-repeat:  repeat-x repeat-y;
 }
 
-.chat-author {
-  color: #666;
+.chat-message {
+  display:block;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
-.chat-text {
+.message-author {
+  color: #66c;
+  float: left;
+  font-size: 13px;
+  margin: 0;
+}
 
+.message-time {
+  color: #aad;
+  float: right;
+  font-size: 12px;
+}
+
+.message-text {
+  clear: both;
+  font-size: 14px;
+  padding-top: 10px;
 }
 
 .sk-fading-circle {
