@@ -160,12 +160,12 @@ State.prototype._setUpChat = function() {
 State.prototype.init = function() {
   var _self = this;
 
-  setInterval(function() {
-    var videoTrack = this._localStream.getVideoTracks()[0];
-    if (videoTrack.readyState !== 'live') {
-      this._getLocalMedia();
-      this.emit(Topics.STREAM_LOCAL_CHANGED);
-    }
+  // setInterval(function() {
+  //   var videoTrack = this._localStream.getVideoTracks()[0];
+  //   if (videoTrack.readyState !== 'live') {
+  //     this._getLocalMedia();
+  //     this.emit(Topics.STREAM_LOCAL_CHANGED);
+  //   }
 
     // if (this._state === ConnectionStatus.MATCHED) {
     //   if (!this._peerCallConn.open || !this._peerDataConn.open) {
