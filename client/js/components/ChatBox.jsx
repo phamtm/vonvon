@@ -12,7 +12,7 @@ var ChatMessage = React.createClass({
     return (
       <li className={'chat-message'}>
         <h5 className={'message-author'}>{this.props.message.authorName}</h5>
-        <div className="message-time">{this.props.message.date}</div>
+        <div className="message-time">{this.props.message.date.toLocaleString()}</div>
         <div className={'message-text'}>{this.props.message.text}</div>
       </li>
     );
@@ -37,12 +37,21 @@ var ChatMessageList = React.createClass({
     });
   },
 
+  componentDidUpdate: function() {
+    this._scrollToBottom();
+  },
+
+  _scrollToBottom: function() {
+    var ul = this.refs.messageList.getDOMNode();
+    ul.scrollTop = ul.scrollHeight;
+  },
+
   render: function() {
     var items = this.state.chatMessages.map(function(msg) {
       return <ChatMessage key={msg.id} message={msg} />
     });
     return (
-      <ul>
+      <ul ref="messageList" className={'chat-message-list'}>
         {items}
       </ul>
     );
@@ -67,6 +76,7 @@ var ChatInput = React.createClass({
       });
       if (this.state.message && this.state.message.length) {
         var rawMessage = Message.getCreatedMessageData(this.state.message);
+        console.log(rawMessage.date);
         State.sendChat(rawMessage);
       }
     }

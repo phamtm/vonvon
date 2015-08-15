@@ -15,7 +15,7 @@ module.exports = {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
-      date: new Date(timestamp),
+      timestamp: timestamp,
       text: text,
     };
   }
