@@ -23,7 +23,7 @@ var VideoBoxLocal = React.createClass({
 		var localStream = this.state.localStream;
 		var localStreamSrc = window.URL.createObjectURL(localStream);
 		return (
-			<div className={"card"}>
+			<div className={"card hide-on-small-only"}>
 				<div className={"card-image waves-effect waves-block waves-light"}>
 					<video autoPlay muted="muted" src={localStreamSrc}></video>
 				</div>

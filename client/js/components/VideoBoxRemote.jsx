@@ -6,28 +6,41 @@ var ConnectionStatus = require('../constants/ConstConnectionStatus');
 var Topics = require('../constants/Topics');
 
 
+const DARK_BACKGROUND = '#2c3e50';
+const LIGHT_BACKGROUND = '#ffffff';
+
 var VideoBoxRemote = React.createClass({
-  options: {
-    'backgroundColor': '#2c3e50',
-    'color': 'white'
-  },
 
   getInitialState: function() {
     return {
       connectionState: State.getState(),
-      remoteStream: State.getRemoteStream()
-    }
+      remoteStream: State.getRemoteStream(),
+      options: {
+        'backgroundColor': '#2c3e50',
+        'color': DARK_BACKGROUND
+      }
+    };
   },
 
   _handleRemoteStreamChange: function() {
+    var state = State.getState();
+    var backgroundColor = DARK_BACKGROUND;
+    if (state === ConnectionStatus.MATCHED) {
+      backgroundColor = LIGHT_BACKGROUND;
+    }
     this.setState({
-      remoteStream: State.getRemoteStream()
+      remoteStream: State.getRemoteStream(),
+      options: {
+        'backgroundColor': '#2c3e50',
+        'color': backgroundColor
+      }
     });
   },
 
   _handleStateChange: function() {
     this.setState({
       connectionState: State.getState()
+
     });
   },
 
@@ -38,9 +51,6 @@ var VideoBoxRemote = React.createClass({
 
   _getVideoHolder: function() {
     switch (this.state.connectionState) {
-      case ConnectionStatus.NOT_CONNECTED:
-        return <span>NO VIDEO</span>;
-
       case ConnectionStatus.REQUESTING:
         return <Spinner />;
 
@@ -59,7 +69,8 @@ var VideoBoxRemote = React.createClass({
   render: function() {
     return (
       <div className={"card"}>
-        <div className={"card-image waves-effect waves-block waves-light"} style={this.options}>
+        <div className={"card-image waves-effect waves-block waves-light"} style={this.state.options}>
+          <VideoBoxRemoteStatus connectionState={this.state.connectionState}/>
           {this._getVideoHolder()}
         </div>
         <div className={"card-content"}>
@@ -75,7 +86,6 @@ var VideoBoxRemoteTray = React.createClass({
     return (
       <div>
         <VideoBoxRemoteButtonNext />
-        <VideoBoxRemoteButtonStatus connectionState={this.props.connectionState}/>
       </div>
     );
   }
@@ -113,12 +123,12 @@ var VideoBoxRemoteButtonNext = React.createClass({
   }
 });
 
-var VideoBoxRemoteButtonStatus = React.createClass({
+var VideoBoxRemoteStatus = React.createClass({
   render: function() {
     return (
-      <button className={"waves-effect waves-light btn"} type="button">
+      <div className="connection-status">
         {this.props.connectionState}
-      </button>
+      </div>
     );
   }
 });

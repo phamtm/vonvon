@@ -2,6 +2,17 @@ video {
 	width: 100%;
 }
 
+.remote-video-holder {
+  position: relative;
+}
+
+.connection-status {
+  position: absolute;
+  right: 8px;
+  top: 5px;
+  color: white;
+}
+
 #remote {
   display: none;
 }

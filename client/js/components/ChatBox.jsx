@@ -53,9 +53,10 @@ var ChatInput = React.createClass({
         message: '',
         disabled: State.getState() !== ConnectionStatus.MATCHED
       });
-      var rawMessage = Message.getCreatedMessageData(this.state.message);
-      console.log(rawMessage);
-      State.sendChat(rawMessage);
+      if (this.state.message && this.state.message.length) {
+        var rawMessage = Message.getCreatedMessageData(this.state.message);
+        State.sendChat(rawMessage);
+      }
     }
   },
 
@@ -71,9 +72,10 @@ var ChatInput = React.createClass({
   },
 
   handleClick: function() {
-    var rawMessage = Message.getCreatedMessageData(this.state.message);
-    console.log(rawMessage);
-    State.sendChat(rawMessage);
+    if (this.state.message && this.state.message.length) {
+      var rawMessage = Message.getCreatedMessageData(this.state.message);
+      State.sendChat(rawMessage);
+    }
     this.setState({
       message: '',
       disabled: State.getState() !== ConnectionStatus.MATCHED
@@ -94,7 +96,7 @@ var ChatInput = React.createClass({
         <button className={"waves-effect waves-light btn"}
                 type="button"
                 onClick={this.handleClick}
-                disabled={this.state.disabled}>
+                disabled={this.state.disabled || !this.state.message.length}>
           Submit
         </button>
       </div>

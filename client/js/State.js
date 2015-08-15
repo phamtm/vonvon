@@ -10,7 +10,7 @@ var Message = require('./Message');
 /**
  * Constructor
  */
-var State = function() {
+ var State = function() {
   EventEmitter.call(this);
 
   // Connection status
@@ -24,13 +24,13 @@ var State = function() {
   	Config.WEB_SERVER,
   	{'sync disconnect on unload': true}
   );
-	this._peerConn = null;
-	this._peerCallConn = null;
-	this._peerDataConn = null;
+  this._peerConn = null;
+  this._peerCallConn = null;
+  this._peerDataConn = null;
 
   // Video streams
-	this._localStream = null;
-	this._remoteStream = null;
+  this._localStream = null;
+  this._remoteStream = null;
 };
 
 State.prototype = Object.create(EventEmitter.prototype);
@@ -87,32 +87,30 @@ State.prototype.onRequestNextPartner = function(cb) {
 State.prototype.sendChat = function(message) {
 	if (message &&
       this._peerDataConn &&
-			this._peerDataConn.open &&
-			this._state == ConnectionStatus.MATCHED) {
-    console.log('sending msg');
-    console.log(message);
-    this._peerDataConn.send(message);
-    var authoredMessage = Message.convertRawMessage(message, true);
-		this._messages.push(authoredMessage);
-		this.emit(Topics.MESSAGE_CHANGED);
-	}
+      this._peerDataConn.open &&
+      this._state == ConnectionStatus.MATCHED) {
+      this._peerDataConn.send(message);
+  var authoredMessage = Message.convertRawMessage(message, true);
+  this._messages.push(authoredMessage);
+  this.emit(Topics.MESSAGE_CHANGED);
+}
 };
 
 navigator.getUserMedia = navigator.getUserMedia ||
-                         navigator.webkitGetUserMedia ||
-                         navigator.mozGetUserMedia;
+navigator.webkitGetUserMedia ||
+navigator.mozGetUserMedia ||
+navigator.msGetUserMedia;
 
 State.prototype._getLocalMedia = function() {
 	// Capture local media
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
-      // this._localStream = null;
       this._localStream = localStream;
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
     console.log
-  );
+    );
 };
 
 State.prototype._closeConn = function() {
@@ -142,18 +140,16 @@ State.prototype._requestNewPartner = function() {
 State.prototype._cleanUpAndRequestNewPartner = function() {
   this._messages = [];
   this.emit(Topics.MESSAGE_CHANGED);
-	this._closeConn();
-	this._clearMessages();
-	this._requestNewPartner();
+  this._closeConn();
+  this._clearMessages();
+  this._requestNewPartner();
 };
 
 State.prototype._setUpChat = function() {
   this._peerDataConn.on('data', function(data) {
-    console.log('recv');
-    console.log(data);
     var rawMessage = Message.convertRawMessage(data, false);
-  	this._messages.push(rawMessage);
-  	this.emit(Topics.MESSAGE_CHANGED);
+    this._messages.push(rawMessage);
+    this.emit(Topics.MESSAGE_CHANGED);
   }.bind(this));
 
   this._peerDataConn.on('close', function() {
@@ -162,11 +158,26 @@ State.prototype._setUpChat = function() {
 };
 
 State.prototype.init = function() {
-	var _self = this;
+  var _self = this;
 
-	this._getLocalMedia();
+  setInterval(function() {
+    var videoTrack = this._localStream.getVideoTracks()[0];
+    if (videoTrack.readyState !== 'live') {
+      this._getLocalMedia();
+      this.emit(Topics.STREAM_LOCAL_CHANGED);
+    }
 
-	this.onRequestNextPartner(this._cleanUpAndRequestNewPartner);
+    if (this._state === ConnectionStatus.MATCHED) {
+      if (!this._peerCallConn.open || !this._peerDataConn.open) {
+        console.log("YAHOOOOOOOOOOOOOOOO");
+        this._cleanUpAndRequestNewPartner();
+      }
+    }
+  }.bind(this), 3000);
+
+  this._getLocalMedia();
+
+  this.onRequestNextPartner(this._cleanUpAndRequestNewPartner);
 
   this._socket.on('connection-created', function(data) {
     var LOCAL_ID = data.id;
@@ -178,7 +189,7 @@ State.prototype.init = function() {
 
     // Received a call
     _self._peerConn.on('call', function(remoteCall) {
-    	_self._peerCallConn = remoteCall;
+      _self._peerCallConn = remoteCall;
 
       remoteCall.on('close', function() {
         _self._requestNewPartner();
@@ -194,13 +205,13 @@ State.prototype.init = function() {
 
     // Received chat data
     _self._peerConn.on('connection', function(dataConnection) {
-    	_self._peerDataConn = dataConnection;
+      _self._peerDataConn = dataConnection;
       _self._setUpChat(dataConnection);
     });
 
     // When received a new partner id
     _self._socket.on('matched', function (data) {
-    	// Matched with a partner
+      // Matched with a partner
       if (!data || !data.hasOwnProperty('partnerId')) {
         return;
       }
@@ -231,7 +242,7 @@ State.prototype.init = function() {
         }
       }
     });
-  });
+});
 };
 
 var stateInstance = new State();
