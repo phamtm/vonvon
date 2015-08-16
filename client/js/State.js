@@ -20,6 +20,7 @@ var Message = require('./utils/MessageUtil');
   this._messages = [];
 
   // Connections: server and peer
+  this._localId = null;
   this._peerId = null;
   this._socket = null;
   this._peerConn = null;
@@ -88,7 +89,7 @@ State.prototype.sendChat = function(message) {
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED) {
     this._peerDataConn.send(message);
-    var authoredMessage = Message.convertRawMessage(message, true);
+    var authoredMessage = Message.convertRawMessage(message, this._localId + ' (You)');
     this._messages.push(authoredMessage);
     this.emit(Topics.MESSAGE_CHANGED);
   }
@@ -153,7 +154,7 @@ State.prototype._setUpChat = function() {
     if (this._state !== ConnectionStatus.MATCHED) {
       return;
     }
-    var rawMessage = Message.convertRawMessage(data, false);
+    var rawMessage = Message.convertRawMessage(data, this._peerId);
     this._messages.push(rawMessage);
     this.emit(Topics.MESSAGE_CHANGED);
   }.bind(this));
@@ -204,11 +205,12 @@ State.prototype.init = function() {
   }.bind(this));
 
   this._socket.on('socket-io::connection-created', function(data) {
-    var LOCAL_ID = data.id;
+    _self._localId = data.id;
+    _self.emit(Topics.ID_LOCAL_CHANGED);
     var PARTNER_ID;
 
     // Create a new connection to the PeerJs-server
-    console.log('Connection created, id::' + LOCAL_ID);
+    console.log('Connection created, id::' + _self._localId);
     _self._peerConn = new Peer(data.id, Config.PEER_SERVER_OPTIONS);
 
     // Received a call
@@ -246,10 +248,11 @@ State.prototype.init = function() {
       console.log('Partner matched, partner-id::' + data.partnerId);
       PARTNER_ID = data.partnerId;
       _self._peerId = PARTNER_ID;
+      _self.emit(Topics.ID_PARTNER_CHANGED);
       _self._state = ConnectionStatus.MATCHED;
       _self.emit(Topics.STATE_CHANGED, ConnectionStatus.MATCHED);
 
-      if (LOCAL_ID.localeCompare(PARTNER_ID) < 0) {
+      if (_self._localId.localeCompare(PARTNER_ID) < 0) {
         console.log("Calling peer::" + PARTNER_ID);
         _self._peerDataConn = _self._peerConn.connect(PARTNER_ID);
         _self._setUpChat(_self._peerDataConn);

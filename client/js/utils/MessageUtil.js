@@ -1,8 +1,6 @@
 module.exports = {
 
-  convertRawMessage: function(rawMessage, you) {
-  	var authorName = you ? 'You' : 'Stranger';
-
+  convertRawMessage: function(rawMessage, authorName) {
     return {
       id: rawMessage.id,
       authorName: authorName,
