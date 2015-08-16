@@ -21,10 +21,7 @@ var Message = require('./utils/MessageUtil');
 
   // Connections: server and peer
   this._peerId = null;
-  this._socket = io.connect(
-  	Config.WEB_SERVER,
-  	{'sync disconnect on unload': true}
-  );
+  this._socket = null;
   this._peerConn = null;
   this._peerCallConn = null;
   this._peerDataConn = null;
@@ -115,6 +112,10 @@ State.prototype._getLocalMedia = function() {
 };
 
 State.prototype._closeConn = function() {
+  if (!this._peerConn || this._peerConn.disconnected) {
+    return;
+  }
+
   if (this._peerCallConn && this._peerCallConn.open) {
   	this._peerCallConn.close();
   }
@@ -142,10 +143,8 @@ State.prototype._cleanUpAndRequestNewPartner = function(peerId) {
   if (this._peerId !== null && peerId !== this._peerId) {
      return;
   }
-  this._messages = [];
-  this.emit(Topics.MESSAGE_CHANGED);
-  this._closeConn();
   this._clearMessages();
+  this._closeConn();
   this._requestNewPartner();
 };
 
@@ -166,6 +165,10 @@ State.prototype._setUpChat = function() {
 
 State.prototype.init = function() {
   var _self = this;
+  this._socket = io.connect(
+    Config.WEB_SERVER,
+    {'sync disconnect on unload': true}
+  );
 
   setInterval(function() {
     // Re-retrieved local stream
@@ -178,17 +181,25 @@ State.prototype.init = function() {
       }
     }
 
+    // Re-establshied the connection to socket-io server
+    this._socket = io.connect(
+      Config.WEB_SERVER,
+      {'sync disconnect on unload': true}
+    );
+
   //   if (this._state === ConnectionStatus.MATCHED) {
   //     if (!this._peerCallConn.open || !this._peerDataConn.open) {
   //       console.log("YAHOOOOOOOOOOOOOOOO");
   //       this._cleanUpAndRequestNewPartner();
   //     }
   //   }
-  }.bind(this), 3000);
+    }.bind(this), 3000
+  );
 
   this._getLocalMedia();
 
   this.onRequestNextPartner(function() {
+    console.log('Next request');
     this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
 
@@ -214,6 +225,10 @@ State.prototype.init = function() {
         _self._remoteStream = remoteStream;
         _self.emit(Topics.STREAM_REMOTE_RECEIVED);
       });
+    });
+
+    _self._peerConn.on('disconnected', function() {
+      console.log('PeerConn:disconnected');
     });
 
     // Received chat data

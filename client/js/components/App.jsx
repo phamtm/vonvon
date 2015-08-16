@@ -1,6 +1,6 @@
 var React = require('react');
 
-var State = require('../State');
+var StateInstance = require('../State');
 var VideoBox = require('./VideoBox.jsx');
 var ChatBox = require('./chatbox/ChatBox.jsx');
 var Topics = require('../constants/Topics');
@@ -9,7 +9,7 @@ var Topics = require('../constants/Topics');
 var App = React.createClass({
 
   componentDidMount: function() {
-    State.init();
+    StateInstance.init();
   },
 
   render: function() {
