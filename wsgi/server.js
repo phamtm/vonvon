@@ -6,11 +6,38 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const uuid = require('node-uuid');
+const bodyParser = require('body-parser');
+
+GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
+      "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
+      "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue",
+      "billowing", "broken", "cold", "damp", "falling", "frosty", "green",
+      "long", "late", "lingering", "bold", "little", "morning", "muddy", "old",
+      "red", "rough", "still", "small", "sparkling", "throbbing", "shy",
+      "wandering", "withered", "wild", "black", "young", "holy", "solitary",
+      "fragrant", "aged", "snowy", "proud", "floral", "restless", "divine",
+      "polished", "ancient", "purple", "lively", "nameless"];
+GEN_NOUNS = [ "waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "morning",
+      "snow", "lake", "sunset", "pine", "shadow", "leaf", "dawn", "glitter",
+      "forest", "hill", "cloud", "meadow", "sun", "glade", "bird", "brook",
+      "butterfly", "bush", "dew", "dust", "field", "fire", "flower", "firefly",
+      "feather", "grass", "haze", "mountain", "night", "pond", "darkness",
+      "snowflake", "silence", "sound", "sky", "shape", "surf", "thunder",
+      "violet", "water", "wildflower", "wave", "water", "resonance", "sun",
+      "wood", "dream", "cherry", "tree", "fog", "frost", "voice", "paper",
+      "frog", "smoke", "star"];
+
+var genCoolId = function() {
+  const l1 = GEN_ADJ.length;
+  const l2 = GEN_NOUNS.length;
+  const idx1 = Math.floor(Math.random(l1));
+  const idx2 = Math.floor(Math.random(l2));
+  return GEN_ADJ[idx1] + '-' + GEN_NOUNS[idx2];
+};
 
 // Who is waiting
 var isWaiting = {};
 
-const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 
 // Redis setup
@@ -23,7 +50,8 @@ io.on('connection', function (socket) {
   const redisClient = redis.createClient();
 
   // Generate a random UUID
-  const clientId = uuid.v1();
+  // const clientId = uuid.v1();
+  const clientId = genCoolId();
   isWaiting[clientId] = false;
   socket.clientId = clientId;
   console.log(Date.now().toLocaleString() + ' Client::' + clientId);
