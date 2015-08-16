@@ -30,8 +30,8 @@ GEN_NOUNS = [ "waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "mo
 var genCoolId = function() {
   const l1 = GEN_ADJ.length;
   const l2 = GEN_NOUNS.length;
-  const idx1 = Math.floor(Math.random(l1));
-  const idx2 = Math.floor(Math.random(l2));
+  const idx1 = Math.floor(Math.random() * l1);
+  const idx2 = Math.floor(Math.random() * l2);
   return GEN_ADJ[idx1] + '-' + GEN_NOUNS[idx2];
 };
 
