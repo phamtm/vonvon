@@ -151,6 +151,9 @@ State.prototype._cleanUpAndRequestNewPartner = function(peerId) {
 
 State.prototype._setUpChat = function() {
   this._peerDataConn.on('data', function(data) {
+    if (this._state !== ConnectionStatus.MATCHED) {
+      return;
+    }
     var rawMessage = Message.convertRawMessage(data, false);
     this._messages.push(rawMessage);
     this.emit(Topics.MESSAGE_CHANGED);
@@ -249,7 +252,7 @@ State.prototype.init = function() {
         }
       }
     });
-});
+  });
 };
 
 var STATE_INSTANCE = new State();
