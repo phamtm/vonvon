@@ -2,7 +2,7 @@ var React = require('react');
 
 var State = require('../State');
 var VideoBox = require('./VideoBox.jsx');
-var ChatBox = require('./ChatBox.jsx');
+var ChatBox = require('./chatbox/ChatBox.jsx');
 var Topics = require('../constants/Topics');
 
 

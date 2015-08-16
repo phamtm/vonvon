@@ -2,7 +2,7 @@ var React = require('react');
 
 var State = require('../State');
 var Spinner = require('./Spinner.jsx');
-var ConnectionStatus = require('../constants/ConstConnectionStatus');
+var ConnectionStatus = require('../constants/ConnectionStatus');
 var Topics = require('../constants/Topics');
 
 
@@ -118,7 +118,10 @@ var VideoBoxRemoteButtonNext = React.createClass({
     var label = (this.state.state === ConnectionStatus.REQUESTING) ? 'Requesting new partner..' : 'Next';
     var disabled = (this.state.state === ConnectionStatus.REQUESTING) ? true : false;
     return (
-      <button className={"waves-effect waves-light btn"} disabled={disabled} type="button" onClick={this._handleClick}>
+      <button className={"waves-effect waves-light btn"}
+              disabled={disabled}
+              type="button"
+              onClick={this._handleClick}>
         {label}
       </button>
     );

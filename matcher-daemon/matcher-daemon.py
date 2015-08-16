@@ -35,5 +35,5 @@ if __name__ == '__main__':
     cnt = 0
     while True:
         cnt += 1
-        time.sleep(0.1)
+        time.sleep(0.05)
         dequeue()

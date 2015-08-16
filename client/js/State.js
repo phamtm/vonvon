@@ -1,10 +1,10 @@
 var Config = require('./config.js');
-var ConnectionStatus = require('./constants/ConstConnectionStatus');
+var ConnectionStatus = require('./constants/ConnectionStatus');
 var EventEmitter = require("events").EventEmitter;
 var io = require('socket.io-client');
 var Peer = require('peerjs');
 var Topics = require('./constants/Topics');
-var Message = require('./Message');
+var Message = require('./utils/MessageUtil');
 
 
 /**
@@ -20,6 +20,7 @@ var Message = require('./Message');
   this._messages = [];
 
   // Connections: server and peer
+  this._peerId = null;
   this._socket = io.connect(
   	Config.WEB_SERVER,
   	{'sync disconnect on unload': true}
@@ -90,10 +91,10 @@ State.prototype.sendChat = function(message) {
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED) {
       this._peerDataConn.send(message);
-  var authoredMessage = Message.convertRawMessage(message, true);
-  this._messages.push(authoredMessage);
-  this.emit(Topics.MESSAGE_CHANGED);
-}
+    var authoredMessage = Message.convertRawMessage(message, true);
+    this._messages.push(authoredMessage);
+    this.emit(Topics.MESSAGE_CHANGED);
+  }
 };
 
 navigator.getUserMedia = navigator.getUserMedia ||
@@ -137,7 +138,10 @@ State.prototype._requestNewPartner = function() {
   }
 };
 
-State.prototype._cleanUpAndRequestNewPartner = function() {
+State.prototype._cleanUpAndRequestNewPartner = function(peerId) {
+  if (this._peerId !== null && peerId !== this._peerId) {
+     return;
+  }
   this._messages = [];
   this.emit(Topics.MESSAGE_CHANGED);
   this._closeConn();
@@ -153,7 +157,7 @@ State.prototype._setUpChat = function() {
   }.bind(this));
 
   this._peerDataConn.on('close', function() {
-    this._cleanUpAndRequestNewPartner();
+    this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
 };
 
@@ -177,7 +181,9 @@ State.prototype.init = function() {
 
   this._getLocalMedia();
 
-  this.onRequestNextPartner(this._cleanUpAndRequestNewPartner);
+  this.onRequestNextPartner(function() {
+    this._cleanUpAndRequestNewPartner(this._peerId);
+  }.bind(this));
 
   this._socket.on('connection-created', function(data) {
     var LOCAL_ID = data.id;
@@ -192,7 +198,7 @@ State.prototype.init = function() {
       _self._peerCallConn = remoteCall;
 
       remoteCall.on('close', function() {
-        _self._requestNewPartner();
+        _self._cleanUpAndRequestNewPartner();
       });
 
       console.log("Receiving a call..")
@@ -217,6 +223,7 @@ State.prototype.init = function() {
       }
       console.log('Partner matched, partner-id::' + data.partnerId);
       PARTNER_ID = data.partnerId;
+      _self._peerId = PARTNER_ID;
       _self._state = ConnectionStatus.MATCHED;
       _self.emit(Topics.STATE_CHANGED, ConnectionStatus.MATCHED);
 
@@ -231,7 +238,7 @@ State.prototype.init = function() {
         if (_self._peerCallConn) {
           _self._peerCallConn.on('close', function() {
             console.log('ending your call');
-            _self._cleanUpAndRequestNewPartner();
+            _self._cleanUpAndRequestNewPartner(PARTNER_ID);
           });
 
           // user with lower id call user with higher id
@@ -245,6 +252,6 @@ State.prototype.init = function() {
 });
 };
 
-var stateInstance = new State();
+var STATE_INSTANCE = new State();
 
-module.exports = stateInstance;
+module.exports = STATE_INSTANCE;
