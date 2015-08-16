@@ -90,7 +90,7 @@ State.prototype.sendChat = function(message) {
       this._peerDataConn &&
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED) {
-      this._peerDataConn.send(message);
+    this._peerDataConn.send(message);
     var authoredMessage = Message.convertRawMessage(message, true);
     this._messages.push(authoredMessage);
     this.emit(Topics.MESSAGE_CHANGED);
@@ -98,9 +98,9 @@ State.prototype.sendChat = function(message) {
 };
 
 navigator.getUserMedia = navigator.getUserMedia ||
-navigator.webkitGetUserMedia ||
-navigator.mozGetUserMedia ||
-navigator.msGetUserMedia;
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia;
 
 State.prototype._getLocalMedia = function() {
 	// Capture local media
@@ -111,7 +111,7 @@ State.prototype._getLocalMedia = function() {
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
     console.log
-    );
+  );
 };
 
 State.prototype._closeConn = function() {
@@ -167,12 +167,16 @@ State.prototype._setUpChat = function() {
 State.prototype.init = function() {
   var _self = this;
 
-  // setInterval(function() {
-  //   var videoTrack = this._localStream.getVideoTracks()[0];
-  //   if (videoTrack.readyState !== 'live') {
-  //     this._getLocalMedia();
-  //     this.emit(Topics.STREAM_LOCAL_CHANGED);
-  //   }
+  setInterval(function() {
+    // Re-retrieved local stream
+    if (this._localStream && this._localStream.getVideoTracks() &&
+        this._localStream.getVideoTracks().length) {
+      var videoTrack = this._localStream.getVideoTracks()[0];
+      if (videoTrack.readyState !== 'live') {
+        this._getLocalMedia();
+        this.emit(Topics.STREAM_LOCAL_CHANGED);
+      }
+    }
 
   //   if (this._state === ConnectionStatus.MATCHED) {
   //     if (!this._peerCallConn.open || !this._peerDataConn.open) {
@@ -180,7 +184,7 @@ State.prototype.init = function() {
   //       this._cleanUpAndRequestNewPartner();
   //     }
   //   }
-  // }.bind(this), 10000);
+  }.bind(this), 3000);
 
   this._getLocalMedia();
 
