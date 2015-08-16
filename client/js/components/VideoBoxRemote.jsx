@@ -28,6 +28,8 @@ var VideoBoxRemote = React.createClass({
     if (state === ConnectionStatus.MATCHED) {
       backgroundColor = LIGHT_BACKGROUND;
     }
+    console.log('Remote stream changed: ');
+    console.log(State.getRemoteStream());
     this.setState({
       remoteStream: State.getRemoteStream(),
       options: {
@@ -40,7 +42,6 @@ var VideoBoxRemote = React.createClass({
   _handleStateChange: function() {
     this.setState({
       connectionState: State.getState()
-
     });
   },
 
@@ -56,7 +57,10 @@ var VideoBoxRemote = React.createClass({
 
       case ConnectionStatus.MATCHED:
         var remoteStream = this.state.remoteStream;
-        var remoteStreamSrc = window.URL.createObjectURL(remoteStream);
+        var remoteStreamSrc = null;
+        if (remoteStream !== null) {
+          remoteStreamSrc = window.URL.createObjectURL(remoteStream);
+        }
         return <video autoPlay src={remoteStreamSrc}></video>;
 
       default:
@@ -65,6 +69,12 @@ var VideoBoxRemote = React.createClass({
         break;
     }
   },
+
+  // componentWillReceiveProps: function(nextProps) {
+  //   this.setState({
+  //     likesIncreasing: nextProps.likeCount > this.props.likeCount
+  //   });
+  // },
 
   render: function() {
     return (
