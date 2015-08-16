@@ -35,55 +35,55 @@ State.prototype = Object.create(EventEmitter.prototype);
 
 // Getters
 State.prototype.getState = function() {
-	return this._state;
+  return this._state;
 };
 
 State.prototype.getMessages = function() {
-	return this._messages;
+  return this._messages;
 };
 
 State.prototype.getLocalStream = function() {
-	return this._localStream;
+  return this._localStream;
 };
 
 State.prototype.getRemoteStream = function() {
-	return this._remoteStream;
+  return this._remoteStream;
 };
 
 // State events
 State.prototype.onStateChange = function(cb) {
-	this.addListener(Topics.STATE_CHANGED, cb);
+  this.addListener(Topics.STATE_CHANGED, cb);
 };
 
 // Chat events
 State.prototype.onMessageReceived = function(cb) {
-	this.addListener(Topics.MESSAGE_RECEIVED, cb);
+  this.addListener(Topics.MESSAGE_RECEIVED, cb);
 };
 
 State.prototype.onMessageSend = function(cb) {
-	this.addListener(Topics.MESSAGE_SEND, cb);
+  this.addListener(Topics.MESSAGE_SEND, cb);
 };
 
 State.prototype.onMessageChange = function(cb) {
-	this.addListener(Topics.MESSAGE_CHANGED, cb);
+  this.addListener(Topics.MESSAGE_CHANGED, cb);
 };
 
 // Stream events
 State.prototype.onStreamLocalReceived = function(cb) {
-	this.addListener(Topics.STREAM_LOCAL_RECEIVED, cb);
+  this.addListener(Topics.STREAM_LOCAL_RECEIVED, cb);
 };
 
 State.prototype.onStreamRemoteReceived = function(cb) {
-	this.addListener(Topics.STREAM_REMOTE_RECEIVED, cb);
+  this.addListener(Topics.STREAM_REMOTE_RECEIVED, cb);
 };
 
 // Next event
 State.prototype.onRequestNextPartner = function(cb) {
-	this.addListener(Topics.REQUEST_NEW_PARTNER, cb);
+  this.addListener(Topics.REQUEST_NEW_PARTNER, cb);
 };
 
 State.prototype.sendChat = function(message) {
-	if (message &&
+  if (message &&
       this._peerDataConn &&
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED) {
@@ -100,7 +100,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
                          navigator.msGetUserMedia;
 
 State.prototype._getLocalMedia = function() {
-	// Capture local media
+  // Capture local media
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
@@ -112,30 +112,30 @@ State.prototype._getLocalMedia = function() {
 };
 
 State.prototype._closeConn = function() {
-  if (!this._peerConn || this._peerConn.disconnected) {
+  if (!this._peerConn || this._peerConn.disconnected || this._peerConn.destroyed) {
     return;
   }
 
   if (this._peerCallConn && this._peerCallConn.open) {
-  	this._peerCallConn.close();
+    this._peerCallConn.close();
   }
 
   if (this._peerDataConn && this._peerDataConn.open) {
-  	this._peerDataConn.close();
+    this._peerDataConn.close();
   }
 };
 
 State.prototype._clearMessages = function() {
-	this._messages = [];
-	this.emit(Topics.MESSAGE_CHANGED);
+  this._messages = [];
+  this.emit(Topics.MESSAGE_CHANGED);
 };
 
 State.prototype._requestNewPartner = function() {
   if (this._state !== ConnectionStatus.REQUESTING) {
-  	console.log('Requesting new partner..');
-  	this._state = ConnectionStatus.REQUESTING;
-  	this.emit(Topics.STATE_CHANGED);
-  	this._socket.emit('request-new-partner');
+    console.log('Requesting new partner..');
+    this._state = ConnectionStatus.REQUESTING;
+    this.emit(Topics.STATE_CHANGED);
+    this._socket.emit('socket-io::request-new-partner');
   }
 };
 
@@ -203,7 +203,7 @@ State.prototype.init = function() {
     this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
 
-  this._socket.on('connection-created', function(data) {
+  this._socket.on('socket-io::connection-created', function(data) {
     var LOCAL_ID = data.id;
     var PARTNER_ID;
 
@@ -238,7 +238,7 @@ State.prototype.init = function() {
     });
 
     // When received a new partner id
-    _self._socket.on('matched', function (data) {
+    _self._socket.on('socket-io::matched', function (data) {
       // Matched with a partner
       if (!data || !data.hasOwnProperty('partnerId')) {
         return;
@@ -275,5 +275,6 @@ State.prototype.init = function() {
 };
 
 var STATE_INSTANCE = new State();
+window.state = STATE_INSTANCE;
 
 module.exports = STATE_INSTANCE;

@@ -20,22 +20,22 @@ server.listen(PORT, function () {
 });
 
 io.on('connection', function (socket) {
-  console.log('new client');
   const redisClient = redis.createClient();
 
   // Generate a random UUID
-  const clientId = uuid.v4();
+  const clientId = uuid.v1();
   isWaiting[clientId] = false;
   socket.clientId = clientId;
-  console.log('Client::' + clientId);
+  console.log(Date.now().toLocaleString() + ' Client::' + clientId);
 
   handleSocketConnectionError(socket, redisClient, clientId);
 
-  socket.emit('connection-created', {
-    id: clientId
-  });
+  socket.emit(
+    'socket-io::connection-created',
+    { id: clientId }
+  );
 
-  socket.on('request-new-partner', function(data) {
+  socket.on('socket-io::request-new-partner', function(data) {
     // the user is already in waiting queue
     if (isWaiting[clientId]) {
       return;
@@ -54,11 +54,12 @@ io.on('connection', function (socket) {
   redisClient.on('message', function (channel, message) {
     isWaiting[clientId] = false;
 
-    console.log('Partner created::' + message);
+    console.log(Date.now().toLocaleString() + ' Partner created::' + message);
     redisClient.unsubscribe(clientId);
-    socket.emit('matched', {
-      partnerId: message
-    });
+    socket.emit(
+      'socket-io::matched',
+      { partnerId: message }
+    );
   });
 });
 
