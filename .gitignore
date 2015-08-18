@@ -6,3 +6,6 @@ node_modules/
 bower_components/
 dump.rdb
 bundle.js
+
+# Project specific
+client/dist
