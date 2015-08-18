@@ -7,7 +7,13 @@ var source = require('vinyl-source-stream');
 var rename = require('gulp-rename');
 var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
+var del = require('del');
 
+
+// Clean
+gulp.task('clean', function(cb) {
+	del(['./src/js/bundle.js'], cb);
+});
 
 // Copy HTML
 gulp.task('html', function() {
@@ -40,7 +46,7 @@ gulp.task('js', function() {
     .pipe(gulp.dest('./dist/js/'));
 });
 
-gulp.task('dist', ['copy-static', 'html', 'css', 'js']);
+gulp.task('dist', ['clean', 'copy-static', 'html', 'css', 'js']);
 
 // Default task
 gulp.task('default', ['dist']);
