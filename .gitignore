@@ -8,4 +8,4 @@ dump.rdb
 bundle.js
 
 # Project specific
-client/dist
+dist/
