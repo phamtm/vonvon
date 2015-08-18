@@ -18,7 +18,7 @@ gulp.task('html', function() {
 // Concatenate and minify CSS
 gulp.task('css', function() {
 	gulp.src('./src/css/**/*.css')
-			.pipe(concat('style.min.css'))
+			.pipe(concat('style.css'))
 			.pipe(minifyCss())
 			.pipe(gulp.dest('./dist/css/'));
 });
