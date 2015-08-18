@@ -171,31 +171,31 @@ State.prototype.init = function() {
     {'sync disconnect on unload': true}
   );
 
-  setInterval(function() {
-    // Re-retrieved local stream
-    if (this._localStream && this._localStream.getVideoTracks() &&
-        this._localStream.getVideoTracks().length) {
-      var videoTrack = this._localStream.getVideoTracks()[0];
-      if (videoTrack.readyState !== 'live') {
-        this._getLocalMedia();
-        this.emit(Topics.STREAM_LOCAL_CHANGED);
-      }
-    }
-
-    // Re-establshied the connection to socket-io server
-    this._socket = io.connect(
-      Config.WEB_SERVER,
-      {'sync disconnect on unload': true}
-    );
-
-  //   if (this._state === ConnectionStatus.MATCHED) {
-  //     if (!this._peerCallConn.open || !this._peerDataConn.open) {
-  //       console.log("YAHOOOOOOOOOOOOOOOO");
-  //       this._cleanUpAndRequestNewPartner();
+  // setInterval(function() {
+  //   // Re-retrieved local stream
+  //   if (this._localStream && this._localStream.getVideoTracks() &&
+  //       this._localStream.getVideoTracks().length) {
+  //     var videoTrack = this._localStream.getVideoTracks()[0];
+  //     if (videoTrack.readyState !== 'live') {
+  //       this._getLocalMedia();
+  //       this.emit(Topics.STREAM_LOCAL_CHANGED);
   //     }
   //   }
-    }.bind(this), 3000
-  );
+
+  //   // Re-establshied the connection to socket-io server
+  //   this._socket = io.connect(
+  //     Config.WEB_SERVER,
+  //     {'sync disconnect on unload': true}
+  //   );
+
+  // //   if (this._state === ConnectionStatus.MATCHED) {
+  // //     if (!this._peerCallConn.open || !this._peerDataConn.open) {
+  // //       console.log("YAHOOOOOOOOOOOOOOOO");
+  // //       this._cleanUpAndRequestNewPartner();
+  // //     }
+  // //   }
+  //   }.bind(this), 3000
+  // );
 
   this._getLocalMedia();
 

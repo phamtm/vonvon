@@ -1,11 +1,12 @@
 var Config = {
   WEBRTC_MEDIA_CONSTRAINTS: {
-    video: {
-      mandatory: {
-        maxWidth: 320,
-        maxHeight: 180
-      }
-    },
+    video: true,
+    // video: {
+    //   mandatory: {
+    //     maxWidth: 320,
+    //     maxHeight: 180
+    //   }
+    // },
     audio: true
   },
 
