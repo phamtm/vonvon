@@ -1,15 +1,15 @@
 module.exports = {
 
-  convertRawMessage: function(rawMessage, authorName) {
+  convertToPresentableMessage: function(message, authorName) {
     return {
-      id: rawMessage.id,
+      id: message.id,
       authorName: authorName,
-      date: new Date(rawMessage.timestamp),
-      text: rawMessage.text,
+      date: new Date(message.timestamp),
+      text: message.text,
     };
   },
 
-  getCreatedMessageData: function(text) {
+  convertToTransferableMessage: function(text) {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,

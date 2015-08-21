@@ -23,10 +23,7 @@ var ChatInput = React.createClass({
         message: '',
         disabled: State.getState() !== ConnectionStatus.MATCHED
       });
-      if (this.state.message && this.state.message.length) {
-        var rawMessage = MessageUtil.getCreatedMessageData(this.state.message);
-        State.sendChat(rawMessage);
-      }
+      State.sendChat(this.state.message);
     }
   },
 

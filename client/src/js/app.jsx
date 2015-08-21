@@ -7,13 +7,13 @@ require('browsernizr/test/webrtc/peerconnection');
 // or if you need access to the modernizr instance:
 var Modernizr = require('browsernizr');
 
-if (!Modernizr.getusermedia && !Modernizr.peerconnection) {
-  window.location.replace('not-supported.html');
-} else {
-  React.render(
-    <App />,
-    document.getElementById('appComponent')
-  );
-}
+// if (!Modernizr.getusermedia && !Modernizr.peerconnection) {
+//   window.location.replace('not-supported.html');
+// } else {
+// }
 
+React.render(
+  <App />,
+  document.getElementById('appComponent')
+);
 
