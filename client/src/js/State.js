@@ -116,7 +116,7 @@ State.prototype._getLocalMedia = function() {
 };
 
 State.prototype._closeConn = function() {
-  console.log(this._qc);
+  // console.log(this._qc);
   if (this._qc) {
     this._qc.close();
   }
@@ -138,7 +138,6 @@ State.prototype._requestNewPartner = function() {
 
 State.prototype._cleanUpAndRequestNewPartner = function(peerId) {
   this._clearMessages();
-  this._closeConn();
   this._requestNewPartner();
 };
 
@@ -156,8 +155,11 @@ State.prototype.init = function() {
 
   this.onRequestNextPartner(function() {
     console.log('Next request');
-    if (this._state === ConnectionStatus.MATCHED) {
-      this._cleanUpAndRequestNewPartner(this._peerId);
+    if (this._state === ConnectionStatus.NOT_CONNECTED) {
+      this._requestNewPartner();
+    }
+    else if (this._state !== ConnectionStatus.REQUESTING) {
+      this._closeConn();
     }
   }.bind(this));
 
@@ -170,19 +172,23 @@ State.prototype.init = function() {
 
     // When received a new partner id
     _self._socket.on('socket-io::matched', function (data) {
+      // only match with 1 peer
+      if (_self._state === ConnectionStatus.MATCHED) {
+        return;
+      }
+
       // Matched with a partner
       if (!data || !data.hasOwnProperty('partnerId')) {
         return;
       }
       console.log('Partner matched, partner-id::' + data.partnerId);
-      PARTNER_ID = data.partnerId;
-      _self._peerId = PARTNER_ID;
+      _self._peerId = data.partnerId;
       _self._state = ConnectionStatus.MATCHED;
       _self.emit(Topics.STATE_CHANGED, ConnectionStatus.MATCHED);
 
       var roomId = _self._localId + ' # ' + _self._peerId;
 
-      if (_self._localId.localeCompare(PARTNER_ID) < 0) {
+      if (_self._localId.localeCompare(_self._peerId) < 0) {
         roomId = _self._peerId + ' # ' + _self._localId;
       }
 
@@ -195,14 +201,15 @@ State.prototype.init = function() {
         })
         .addStream(_self._localStream)
         .createDataChannel('test')
-        .on('call:started', function(peerId, peerConnection, data) {
+        .once('call:started', function(peerId, peerConnection, data) {
+          console.log('call::started::' + peerId);
           // TODO: handle peerConn properly
 
           // how about multiple call started -> allow only 1 call
           _self._remoteStream = peerConnection.getRemoteStreams()[0];
           _self.emit(Topics.STREAM_REMOTE_RECEIVED);
         })
-        .on('channel:opened:test', function(peerId, dataChannel) {
+        .once('channel:opened:chat@' + roomId, function(peerId, dataChannel) {
           // chat opened
           _self._dataChannel = dataChannel;
           console.log('chat:opened');
@@ -218,12 +225,12 @@ State.prototype.init = function() {
             _self.emit(Topics.MESSAGE_CHANGED);
           };
         })
-        .on('channel:closed', function(id) {
+        .once('channel:closed', function(id) {
           // chat closed
-          console.log('chat:closed');
+          console.log('chat:closed::' + id);
         })
-        .on('call:ended', function(id) {
-          console.log('call:ended');
+        .once('call:ended', function(id) {
+          console.log('call:ended::' + id);
           if (_self._state === ConnectionStatus.MATCHED) {
             _self._cleanUpAndRequestNewPartner();
           }
