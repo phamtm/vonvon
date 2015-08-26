@@ -81,12 +81,15 @@ io.on('connection', function (socket) {
   // the user has been matched with another
   redisClient.on('message', function (channel, message) {
     isWaiting[clientId] = false;
+    var tokens = message.split('#');
 
     console.log(Date.now().toLocaleString() + ' Partner created::' + message);
     redisClient.unsubscribe(clientId);
     socket.emit(
       'socket-io::matched',
-      { partnerId: message }
+      {
+        partnerId: tokens[0], roomId: tokens[1]
+      }
     );
   });
 });

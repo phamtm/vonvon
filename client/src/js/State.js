@@ -183,14 +183,11 @@ State.prototype.init = function() {
       }
       console.log('Partner matched, partner-id::' + data.partnerId);
       _self._peerId = data.partnerId;
+      var roomId = data.roomId;
+      console.log('roomId::' + roomId);
       _self._state = ConnectionStatus.MATCHED;
       _self.emit(Topics.STATE_CHANGED, ConnectionStatus.MATCHED);
 
-      var roomId = _self._localId + ' # ' + _self._peerId;
-
-      if (_self._localId.localeCompare(_self._peerId) < 0) {
-        roomId = _self._peerId + ' # ' + _self._localId;
-      }
 
       console.log('calling-peer:', _self._peerId);
       _self._qc = quickconnect(
@@ -212,7 +209,7 @@ State.prototype.init = function() {
         .once('channel:opened:chat@' + roomId, function(peerId, dataChannel) {
           // chat opened
           _self._dataChannel = dataChannel;
-          console.log('chat:opened');
+          console.log('chat:opened:chat@' + roomId);
           dataChannel.onmessage = function(evt) {
             if (_self._state !== ConnectionStatus.MATCHED) {
               return;

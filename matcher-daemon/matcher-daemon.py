@@ -1,4 +1,5 @@
 import time
+import uuid
 
 import redis
 
@@ -20,14 +21,16 @@ def dequeue():
     while (i + 1 < len(ids)):
         id1 = ids[i]
         id2 = ids[i + 1]
+        roomId = uuid.uuid1().hex
+
         print 'Matching:: %s # %s' % (id1, id2)
 
         p = rs.pipeline(transaction=True)
         p.zrem(RANDOM_QUEUE_NAME, id1)
         p.zrem(RANDOM_QUEUE_NAME, id2)
         p.execute()
-        rs.publish(id1, id2)
-        rs.publish(id2, id1)
+        rs.publish(id1 + '#' + roomId, id2)
+        rs.publish(id2 + '#' + roomId, id1)
         i += 2
 
 
