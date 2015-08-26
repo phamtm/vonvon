@@ -200,7 +200,7 @@ State.prototype.init = function() {
           iceServers: freeice()
         })
         .addStream(_self._localStream)
-        .createDataChannel('test')
+        .createDataChannel('chat@' + roomId)
         .once('call:started', function(peerId, peerConnection, data) {
           console.log('call::started::' + peerId);
           // TODO: handle peerConn properly
