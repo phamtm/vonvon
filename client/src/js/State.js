@@ -195,8 +195,13 @@ State.prototype.init = function() {
         {
           room: roomId,
           iceServers: freeice()
-        })
-        .addStream(_self._localStream)
+        });
+
+      if (_self._localStream) {
+        _self._qc.addStream(_self._localStream);
+      }
+
+      _self._qc
         .createDataChannel('chat@' + roomId)
         .once('call:started', function(peerId, peerConnection, data) {
           console.log('call::started::' + peerId);
