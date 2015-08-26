@@ -71,6 +71,14 @@ State.prototype.onMessageChange = function(cb) {
   this.addListener(Topics.MESSAGE_CHANGED, cb);
 };
 
+State.prototype.onChatChannelOpened = function(cb) {
+  this.addListener(Topics.CHAT_CHANNEL_OPENED, cb);
+};
+
+State.prototype.onChatChannelClosed = function(cb) {
+  this.addListener(Topics.CHAT_CHANNEL_CLOSED, cb);
+};
+
 // Stream events
 State.prototype.onStreamLocalReceived = function(cb) {
   this.addListener(Topics.STREAM_LOCAL_RECEIVED, cb);
@@ -212,6 +220,7 @@ State.prototype.init = function() {
           _self.emit(Topics.STREAM_REMOTE_RECEIVED);
         })
         .once('channel:opened:chat@' + roomId, function(peerId, dataChannel) {
+          _self.emit(Topics.CHAT_CHANNEL_OPENED);
           // chat opened
           _self._dataChannel = dataChannel;
           console.log('chat:opened:chat@' + roomId);
@@ -228,6 +237,7 @@ State.prototype.init = function() {
           };
         })
         .once('channel:closed', function(id) {
+          _self.emit(Topics.CHAT_CHANNEL_CLOSED);
           // chat closed
           console.log('chat:closed::' + id);
         })

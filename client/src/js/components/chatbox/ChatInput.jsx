@@ -33,15 +33,13 @@ var ChatInput = React.createClass({
 
   handleStateChange: function() {
     this.setState({
-      message: '',
-      disabled: State.getState() !== ConnectionStatus.MATCHED
+      message: ''
     });
   },
 
   handleClick: function() {
     if (this.state.message && this.state.message.length) {
-      var rawMessage = MessageUtil.getCreatedMessageData(this.state.message);
-      State.sendChat(rawMessage);
+      State.sendChat(this.state.message);
     }
     this.setState({
       message: '',
@@ -49,8 +47,24 @@ var ChatInput = React.createClass({
     });
   },
 
+  handleChatChannelOpened: function() {
+    this.setState({
+      message: '',
+      disabled: false
+    });
+  },
+
+  handleChatChannelClosed: function() {
+    this.setState({
+      message: '',
+      disabled: true
+    });
+  },
+
   componentDidMount: function() {
     State.onStateChange(this.handleStateChange);
+    State.onChatChannelOpened(this.handleChatChannelOpened);
+    State.onChatChannelClosed(this.handleChatChannelClosed);
   },
 
   render: function() {
