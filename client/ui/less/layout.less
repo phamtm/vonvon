@@ -1,0 +1,73 @@
+.remote-video-holder {
+    background-color: #ddd;
+}
+
+.local-video-holder {
+    background-color: #ddd;
+}
+
+.chat-video {
+    width: 100%;
+}
+
+.videos-holder {
+    position: relative;
+}
+
+@media screen and (min-width: @screen-sm-min) {
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .left {
+        max-width: 400px;
+        flex: 2;
+        background-color: #ccc;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .right {
+        flex: 3;
+        background-color: #eee;
+
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: @screen-xs-max) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .left {
+        width: 100%;
+        background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .right {
+        width: 100%;
+        background-color: #eee;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .local-video-holder {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 80px;
+        height: 60px;
+        border: 2px solid #666;
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "vonvon-ui",
+  "version": "0.0.1",
+  "description": "UI for vonvon.vn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minh Pham",
+  "license": "Apache-2.0",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3"
+  }
+}

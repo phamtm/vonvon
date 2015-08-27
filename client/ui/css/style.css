@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+.remote-video-holder {
+  background-color: #ddd;
+}
+.local-video-holder {
+  background-color: #ddd;
+}
+.chat-video {
+  width: 100%;
+}
+.videos-holder {
+  position: relative;
+}
+@media screen and (min-width: 668px) {
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  .left {
+    max-width: 400px;
+    flex: 2;
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .right {
+    flex: 3;
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media screen and (max-width: 667px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .left {
+    width: 100%;
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .right {
+    width: 100%;
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+  }
+  .local-video-holder {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 80px;
+    height: 60px;
+    border: 2px solid #666;
+  }
+}
+.chatbox-holder {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+.chat-messages-holder {
+  flex: 1 100%;
+}
+.chat-input-area {
+  background: #bbb;
+  height: 50px;
+}
+@media screen and (min-width: 668px) {
+  .emoticon-sidebar {
+    display: flex;
+    background-color: #aaa;
+    flex: 1;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 667px) {
+  .emoticon-sidebar {
+    display: none;
+    background-color: #aaa;
+    flex: 1;
+    flex-direction: column;
+  }
+}
+.emoticon-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 100%;
+}
+.emoticon-list-item {
+  border-radius: 5px;
+}
+.emoticon-list-item:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.emoticon-search-input {
+  background: #bbb;
+  height: 50px;
+  flex-shrink: none;
+}
+.img-emoticon {
+  width: 50px;
+  height: 50px;
+}
