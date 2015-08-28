@@ -5,7 +5,8 @@
 ul {
   list-style: none;
 }
-img {
+img,
+video {
   display: block !important;
 }
 .remote-video-holder {
@@ -41,6 +42,9 @@ img {
   flex-direction: column;
   flex-wrap: none;
   justify-content: flex-start;
+}
+.remoteVideo {
+  width: 100%;
 }
 @media screen and (min-width: 668px) {
   .wrapper-content {
