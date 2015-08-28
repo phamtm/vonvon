@@ -16,125 +16,207 @@
   </head>
   <body>
 
-    <div class="wrapper">
-
-      <div class="left">
-        <div class="videos-holder">
-          <div class="remote-video-holder">
-            <div class="card">
-              <div class="card-image">
-                <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Local">
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-action">
-                <a href="#">Next</a>
-                <span class="switch">
-                  <label>
-                    Video
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    No video
-                  </label>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="local-video-holder z-depth-1">
-            <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote">
-          </div>
-        </div>
+    <div class="wrapper-all">
+      <div class="navbar">
+        <ul>
+          <li class="logo">VonVon.vn</li>
+          <li>have fun!</li>
+        </ul>
       </div>
 
-      <div class="right">
+      <div class="wrapper-content">
+        <div class="left">
+          <div class="videos-holder">
+            <div class="remote-video-holder">
+              <div class="card">
+                <div class="card-image">
+                  <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Local">
+                  <span class="card-title">not connected</span>
+                </div>
+                <div class="card-action">
+                  <a href="#">Next</a>
+                  <span class="switch">
+                    <label>
+                      No video
+                      <input type="checkbox" checked>
+                      <span class="lever"></span>
+                      Video
+                    </label>
+                  </span>
+                </div>
+              </div>
+            </div>
 
-        <div class="chatbox-holder">
-          <div class="chat-messages-holder">
-            <ul class="chat-message-ul">
-              <li class="chat-message-li noti-li">
-                <div class="col s12 m8 offset-m2 l6 offset-l3">
-                  <div class="card-panel noti grey lighten-5 z-depth-1">
-                    <div class="row valign-wrapper">
-                      <div class="col s2">
-                        <img data-src="holder.js/64x64?auto=yes&theme=vine" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                      </div>
-                      <div class="col s10">
-                        <span class="black-text">
-                          This is a square image. Add the "circle" class to it to make it appear circular.
-                        </span>
+            <div class="local-video-holder">
+              <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote">
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+
+          <div class="chatbox-holder">
+            <div class="chat-messages-holder">
+              <ul class="chat-message-ul">
+                <li class="chat-message-li noti-li">
+                  <div class="col s12 m8 offset-m2 l6 offset-l3">
+                    <div class="card-panel noti grey lighten-5">
+                      <div class="row valign-wrapper">
+                        <div class="col s2">
+                          <img data-src="holder.js/50x50?auto=yes&theme=vine" alt="" class="circle responsive-img">
+                        </div>
+                        <div class="col s10">
+                          <span class="black-text">
+                            This is a square image. Add the "circle" class to it to make it appear circular.
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-              <li class="chat-message-li">
-                <h5 class="message-author">Author</h5>
-                <div class="message-timestamp">1 minute ago</div>
-                <div class="message-text">Text text text text text</div>
-              </li>
-            </ul>
-          </div>
-          <div class="chat-input-area">
-            <div class="chat-input-holder">
-              <input id="chat-input" type="text" autofocus placeholder="Type a message...">
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble_outline</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble_outline</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble_outline</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble_outline</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble_outline</i> Author
+                  </h5>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+                <li class="chat-message-li">
+                  <h5 class="message-author">
+                    <i class="tiny material-icons">chat_bubble</i> Author
+                  </h5>
+                  <div class="message-timestamp">1 minute ago</div>
+                  <div class="message-text">Text text text text text</div>
+                </li>
+              </ul>
             </div>
-            <ul class="chat-actions">
-              <li><i class="small material-icons">send</i></li>
-              <li><i class="small material-icons">mood</i></li>
-            </ul>
+            <div class="chat-input-area">
+              <div class="chat-input-holder">
+                <input id="chat-input" type="text" autofocus placeholder="Type a message...">
+              </div>
+              <ul class="chat-actions">
+                <li><i class="small material-icons">send</i></li>
+                <li class="emoticon-picker">
+                  <i class="small material-icons">mood</i>
+                  <div class="emoticon-picker-popup z-depth-1">
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                    <div class="emoticon-picker-popup-emoticon">
+                      <img src="img/emoticons/haha.png" alt="emoticon">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="emoticon-sidebar">
+            <div class="emoticon-list">
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+              <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
+            </div>
+            <div class="emoticon-search-input">
+              Search emoticon
+            </div>
           </div>
         </div>
 
-        <div class="emoticon-sidebar">
-          <div class="emoticon-list">
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-            <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
-          </div>
-          <div class="emoticon-search-input">
-            Search emoticon
-          </div>
-        </div>
       </div>
     </div>
 

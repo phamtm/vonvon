@@ -13,7 +13,7 @@
 .chat-input-area {
     background: #fefefe;
     height: @chat-input-height;
-    border-top: 1px solid darken(@color-background, 10%);
+    border-top: 1px solid lighten(@color-dark-blue, 40%);
     display: flex;
     flex-direction: row;
     flex-wrap: none;
@@ -99,6 +99,7 @@ ul.chat-actions li i:hover {
 
 .card-panel.noti {
   padding: 10px 8px;
+  .light-shadow;
 }
 
 .card-panel.noti .valign-wrapper {
@@ -107,4 +108,8 @@ ul.chat-actions li i:hover {
 
 .chat-message-li.noti-li {
   border: none;
+}
+
+.chat-message-li i {
+  font-size: 13px;
 }

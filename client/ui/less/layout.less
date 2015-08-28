@@ -4,6 +4,7 @@
 
 .local-video-holder {
     background-color: #ddd;
+    .light-shadow;
 }
 
 .chat-video {
@@ -16,8 +17,8 @@
 
 .remote-video-holder .card {
     margin-top: 0;
-    box-shadow: 0 2px 5px -5px rgba(0,0,0,0.16),0 2px 10px -10px rgba(0,0,0,0.12);
     border-radius: 0;
+    .light-shadow;
 }
 
 .remote-video-holder .card .card-image img {
@@ -32,11 +33,21 @@
     background-color: @color-background;
 }
 
+.wrapper-all {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: none;
+    justify-content: flex-start;
+}
+
+
 @media screen and (min-width: @screen-sm-min) {
-    .wrapper {
+
+    .wrapper-content {
         display: flex;
         flex-direction: row;
-        height: 100vh;
+        flex: 2;
     }
 
     .left {
@@ -58,12 +69,11 @@
 }
 
 @media screen and (max-width: @screen-xs-max) {
-    .wrapper {
+
+    .wrapper-content {
         display: flex;
         flex-direction: column;
-        height: 100vh;
-        background-image: url('../img/swirl_pattern.png');
-        background-repeat:  repeat-x repeat-y;
+        flex: 2;
     }
 
     .left {

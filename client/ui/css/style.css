@@ -13,6 +13,7 @@ img {
 }
 .local-video-holder {
   background-color: #ddd;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 .chat-video {
   width: 100%;
@@ -22,8 +23,8 @@ img {
 }
 .remote-video-holder .card {
   margin-top: 0;
-  box-shadow: 0 2px 5px -5px rgba(0, 0, 0, 0.16), 0 2px 10px -10px rgba(0, 0, 0, 0.12);
   border-radius: 0;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 .remote-video-holder .card .card-image img {
   border-radius: 0;
@@ -34,11 +35,18 @@ img {
 .left {
   background-color: #ecf0f1;
 }
+.wrapper-all {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: none;
+  justify-content: flex-start;
+}
 @media screen and (min-width: 668px) {
-  .wrapper {
+  .wrapper-content {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    flex: 2;
   }
   .left {
     max-width: 400px;
@@ -55,12 +63,10 @@ img {
   }
 }
 @media screen and (max-width: 667px) {
-  .wrapper {
+  .wrapper-content {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    background-image: url('../img/swirl_pattern.png');
-    background-repeat: repeat-x repeat-y;
+    flex: 2;
   }
   .left {
     width: 100%;
@@ -84,6 +90,21 @@ img {
     border: 2px solid #666;
   }
 }
+.navbar {
+  background-color: rgba(0, 60, 99, 0.79);
+  height: 30px;
+  box-sizing: border-box;
+  padding: 4px 16px;
+  font-size: 14px;
+  color: #ffffff;
+}
+.navbar ul li {
+  display: inline-block;
+  margin-right: 16px;
+}
+.logo {
+  font-weight: bold;
+}
 .chatbox-holder {
   display: flex;
   flex-direction: column;
@@ -97,7 +118,7 @@ img {
 .chat-input-area {
   background: #fefefe;
   height: 50px;
-  border-top: 1px solid #cfd9db;
+  border-top: 1px solid #8aa4be;
   display: flex;
   flex-direction: row;
   flex-wrap: none;
@@ -170,12 +191,50 @@ ul.chat-actions li i:hover {
 }
 .card-panel.noti {
   padding: 10px 8px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 .card-panel.noti .valign-wrapper {
   margin-bottom: 0;
 }
 .chat-message-li.noti-li {
   border: none;
+}
+.chat-message-li i {
+  font-size: 13px;
+}
+.emoticon-picker {
+  display: inline-block;
+  position: relative;
+}
+.emoticon-picker-popup {
+  width: 280px;
+  height: 340px;
+  position: absolute;
+  bottom: 40px;
+  right: 0px;
+  border-radius: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+.emoticon-picker-popup-emoticon {
+  cursor: pointer;
+  padding: 10px;
+  width: 70px;
+  height: 70px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.emoticon-picker-popup-emoticon:hover {
+  background-color: #ecf0f1;
+}
+.emoticon-picker-popup-emoticon img {
+  width: 50px;
+  height: 50px;
 }
 @media screen and (min-width: 668px) {
   .emoticon-sidebar {
