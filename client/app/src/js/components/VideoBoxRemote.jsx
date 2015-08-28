@@ -59,17 +59,20 @@ var VideoBoxRemote = React.createClass({
         if (remoteStream !== null) {
           remoteStreamSrc = window.URL.createObjectURL(remoteStream);
         }
-        return
-            <video autoPlay className={"responsive-video remoteVideo"} src="http://www.sample-videos.com/video/mp4/240/big_buck_bunny_240p_1mb.mp4"/>
+
+        console.log('video received');
+        return (
+          <video autoPlay className={"responsive-video remoteVideo"}
+                 src={remoteStreamSrc} />
+        );
 
       default:
         console.log(this.state.connectionState);
         return (
           <div className={'remote-video-holder'}>
-            <video autoPlay className={"responsive-video remoteVideo"} src="http://www.sample-videos.com/video/mp4/240/big_buck_bunny_240p_1mb.mp4"/>
+            <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote" />
           </div>
         );
-        break;
     }
   },
 
@@ -80,11 +83,11 @@ var VideoBoxRemote = React.createClass({
         <div className={"card"}>
           <div className={"card-image"}>
             {this._getVideoHolder()}
-            <span className={"card-title"}>not connected</span>
+            <span className={"card-title"}>{this.state.connectionState}</span>
           </div>
 
           <div className={"card-action"}>
-            <a href="#">Next</a>
+            <VideoBoxRemoteButtonNext />
             <span className={"switch"}>
               <label>
                 No video
@@ -113,6 +116,7 @@ var VideoBoxRemoteTray = React.createClass({
 });
 
 var VideoBoxRemoteButtonNext = React.createClass({
+
   getInitialState: function() {
     return {
       state: State.getState()
@@ -134,15 +138,12 @@ var VideoBoxRemoteButtonNext = React.createClass({
   },
 
   render: function() {
-    var label = (this.state.state === ConnectionStatus.REQUESTING) ? 'Requesting new partner..' : 'Next';
-    var disabled = (this.state.state === ConnectionStatus.REQUESTING) ? true : false;
+    var label = (this.state.state === ConnectionStatus.REQUESTING) ? 'Requesting..' : 'Next';
+    var disabled = this.state.state === ConnectionStatus.REQUESTING;
     return (
-      <button className={"waves-effect waves-light btn"}
-              disabled={disabled}
-              type="button"
-              onClick={this._handleClick}>
+      <a href="#" disabled={disabled} onClick={this._handleClick}>
         {label}
-      </button>
+      </a>
     );
   }
 });

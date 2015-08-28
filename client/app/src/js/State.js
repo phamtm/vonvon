@@ -21,16 +21,7 @@ var temasysPlugin = require('rtc-plugin-temasys');
   this._state = ConnectionStatus.NOT_CONNECTED;
 
   // Chat messages
-  this._messages = [
-    {id: '1', authorName: 'minh', text: 'text text text text text'},
-    {id: '2', authorName: 'minh', text: 'text text text text text'},
-    {id: '3', authorName: 'minh', text: 'text text text text text'},
-    {id: '4', authorName: 'minh', text: 'text text text text text'},
-    {id: '5', authorName: 'minh', text: 'text text text text text'},
-    {id: '6', authorName: 'minh', text: 'text text text text text'},
-    {id: '7', authorName: 'minh', text: 'text text text text text'},
-    {id: '8', authorName: 'minh', text: 'text text text text text'},
-  ];
+  this._messages = [];
 
   // Connections: server and peer
   this._localId = null;

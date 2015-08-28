@@ -3,6 +3,7 @@ var React = require('react');
 var State = require('../../State');
 var ConnectionStatus = require('../../constants/ConnectionStatus');
 var MessageUtil = require('../../utils/MessageUtil');
+var EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
 
 
 const ENTER_KEY_CODE = 13;
@@ -71,79 +72,28 @@ var ChatInput = React.createClass({
     return (
       <div className={"chat-input-area"}>
         <div className={"chat-input-holder"}>
-          <input id="chat-input" type="text" autofocus placeholder="Type a message..." />
+          <input id="chat-input"
+                 type="text"
+                 autofocus
+                 placeholder={this.state.disabled ? 'Press next' : 'Type a message...'}
+                 value={this.state.message}
+                 disabled={this.state.disabled}
+                 onChange={this.handleValueChange}
+                 onKeyDown={this.handleKeyDown}  />
         </div>
         <ul className={"chat-actions"}>
-          <li><i className={"small material-icons"}>send</i></li>
-          <li className={"emoticon-picker"}>
-            <i className={"small material-icons"}>mood</i>
-            <div className={"emoticon-picker-popup z-depth-1"}>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-              <div className={"emoticon-picker-popup-emoticon"}>
-                <img src="img/emoticons/haha.png" alt="emoticon" />
-              </div>
-            </div>
+          <li>
+            <i className={"small material-icons"} onClick={this.handleClick}
+               disabled={this.state.disabled || !this.state.message.length}>
+              send
+            </i>
           </li>
+          <EmoticonPicker />
         </ul>
       </div>
     );
   }
+
 });
 
 module.exports = ChatInput;
