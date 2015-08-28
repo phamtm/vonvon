@@ -5,6 +5,9 @@
 ul {
   list-style: none;
 }
+img {
+  display: block !important;
+}
 .remote-video-holder {
   background-color: #ddd;
 }
@@ -17,6 +20,20 @@ ul {
 .videos-holder {
   position: relative;
 }
+.remote-video-holder .card {
+  margin-top: 0;
+  box-shadow: 0 2px 5px -5px rgba(0, 0, 0, 0.16), 0 2px 10px -10px rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+}
+.remote-video-holder .card .card-image img {
+  border-radius: 0;
+}
+.card .card-action a {
+  color: #e74c3c;
+}
+.left {
+  background-color: #ecf0f1;
+}
 @media screen and (min-width: 668px) {
   .wrapper {
     display: flex;
@@ -26,7 +43,6 @@ ul {
   .left {
     max-width: 400px;
     flex: 2;
-    background-color: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -43,10 +59,11 @@ ul {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-image: url('../img/swirl_pattern.png');
+    background-repeat: repeat-x repeat-y;
   }
   .left {
     width: 100%;
-    background-color: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -56,13 +73,14 @@ ul {
     background-color: #eee;
     display: flex;
     flex-direction: row;
+    flex: 2;
   }
   .local-video-holder {
     position: absolute;
-    bottom: 8px;
+    bottom: 28px;
     right: 8px;
-    width: 80px;
-    height: 60px;
+    width: 60px;
+    height: 40px;
     border: 2px solid #666;
   }
 }
@@ -70,18 +88,100 @@ ul {
   display: flex;
   flex-direction: column;
   flex: 3;
+  background-color: #ffffff;
 }
 .chat-messages-holder {
-  flex: 1 100%;
+  flex: 2;
+  overflow-y: scroll;
 }
 .chat-input-area {
-  background: #bbb;
+  background: #fefefe;
   height: 50px;
+  border-top: 1px solid #cfd9db;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: none;
+}
+.chat-input-holder {
+  width: calc(100% -  100px);
+}
+#chat-input {
+  padding: 16px;
+  background-color: transparent;
+  border: none;
+  border-bottom: none;
+  border-radius: 0;
+  outline: none;
+  height: 100%;
+  font-size: 1rem;
+  margin: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+.chat-message-ul {
+  overflow-y: scroll;
+  padding: 16px;
+}
+.chat-message-li {
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #efefef;
+}
+.chat-message-li:first-child {
+  padding-top: 0;
+}
+.chat-message-li:last-child {
+  border-bottom: 0;
+}
+.message-author {
+  color: #3498db;
+  float: left;
+  font-size: 13px;
+  margin: 0;
+}
+.message-timestamp {
+  color: #5faee3;
+  float: right;
+  font-size: 12px;
+}
+.message-text {
+  clear: both;
+  font-size: 14px;
+  padding-top: 4px;
+}
+ul.chat-actions {
+  display: flex;
+  width: 100px;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 16px;
+}
+ul.chat-actions li {
+  display: inline-block;
+  padding-top: 10px;
+  margin-right: 5px;
+  color: #94aab0;
+}
+ul.chat-actions li i:hover {
+  cursor: pointer;
+  color: #3498db;
+}
+.card-panel.noti {
+  padding: 10px 8px;
+}
+.card-panel.noti .valign-wrapper {
+  margin-bottom: 0;
+}
+.chat-message-li.noti-li {
+  border: none;
 }
 @media screen and (min-width: 668px) {
   .emoticon-sidebar {
     display: flex;
-    background-color: #aaa;
+    background-color: #ecf0f1;
+    border-left: 1px solid #ccc;
     flex: 1;
     flex-direction: column;
   }
@@ -89,20 +189,18 @@ ul {
 @media screen and (max-width: 667px) {
   .emoticon-sidebar {
     display: none;
-    background-color: #aaa;
-    flex: 1;
-    flex-direction: column;
   }
 }
 .emoticon-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-content: flex-start;
   overflow-x: hidden;
   overflow-y: auto;
   flex: 1 100%;
+  padding: 16px;
 }
 .emoticon-list-item {
   border-radius: 5px;
@@ -112,11 +210,18 @@ ul {
   cursor: pointer;
 }
 .emoticon-search-input {
-  background: #bbb;
   height: 50px;
   flex-shrink: none;
 }
 .img-emoticon {
   width: 50px;
   height: 50px;
+}
+body {
+  color: #2c3e50;
+  overflow: hidden;
+}
+body *::selection {
+  background: #2c3e50;
+  color: #ecf0f1;
 }

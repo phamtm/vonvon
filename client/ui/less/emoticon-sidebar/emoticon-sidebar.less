@@ -1,7 +1,8 @@
 @media screen and (min-width: @screen-sm-min) {
     .emoticon-sidebar {
         display: flex;
-        background-color: #aaa;
+        background-color: @color-background;
+        border-left: 1px solid #ccc;
         flex: 1;
         flex-direction: column;
     }
@@ -10,22 +11,19 @@
 @media screen and (max-width: @screen-xs-max) {
     .emoticon-sidebar {
         display: none;
-        background-color: #aaa;
-        flex: 1;
-        flex-direction: column;
     }
 }
-
 
 .emoticon-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-content: flex-start;
     overflow-x: hidden;
     overflow-y: auto;
     flex: 1 100%;
+    .apply-padding;
 }
 
 .emoticon-list-item {
@@ -38,7 +36,6 @@
 }
 
 .emoticon-search-input {
-    background: #bbb;
     height: @chat-input-height;
     flex-shrink: none;
 }

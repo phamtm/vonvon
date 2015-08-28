@@ -1,5 +1,16 @@
 @import "variables";
+@import "mixins";
 @import "reset";
 @import "layout";
 @import "chatbox/chatbox";
 @import "emoticon-sidebar/emoticon-sidebar";
+
+body {
+    color: @color-dark-blue;
+    overflow: hidden;
+}
+
+body *::selection {
+    background: @color-dark-blue;
+    color: @color-background;
+}

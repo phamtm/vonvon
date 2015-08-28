@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="img/ico" href="img/favicon.ico">
     <title>VonVon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -20,9 +21,26 @@
       <div class="left">
         <div class="videos-holder">
           <div class="remote-video-holder">
-            <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Local">
+            <div class="card">
+              <div class="card-image">
+                <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Local">
+                <span class="card-title">Card Title</span>
+              </div>
+              <div class="card-action">
+                <a href="#">Next</a>
+                <span class="switch">
+                  <label>
+                    Video
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    No video
+                  </label>
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="local-video-holder">
+
+          <div class="local-video-holder z-depth-1">
             <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote">
           </div>
         </div>
@@ -32,10 +50,73 @@
 
         <div class="chatbox-holder">
           <div class="chat-messages-holder">
-            Chatbox messages
+            <ul class="chat-message-ul">
+              <li class="chat-message-li noti-li">
+                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                  <div class="card-panel noti grey lighten-5 z-depth-1">
+                    <div class="row valign-wrapper">
+                      <div class="col s2">
+                        <img data-src="holder.js/64x64?auto=yes&theme=vine" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                      </div>
+                      <div class="col s10">
+                        <span class="black-text">
+                          This is a square image. Add the "circle" class to it to make it appear circular.
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+              <li class="chat-message-li">
+                <h5 class="message-author">Author</h5>
+                <div class="message-timestamp">1 minute ago</div>
+                <div class="message-text">Text text text text text</div>
+              </li>
+            </ul>
           </div>
           <div class="chat-input-area">
-            Input
+            <div class="chat-input-holder">
+              <input id="chat-input" type="text" autofocus placeholder="Type a message...">
+            </div>
+            <ul class="chat-actions">
+              <li><i class="small material-icons">send</i></li>
+              <li><i class="small material-icons">mood</i></li>
+            </ul>
           </div>
         </div>
 
@@ -50,7 +131,9 @@
             <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
             <div class="emoticon-list-item"><img class="img-emoticon" src="img/emoticons/haha.png" alt="emoticon"></div>
           </div>
-          <div class="emoticon-search-input">Search emoticon</div>
+          <div class="emoticon-search-input">
+            Search emoticon
+          </div>
         </div>
       </div>
     </div>
