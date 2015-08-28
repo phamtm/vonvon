@@ -5,9 +5,11 @@ var VideoBoxRemote = require('./VideoBoxRemote.jsx');
 var VideoBox = React.createClass({
   render: function() {
     return (
-      <div>
-        <VideoBoxRemote />
-        <VideoBoxLocal />
+      <div className="left">
+        <div className="videos-holder">
+          <VideoBoxRemote />
+          <VideoBoxLocal />
+        </div>
       </div>
     );
   }

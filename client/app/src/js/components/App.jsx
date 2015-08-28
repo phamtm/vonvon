@@ -14,14 +14,20 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <div className={"col s12 m6 l4"}>
-          <VideoBox />
+      <div className="wrapper-all" id="appComponent">
+
+        <div className="navbar">
+          <ul>
+            <li className="logo">VonVon.vn</li>
+            <li>have fun!</li>
+          </ul>
         </div>
 
-        <div className={"col s12 m6 l8"}>
+        <div className="wrapper-content">
+          <VideoBox />
           <ChatBox />
         </div>
+
       </div>
     );
   }

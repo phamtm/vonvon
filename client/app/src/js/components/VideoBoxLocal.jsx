@@ -3,6 +3,7 @@ var State = require('../State');
 
 
 var VideoBoxLocal = React.createClass({
+
   getInitialState: function() {
     return {
       localStream: State.getLocalStream()
@@ -25,14 +26,16 @@ var VideoBoxLocal = React.createClass({
     if (localStream !== null) {
       localStreamSrc = window.URL.createObjectURL(localStream);
     }
+
     return (
-      <div className={"card hide-on-small-only"}>
-        <div className={"card-image waves-effect waves-block waves-light"}>
-          <video autoPlay muted="muted" src={localStreamSrc}></video>
-        </div>
+      <div className={"local-video-holder"}>
+        <video className={"responsive-video localVideo"} autoPlay muted="muted"
+               src={localStreamSrc} >
+        </video>
       </div>
-      );
+    );
   }
+
 });
 
 module.exports = VideoBoxLocal;

@@ -1,7 +1,5 @@
 var React = require('react');
 
-// var EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
-var EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
 var State = require('../../State');
 var ConnectionStatus = require('../../constants/ConnectionStatus');
 var MessageUtil = require('../../utils/MessageUtil');
@@ -71,18 +69,21 @@ var ChatInput = React.createClass({
 
   render: function() {
     return (
-      <div className="chatInput">
-        <input type="text" value={this.state.message}
-               disabled={this.state.disabled}
-               onChange={this.handleValueChange}
-               onKeyDown={this.handleKeyDown} />
-        <button className={"waves-effect waves-light btn"}
-                type="button"
-                onClick={this.handleClick}
-                disabled={this.state.disabled || !this.state.message.length}>
-          Submit
-        </button>
-        <EmoticonPicker />
+      <div className={"chat-input-area"}>
+        <div className={"chat-input-holder"}>
+          <input id="chat-input" type="text" autofocus placeholder="Type a message..." />
+        </div>
+        <ul className={"chat-actions"}>
+          <li><i className={"small material-icons"}>send</i></li>
+          <li className={"emoticon-picker"}>
+            <i className={"small material-icons"}>mood</i>
+            <div className={"emoticon-picker-popup z-depth-1"}>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     );
   }

@@ -59,33 +59,44 @@ var VideoBoxRemote = React.createClass({
         if (remoteStream !== null) {
           remoteStreamSrc = window.URL.createObjectURL(remoteStream);
         }
-        return <video autoPlay src={remoteStreamSrc}></video>;
+        return
+            <video autoPlay className={"responsive-video remoteVideo"} src="http://www.sample-videos.com/video/mp4/240/big_buck_bunny_240p_1mb.mp4"/>
 
       default:
         console.log(this.state.connectionState);
-        return <div className='remote-video-holder'></div>;
+        return (
+          <div className={'remote-video-holder'}>
+            <video autoPlay className={"responsive-video remoteVideo"} src="http://www.sample-videos.com/video/mp4/240/big_buck_bunny_240p_1mb.mp4"/>
+          </div>
+        );
         break;
     }
   },
 
-  // componentWillReceiveProps: function(nextProps) {
-  //   this.setState({
-  //     likesIncreasing: nextProps.likeCount > this.props.likeCount
-  //   });
-  // },
-
   render: function() {
     return (
-      <div className={"card"}>
-        <div
-          className={"card-image waves-effect waves-block waves-light"}
-          style={this.state.options}>
-          <VideoBoxRemoteStatus connectionState={this.state.connectionState}/>
-          {this._getVideoHolder()}
+      <div className={"remote-video-holder"}>
+
+        <div className={"card"}>
+          <div className={"card-image"}>
+            {this._getVideoHolder()}
+            <span className={"card-title"}>not connected</span>
+          </div>
+
+          <div className={"card-action"}>
+            <a href="#">Next</a>
+            <span className={"switch"}>
+              <label>
+                No video
+                <input type="checkbox" defaultChecked />
+                <span className={"lever"}></span>
+                Video
+              </label>
+            </span>
+          </div>
+
         </div>
-        <div className={"card-content"}>
-          <VideoBoxRemoteTray connectionState={this.state.connectionState}/>
-        </div>
+
       </div>
     );
   }
@@ -139,9 +150,7 @@ var VideoBoxRemoteButtonNext = React.createClass({
 var VideoBoxRemoteStatus = React.createClass({
   render: function() {
     return (
-      <div className="connection-status">
-        {this.props.connectionState}
-      </div>
+      <span className="card-title">{this.props.connectionState}</span>
     );
   }
 });

@@ -36,7 +36,7 @@ var ChatMessageList = React.createClass({
       return <ChatMessage key={msg.id} message={msg} />
     });
     return (
-      <ul ref="messageList" className={'chat-message-list'}>
+      <ul ref="messageList" className={'chat-message-ul'}>
         {items}
       </ul>
     );
