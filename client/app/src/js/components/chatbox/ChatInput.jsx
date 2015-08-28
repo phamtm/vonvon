@@ -81,6 +81,63 @@ var ChatInput = React.createClass({
               <div className={"emoticon-picker-popup-emoticon"}>
                 <img src="img/emoticons/haha.png" alt="emoticon" />
               </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
+              <div className={"emoticon-picker-popup-emoticon"}>
+                <img src="img/emoticons/haha.png" alt="emoticon" />
+              </div>
             </div>
           </li>
         </ul>
