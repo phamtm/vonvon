@@ -5,6 +5,7 @@
   "main": "js/app.js",
   "dependencies": {
     "browsernizr": "^1.0.2",
+    "cssify": "^0.7.0",
     "freeice": "^2.2.0",
     "peerjs": "^0.3.14",
     "react": "~0.12",
