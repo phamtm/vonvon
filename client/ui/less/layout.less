@@ -1,5 +1,6 @@
 .remote-video-holder {
     background-color: #ddd;
+    width: 100%;
 }
 
 .local-video-holder {
@@ -23,6 +24,18 @@
 
 .remote-video-holder .card .card-image img {
     border-radius: 0;
+}
+
+.remote-video-holder .card-image {
+    background: @color-dark-blue;
+    display: flex;
+    min-height: 200px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.remote-video-holder .circle::before {
+    background-color: @color-background;
 }
 
 .card .card-action a {

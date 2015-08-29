@@ -1,7 +1,7 @@
 var React = require('react');
+var Spinner = require('react-spinkit');
 
 var State = require('../State');
-var Spinner = require('./Spinner.jsx');
 var ConnectionStatus = require('../constants/ConnectionStatus');
 var Topics = require('../constants/Topics');
 
@@ -51,7 +51,7 @@ var VideoBoxRemote = React.createClass({
   _getVideoHolder: function() {
     switch (this.state.connectionState) {
       case ConnectionStatus.REQUESTING:
-        return <Spinner />;
+        return <Spinner spinnerName="circle" noFadeIn/>;
 
       case ConnectionStatus.MATCHED:
         var remoteStream = this.state.remoteStream;
@@ -70,7 +70,7 @@ var VideoBoxRemote = React.createClass({
         console.log(this.state.connectionState);
         return (
           <div className={'remote-video-holder'}>
-            <img class="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote" />
+            <img className="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote" />
           </div>
         );
     }

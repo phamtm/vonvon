@@ -1,21 +1,42 @@
-module.exports = {
+const MessageType = require('../constants/MessageType');
 
-  convertToPresentableMessage: function(message, authorName) {
+
+const MessageUtil = {
+
+  convertToPresentableMessage: function(message, authorName, you) {
     return {
       id: message.id,
       authorName: authorName,
       date: new Date(message.timestamp),
-      text: message.text,
+      you: you,
+      content: message.content
     };
   },
 
-  convertToTransferableMessage: function(text) {
+  convertToTransferableTextMessage: function(text) {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
       timestamp: timestamp,
-      text: text,
+      content: {
+        type: MessageType.TEXT,
+        text: text
+      }
+    };
+  },
+
+  convertToTransferableStickerMessage: function(stickerCode) {
+    var timestamp = Date.now();
+    return {
+      id: 'm_' + timestamp,
+      timestamp: timestamp,
+      content: {
+        type: MessageType.STICKER,
+        stickerCode: stickerCode,
+      }
     };
   }
 
 };
+
+module.exports = MessageUtil;

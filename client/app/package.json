@@ -9,6 +9,10 @@
     "peerjs": "^0.3.14",
     "react": "~0.12",
     "react-spinkit": "^1.1.4",
+    "rtc-attach": "^2.0.1",
+    "rtc-capture": "^1.0.2",
+    "rtc-plugin-temasys": "^1.1.2",
+    "rtc-quickconnect": "^4.3.3",
     "socket.io-client": "^1.3.6"
   },
   "devDependencies": {
@@ -25,10 +29,6 @@
     "gulp-util": "^3.0.6",
     "jest-cli": "~0.2.1",
     "reactify": "^1.1.1",
-    "rtc-attach": "^2.0.1",
-    "rtc-capture": "^1.0.2",
-    "rtc-plugin-temasys": "^1.1.2",
-    "rtc-quickconnect": "^4.3.3",
     "statics": "~0.1.0",
     "uglify-js": "~1.3.5",
     "vinyl-source-stream": "^1.1.0",
@@ -40,7 +40,7 @@
     "collect-static": "collect-static . ./static",
     "test": "jest"
   },
-  "author": "Nicola Paolucci",
+  "author": "Minh Pham",
   "license": "Apache 2",
   "browserify": {
     "transform": [

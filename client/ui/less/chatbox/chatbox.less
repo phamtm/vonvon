@@ -36,6 +36,7 @@
     box-shadow: none;
     box-sizing: border-box;
     transition: all .3s;
+    .no-select;
 }
 
 .chat-message-ul {
@@ -90,6 +91,9 @@ ul.chat-actions li {
   padding-top: 10px;
   margin-right: 5px;
   color: darken(@color-background, 30%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 ul.chat-actions li i:hover {
@@ -112,4 +116,5 @@ ul.chat-actions li i:hover {
 
 .chat-message-li i {
   font-size: 13px;
+  .no-select;
 }

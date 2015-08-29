@@ -11,6 +11,7 @@ video {
 }
 .remote-video-holder {
   background-color: #ddd;
+  width: 100%;
 }
 .local-video-holder {
   background-color: #ddd;
@@ -29,6 +30,16 @@ video {
 }
 .remote-video-holder .card .card-image img {
   border-radius: 0;
+}
+.remote-video-holder .card-image {
+  background: #2c3e50;
+  display: flex;
+  min-height: 200px;
+  align-items: center;
+  justify-content: space-around;
+}
+.remote-video-holder .circle::before {
+  background-color: #ecf0f1;
 }
 .card .card-action a {
   color: #e74c3c;
@@ -144,6 +155,12 @@ video {
   box-shadow: none;
   box-sizing: border-box;
   transition: all .3s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .chat-message-ul {
   overflow-y: scroll;
@@ -189,6 +206,9 @@ ul.chat-actions li {
   padding-top: 10px;
   margin-right: 5px;
   color: #94aab0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 ul.chat-actions li i:hover {
   cursor: pointer;
@@ -206,6 +226,12 @@ ul.chat-actions li i:hover {
 }
 .chat-message-li i {
   font-size: 13px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .emoticon-picker {
   display: inline-block;
@@ -240,9 +266,19 @@ ul.chat-actions li i:hover {
 .emoticon-picker-popup-emoticon img {
   width: 50px;
   height: 50px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .emoticon-picker i {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 @media screen and (min-width: 668px) {
@@ -284,6 +320,11 @@ ul.chat-actions li i:hover {
 .img-emoticon {
   width: 50px;
   height: 50px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .sk-fading-circle {

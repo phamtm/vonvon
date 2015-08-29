@@ -24,7 +24,7 @@ var ChatInput = React.createClass({
         message: '',
         disabled: State.getState() !== ConnectionStatus.MATCHED
       });
-      State.sendChat(this.state.message);
+      State.sendTextMessage(this.state.message);
     }
   },
 
@@ -74,7 +74,7 @@ var ChatInput = React.createClass({
         <div className={"chat-input-holder"}>
           <input id="chat-input"
                  type="text"
-                 autofocus
+                 autofocus={!this.state.disabled}
                  placeholder={this.state.disabled ? 'Press next' : 'Type a message...'}
                  value={this.state.message}
                  disabled={this.state.disabled}

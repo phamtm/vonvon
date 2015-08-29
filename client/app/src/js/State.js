@@ -93,17 +93,30 @@ State.prototype.onRequestNextPartner = function(cb) {
   this.addListener(Topics.REQUEST_NEW_PARTNER, cb);
 };
 
-State.prototype.sendChat = function(text) {
+State.prototype.sendMessage = function(transferableMessage) {
   // TODO: check if data channel is closed
-  if (text && this._dataChannel) {
-    var transferableMessage = MessageUtil.convertToTransferableMessage(text);
+  if (transferableMessage && this._dataChannel) {
     var serializedMessage = JSON.stringify(transferableMessage);
     this._dataChannel.send(serializedMessage);
     var presentableMessage = MessageUtil.convertToPresentableMessage(
-        transferableMessage, this._localId);
+        transferableMessage, this._localId, true);
     presentableMessage.authorName += ' (You)';
     this._messages.push(presentableMessage);
     this.emit(Topics.MESSAGE_CHANGED);
+  }
+};
+
+State.prototype.sendTextMessage = function(text) {
+  if (text) {
+    var transferableMessage = MessageUtil.convertToTransferableTextMessage(text);
+    this.sendMessage(transferableMessage);
+  }
+};
+
+State.prototype.sendStickerMessage = function(stickerCode) {
+  if (stickerCode) {
+    var transferableMessage = MessageUtil.convertToTransferableStickerMessage(stickerCode);
+    this.sendMessage(transferableMessage);
   }
 };
 
@@ -236,7 +249,7 @@ State.prototype.init = function() {
             // TODO: validate message?
             var deserializedMessage = JSON.parse(evt.data);
             var presentableMessage = MessageUtil.convertToPresentableMessage(
-               deserializedMessage, _self._peerId);
+               deserializedMessage, _self._peerId, false);
             _self._messages.push(presentableMessage);
             _self.emit(Topics.MESSAGE_CHANGED);
           };

@@ -1,7 +1,6 @@
 var React = require('react');
 
 var EmoticonPopup = require('./EmoticonPopup.jsx');
-var emoticons = require('./emoticons');
 
 
 var EmoticonPicker = React.createClass({
