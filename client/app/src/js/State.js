@@ -100,7 +100,7 @@ State.prototype.sendMessage = function(transferableMessage) {
     this._dataChannel.send(serializedMessage);
     var presentableMessage = MessageUtil.convertToPresentableMessage(
         transferableMessage, this._localId, true);
-    presentableMessage.authorName += ' (You)';
+    presentableMessage.authorName = 'You';
     this._messages.push(presentableMessage);
     this.emit(Topics.MESSAGE_CHANGED);
   }

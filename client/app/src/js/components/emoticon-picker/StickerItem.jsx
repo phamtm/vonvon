@@ -6,7 +6,7 @@ var State = require('../../State');
 var StickerItem = React.createClass({
 
   sendStickerMessage: function() {
-    State.sendStickerMessage(this.props.sticker.stickerCode);
+    State.sendStickerMessage(this.props.stickerCode);
   },
 
   render: function() {

@@ -7,9 +7,15 @@ var StickerItem = require('./StickerItem.jsx');
 var EmoticonPopup = React.createClass({
 
   render: function() {
-    const stickers = Sticker.map(function(sticker) {
-      return <StickerItem key={sticker.stickerCode} sticker={sticker} />;
-    });
+    const stickers = [];
+
+    for (var stickerCode in Sticker) {
+      if (Sticker.hasOwnProperty(stickerCode)) {
+        var sticker = <StickerItem key={stickerCode} stickerCode={stickerCode}
+                                   sticker={Sticker[stickerCode]} />;
+        stickers.push(sticker);
+      }
+    }
 
     return (
       <div className={"emoticon-picker-popup z-depth-1"}>

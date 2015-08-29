@@ -167,10 +167,75 @@ video {
   padding: 16px;
 }
 .chat-message-li {
-  display: block;
   padding-top: 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.chat-message-li .message-author {
+  width: 100%;
+  color: #3498db;
+  font-size: 13px;
+  margin: 0;
+}
+.chat-message-li .message-author i {
+  margin-top: 2px;
+}
+.chat-message-li .message-timestamp {
+  color: #5faee3;
+  font-size: 12px;
+}
+.chat-message-li .message-text {
+  width: 100%;
+  clear: both;
+  font-size: 14px;
+  padding: 5px 16px;
+}
+.chat-message-li .message-sticker {
+  padding: 16px;
+}
+.chat-message-li-you {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.chat-message-li-you .message-author {
+  width: 100%;
+  color: #3498db;
+  font-size: 13px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.chat-message-li-you .message-author i {
+  margin-right: 5px;
+  margin-top: 2px;
+}
+.chat-message-li-you .message-timestamp {
+  color: #5faee3;
+  font-size: 12px;
+}
+.chat-message-li-you .message-text {
+  width: 100%;
+  clear: both;
+  font-size: 14px;
+  padding: 5px 0px;
+  text-align: right;
+}
+.chat-message-li-you .message-sticker {
+  padding: 16px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 .chat-message-li:first-child {
   padding-top: 0;
@@ -178,21 +243,12 @@ video {
 .chat-message-li:last-child {
   border-bottom: 0;
 }
-.message-author {
-  color: #3498db;
-  float: left;
-  font-size: 13px;
-  margin: 0;
+.message-sticker img {
+  width: 50px;
+  height: 50px;
 }
-.message-timestamp {
-  color: #5faee3;
-  float: right;
-  font-size: 12px;
-}
-.message-text {
-  clear: both;
-  font-size: 14px;
-  padding-top: 4px;
+.message-sticker img:hover {
+  cursor: pointer;
 }
 ul.chat-actions {
   display: flex;

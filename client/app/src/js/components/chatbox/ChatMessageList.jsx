@@ -1,6 +1,8 @@
 var React = require('react');
 
-var ChatMessage = require('./ChatMessage.jsx');
+var ChatMessageText = require('./ChatMessageText.jsx');
+var ChatMessageSticker = require('./ChatMessageSticker.jsx');
+var MessageType = require('../../constants/MessageType');
 var State = require('../../State');
 
 
@@ -33,7 +35,14 @@ var ChatMessageList = React.createClass({
 
   render: function() {
     var items = this.state.chatMessages.map(function(msg) {
-      return <ChatMessage key={msg.id} message={msg} />
+      switch (msg.content.type) {
+        case MessageType.TEXT:
+          return <ChatMessageText key={msg.id} message={msg} />;
+        case MessageType.STICKER:
+          return <ChatMessageSticker key={msg.id} message={msg} />;
+        default:
+          return null;
+      }
     });
     return (
       <ul ref="messageList" className={'chat-message-ul'}>

@@ -40,7 +40,7 @@ var ChatInput = React.createClass({
 
   handleClick: function() {
     if (this.state.message && this.state.message.length) {
-      State.sendChat(this.state.message);
+      State.sendTextMessage(this.state.message);
     }
     this.setState({
       message: '',
