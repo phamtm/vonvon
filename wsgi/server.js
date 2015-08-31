@@ -3,10 +3,17 @@ const PORT = 8002;
 const async = require('async');
 const redis = require('redis');
 const app = require('express')();
-const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const uuid = require('node-uuid');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
+var serverOptions = {
+  key: fs.readFileSync('/etc/nginx/keys/myserver.key'),
+  cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt')
+};
+
+const server = require('https').createServer(serverOptions, app);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -37,10 +44,6 @@ var genCoolId = function() {
 
 // Who is waiting
 var isWaiting = {};
-
-app.use(bodyParser.json()); // for parsing application/json
-
-// Redis setup
 
 server.listen(PORT, function () {
   console.log('Server listening at port %d', PORT);
