@@ -12,8 +12,6 @@ var serverOptions = {
   cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt')
 };
 
-var io = require('socket.io').listen(12080);
-
 const server = require('https').createServer(serverOptions, app);
 const io = require('socket.io')(server);
 
