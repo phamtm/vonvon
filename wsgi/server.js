@@ -3,7 +3,6 @@ const PORT = 8002;
 const async = require('async');
 const redis = require('redis');
 const app = require('express')();
-const io = require('socket.io')(server);
 const uuid = require('node-uuid');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -13,7 +12,10 @@ var serverOptions = {
   cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt')
 };
 
+var io = require('socket.io').listen(12080);
+
 const server = require('https').createServer(serverOptions, app);
+const io = require('socket.io')(server);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -48,6 +50,15 @@ var isWaiting = {};
 server.listen(PORT, function () {
   console.log('Server listening at port %d', PORT);
 });
+
+io.set('origins','*');
+io.set('transports', [
+  'websocket',
+  'flashsocket',
+  'htmlfile',
+  'xhr-polling',
+  'jsonp-polling'
+]);
 
 io.on('connection', function (socket) {
   const redisClient = redis.createClient();

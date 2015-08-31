@@ -16,7 +16,7 @@ var Config = {
     key: 'peerjs'
   },
 
-  WEB_SERVER: 'www.vonvon.vn:8002'
+  WEB_SERVER: 'https://www.vonvon.vn:8002'
 
 };
 
