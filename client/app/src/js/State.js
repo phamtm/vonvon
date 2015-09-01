@@ -169,7 +169,10 @@ State.prototype.init = function() {
   var _self = this;
   this._socket = io.connect(
     Config.WEB_SERVER,
-    {'sync disconnect on unload': true}
+    {
+      'sync disconnect on unload': true,
+      'secure': true
+    }
   );
 
   this._getLocalMedia();
