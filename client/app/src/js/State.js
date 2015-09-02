@@ -170,8 +170,7 @@ State.prototype.init = function() {
   this._socket = io.connect(
     Config.WEB_SERVER,
     {
-      'sync disconnect on unload': true,
-      'secure': true
+      'sync disconnect on unload': true
     }
   );
 
