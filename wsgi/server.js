@@ -9,11 +9,12 @@ const fs = require('fs');
 
 var serverOptions = {
   key: fs.readFileSync('/etc/nginx/keys/myserver.key'),
-  cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt')
+  cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt'),
+  requestCert: true
 };
 
 const server = require('https').createServer(serverOptions, app);
-const io = require('socket.io')(server);
+const io = require('socket.io').listen(server);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
