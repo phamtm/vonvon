@@ -7,13 +7,7 @@ const uuid = require('node-uuid');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-var serverOptions = {
-  key: fs.readFileSync('/etc/nginx/keys/myserver.key'),
-  cert: fs.readFileSync('/etc/nginx/keys/ssl-bundle.crt'),
-  requestCert: true
-};
-
-const server = require('https').createServer(serverOptions, app);
+const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
