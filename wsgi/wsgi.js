@@ -2,13 +2,9 @@ const PORT = 8002;
 
 const async = require('async');
 const redis = require('redis');
-const app = require('express')();
 const uuid = require('node-uuid');
-const bodyParser = require('body-parser');
 const fs = require('fs');
-
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
+const io = require('socket.io').listen(PORT);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -39,10 +35,6 @@ var genCoolId = function() {
 
 // Who is waiting
 var isWaiting = {};
-
-server.listen(PORT, function () {
-  console.log('Server listening at port %d', PORT);
-});
 
 io.set('origins','*');
 io.set('transports', [
