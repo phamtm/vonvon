@@ -29,22 +29,16 @@ gulp.task('css', function() {
 			.pipe(gulp.dest('./dist/css/'));
 });
 
-// // Copy images
-// gulp.task('copy-static', function() {
-// 	gulp.src('./src/img/**/*')
-// 			.pipe(gulp.dest('./dist/img'));
-// });
+// Browserify and compress JS
+gulp.task('js', function() {
+  var bundleStream = browserify('./src/js/app.jsx').bundle()
 
-// // Browserify and compress JS
-// gulp.task('js', function() {
-//   var bundleStream = browserify('./src/js/app.js').bundle()
-
-//   bundleStream
-//     .pipe(source('app.js'))
-//     .pipe(streamify(uglify()))
-//     .pipe(rename('bundle.js'))
-//     .pipe(gulp.dest('./dist/js/'));
-// });
+  bundleStream
+    .pipe(source('app.js'))
+    .pipe(streamify(uglify()))
+    .pipe(rename('bundle.js'))
+    .pipe(gulp.dest('./dist/js/'));
+});
 
 // gulp.task('dist', ['clean', 'copy-static', 'html', 'css', 'js']);
 

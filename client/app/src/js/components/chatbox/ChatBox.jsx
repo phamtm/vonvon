@@ -2,7 +2,7 @@ var React = require('react');
 
 var ChatInput = require('./ChatInput.jsx');
 var ChatMessageList = require('./ChatMessageList.jsx');
-var EmoticonSidebar = require('./EmoticonSidebar.jsx');
+var EmoticonSidebar = require('../emoticon-sidebar/EmoticonSidebar.jsx');
 
 
 var ChatBox = React.createClass({
