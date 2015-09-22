@@ -11,12 +11,12 @@ var Config = {
   },
 
   PEER_SERVER_OPTIONS: {
-    host: 'toidocbao.org',
+    host: 'vonvon.vn',
     port: 8001,
     key: 'peerjs'
   },
 
-  WEB_SERVER: 'toidocbao.org:8002'
+  WEB_SERVER: 'vonvon.vn:8002'
 
 };
 

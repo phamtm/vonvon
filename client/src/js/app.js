@@ -15,5 +15,3 @@ if (!Modernizr.getusermedia && !Modernizr.peerconnection) {
     document.getElementById('appComponent')
   );
 }
-
-
