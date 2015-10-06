@@ -1,8 +1,8 @@
 var Config = require('./config.js');
 var ConnectionStatus = require('./constants/ConnectionStatus');
-var EventEmitter = require("events").EventEmitter;
+var EventEmitter = require('events').EventEmitter;
 var io = require('socket.io-client');
-var Peer = require('peerjs');
+var Peer = require('peerjs_fork_firefox40');
 var Topics = require('./constants/Topics');
 var Message = require('./utils/MessageUtil');
 
