@@ -1,10 +1,10 @@
 const PORT = 8002;
 
-const async = require('async');
 const redis = require('redis');
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 const uuid = require('node-uuid');
-const fs = require('fs');
-const io = require('socket.io').listen(PORT);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -36,14 +36,9 @@ var genCoolId = function() {
 // Who is waiting
 var isWaiting = {};
 
-io.set('origins','*');
-io.set('transports', [
-  'websocket',
-  'flashsocket',
-  'htmlfile',
-  'xhr-polling',
-  'jsonp-polling'
-]);
+server.listen(PORT, function () {
+  console.log('Server listening at port %d', PORT);
+});
 
 io.on('connection', function (socket) {
   const redisClient = redis.createClient();
@@ -80,15 +75,12 @@ io.on('connection', function (socket) {
   // the user has been matched with another
   redisClient.on('message', function (channel, message) {
     isWaiting[clientId] = false;
-    var tokens = message.split('#');
 
     console.log(Date.now().toLocaleString() + ' Partner created::' + message);
     redisClient.unsubscribe(clientId);
     socket.emit(
       'socket-io::matched',
-      {
-        partnerId: tokens[0], roomId: tokens[1]
-      }
+      { partnerId: message }
     );
   });
 });

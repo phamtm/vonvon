@@ -12,7 +12,8 @@
     "socket.io-client": "^1.3.7"
   },
   "devDependencies": {
-    "browserify": "^11.0.1",
+    "browserify": "^11.2.0",
+    "chalk": "^1.1.1",
     "del": "^1.2.1",
     "envify": "~3.2.0",
     "gulp": "^3.9.0",
@@ -21,12 +22,14 @@
     "gulp-minify-css": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-streamify": "^1.0.0",
-    "gulp-uglify": "^1.2.0",
+    "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.6",
-    "jest-cli": "~0.2.1",
+    "orchestrator": "^0.3.7",
     "reactify": "^1.1.1",
+    "replace-ext": "0.0.1",
     "statics": "~0.1.0",
     "uglify-js": "~1.3.5",
+    "vinyl": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "~2.2.1"
   },
@@ -34,7 +37,7 @@
     "start": "STATIC_ROOT=./static watchify -o src/js/bundle.js -v -d .",
     "build": "STATIC_ROOT=./static NODE_ENV=production browserify . | uglifyjs -cm > js/bundle.js",
     "collect-static": "collect-static . ./static",
-    "test": "jest"
+    "test": "test"
   },
   "author": "Minh Pham",
   "license": "Apache 2",
@@ -43,8 +46,5 @@
       "reactify",
       "envify"
     ]
-  },
-  "jest": {
-    "rootDir": "./js"
   }
 }

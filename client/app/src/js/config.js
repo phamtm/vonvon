@@ -10,7 +10,13 @@ var Config = {
     audio: true
   },
 
-  WEB_SERVER: 'https://www.vonvon.vn/node'
+  PEER_SERVER_OPTIONS: {
+    host: 'localhost',
+    port: 8001,
+    key: 'peerjs'
+  },
+
+  WEB_SERVER: 'localhost:8002'
 
 };
 

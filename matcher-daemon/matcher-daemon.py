@@ -29,8 +29,8 @@ def dequeue():
         p.zrem(RANDOM_QUEUE_NAME, id1)
         p.zrem(RANDOM_QUEUE_NAME, id2)
         p.execute()
-        rs.publish(id1, id2 + '#' + roomId)
-        rs.publish(id2, id1 + '#' + roomId)
+        rs.publish(id1, id2)
+        rs.publish(id2, id1)
         i += 2
 
 
