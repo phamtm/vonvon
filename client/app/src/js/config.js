@@ -1,4 +1,4 @@
-var SERVER_IP = "52.76.95.67";
+var SERVER_IP = "trananhcuong.com";
 var PEER_KEY = "peerjs";
 var PEER_PORT = 8001;
 var SOCKET_PORT = 8002;

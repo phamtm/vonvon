@@ -2,9 +2,16 @@ const PORT = 8002;
 
 const redis = require('redis');
 const app = require('express')();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 const uuid = require('node-uuid');
+const fs = require('fs');
+
+var serverOptions = {
+  key: fs.readFileSync('/home/ubuntu/keys/trananhcuong.key'),
+  cert: fs.readFileSync('/home/ubuntu/keys/trananhcuong.crt'),
+};
+
+const server = require('https').createServer(serverOptions, app);
+const io = require('socket.io').listen(server);
 
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
