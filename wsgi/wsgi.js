@@ -17,8 +17,8 @@ var serverOptions = {
 const server = require('https').createServer(serverOptions, app);
 const io = require('socket.io').listen(server);
 
-io.set( 'origins', '*www.vonvon.vn:*' );
-
+//io.set( 'origins', '*www.vonvon.vn:*' );
+io.set( 'origins', '*:*' );
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
       "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue",
