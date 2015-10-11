@@ -17,7 +17,6 @@ var ChatBox = React.createClass({
           <ChatInput />
         </div>
 
-        <EmoticonSidebar />
       </div>
     );
   }
