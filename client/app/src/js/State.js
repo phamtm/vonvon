@@ -141,6 +141,10 @@ State.prototype._getLocalMedia = function() {
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
+      if (!localStream) {
+        window.location.replace('not-supported.html');
+        return;
+      }
       this._localStream = localStream;
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
