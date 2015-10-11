@@ -2,10 +2,23 @@ const PORT = 8002;
 
 const redis = require('redis');
 const app = require('express')();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 const uuid = require('node-uuid');
+const fs = require('fs');
+const cors = require('cors');
 
+app.use(cors());
+
+var serverOptions = {
+  key: fs.readFileSync('/home/ubuntu/keys/trananhcuong.key'),
+  cert: fs.readFileSync('/home/ubuntu/keys/trananhcuong.crt'),
+  ca: fs.readFileSync('/home/ubuntu/keys/geotrust2.pem')
+};
+
+const server = require('https').createServer(serverOptions, app);
+const io = require('socket.io').listen(server);
+
+//io.set( 'origins', '*www.vonvon.vn:*' );
+io.set( 'origins', '*:*' );
 GEN_ADJ = [ "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
       "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
       "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue",

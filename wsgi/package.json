@@ -5,6 +5,8 @@
   "main": "server.js",
   "dependencies": {
     "async": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
     "multer": "^1.0.1",
     "node-uuid": "^1.4.3",
     "redis": "^0.12.1",

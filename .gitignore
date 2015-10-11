@@ -9,3 +9,6 @@ bundle.js
 
 # Project specific
 dist/
+
+# Config file
+client/app/src/js/config.js

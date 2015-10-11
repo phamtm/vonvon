@@ -1,3 +1,8 @@
+var SERVER_IP = "trananhcuong.com";
+var PEER_KEY = "peerjs";
+var PEER_PORT = 8001;
+var SOCKET_PORT = 8002;
+
 var Config = {
   WEBRTC_MEDIA_CONSTRAINTS: {
     video: true,
@@ -11,12 +16,12 @@ var Config = {
   },
 
   PEER_SERVER_OPTIONS: {
-    host: 'localhost',
-    port: 8001,
-    key: 'peerjs'
+    host: SERVER_IP,
+    port: PEER_PORT,
+    key: PEER_KEY
   },
 
-  WEB_SERVER: 'localhost:8002'
+  WEB_SERVER: SERVER_IP + ":" + SOCKET_PORT
 
 };
 
