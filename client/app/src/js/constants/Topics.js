@@ -12,6 +12,8 @@ var Topics = keyMirror({
   MESSAGE_SEND: null,
   MESSAGE_CHANGED: null,
 
+  CLOSE_EMOTICON_PICKER: null,
+
   REQUEST_NEW_PARTNER: null,
   ID_LOCAL_CHANGED: null,
   ID_PARTNER_CHANGED: null,

@@ -1,5 +1,6 @@
 var React = require('react');
 
+const Dispatcher = require('../../Dispatcher');
 var EmoticonPopup = require('./EmoticonPopup.jsx');
 
 
@@ -9,6 +10,20 @@ var EmoticonPicker = React.createClass({
     return {
       popupActive: false
     };
+  },
+
+  componentDidMount: function() {
+    Dispatcher.addChatCloseListener(this.closePopup);
+  },
+
+  componentWillUnmount: function() {
+    // unsubscribe events here
+  },
+
+  closePopup: function() {
+    this.setState({
+      popupActive: false
+    });
   },
 
   togglePopup: function() {

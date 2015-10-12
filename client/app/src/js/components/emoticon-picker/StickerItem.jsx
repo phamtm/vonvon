@@ -1,12 +1,15 @@
-var React = require('react');
+const React = require('react');
 
-var State = require('../../State');
+const Dispatcher = require('../../Dispatcher');
+const State = require('../../State');
+const Topics = require('../../constants/Topics');
 
 
-var StickerItem = React.createClass({
+const StickerItem = React.createClass({
 
   sendStickerMessage: function() {
     State.sendStickerMessage(this.props.stickerCode);
+    Dispatcher.emit(Topics.CLOSE_EMOTICON_PICKER);
   },
 
   render: function() {

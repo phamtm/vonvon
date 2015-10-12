@@ -1,10 +1,10 @@
-var Config = require('./config.js');
-var ConnectionStatus = require('./constants/ConnectionStatus');
-var EventEmitter = require('events').EventEmitter;
-var io = require('socket.io-client');
-var Peer = require('peerjs_fork_firefox40');
-var Topics = require('./constants/Topics');
-var MessageUtil = require('./utils/MessageUtil');
+const Config = require('./config.js');
+const ConnectionStatus = require('./constants/ConnectionStatus');
+const EventEmitter = require('events').EventEmitter;
+const io = require('socket.io-client');
+const Peer = require('peerjs_fork_firefox40');
+const Topics = require('./constants/Topics');
+const MessageUtil = require('./utils/MessageUtil');
 
 
 /**
