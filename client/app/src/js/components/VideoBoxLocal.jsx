@@ -1,8 +1,8 @@
-var React = require('react');
-var State = require('../State');
+const React = require('react');
+const State = require('../State');
 
 
-var VideoBoxLocal = React.createClass({
+const VideoBoxLocal = React.createClass({
 
   getInitialState: function() {
     return {

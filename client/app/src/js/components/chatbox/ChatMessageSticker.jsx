@@ -1,11 +1,11 @@
-var React = require('react');
+const React = require('react');
 
-var Sticker = require('../emoticon-picker/Sticker');
+const Sticker = require('../emoticon-picker/Sticker');
 
 
-var ChatMessageSticker = React.createClass({
+const ChatMessageSticker = React.createClass({
   render: function() {
-    var message = this.props.message;
+    const message = this.props.message;
     return (
       <li className={ message.you ? 'chat-message-li-you' : 'chat-message-li' }>
         <div className={'message-author'}>

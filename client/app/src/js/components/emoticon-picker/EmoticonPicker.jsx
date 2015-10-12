@@ -1,10 +1,10 @@
-var React = require('react');
+const React = require('react');
 
 const Dispatcher = require('../../Dispatcher');
-var EmoticonPopup = require('./EmoticonPopup.jsx');
+const EmoticonPopup = require('./EmoticonPopup.jsx');
 
 
-var EmoticonPicker = React.createClass({
+const EmoticonPicker = React.createClass({
 
   getInitialState: function() {
     return {

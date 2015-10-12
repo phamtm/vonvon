@@ -1,12 +1,12 @@
-var React = require('react');
+const React = require('react');
 
-var ChatMessageText = require('./ChatMessageText.jsx');
-var ChatMessageSticker = require('./ChatMessageSticker.jsx');
-var MessageType = require('../../constants/MessageType');
-var State = require('../../State');
+const ChatMessageText = require('./ChatMessageText.jsx');
+const ChatMessageSticker = require('./ChatMessageSticker.jsx');
+const MessageType = require('../../constants/MessageType');
+const State = require('../../State');
 
 
-var ChatMessageList = React.createClass({
+const ChatMessageList = React.createClass({
 
   getInitialState: function() {
     return {
@@ -29,12 +29,12 @@ var ChatMessageList = React.createClass({
   },
 
   _scrollToBottom: function() {
-    var ul = this.refs.holder.getDOMNode();
+    const ul = this.refs.holder.getDOMNode();
     ul.scrollTop = ul.scrollHeight;
   },
 
   render: function() {
-    var items = this.state.chatMessages.map(function(msg) {
+    const items = this.state.chatMessages.map(function(msg) {
       switch (msg.content.type) {
         case MessageType.TEXT:
           return <ChatMessageText key={msg.id} message={msg} />;

@@ -1,7 +1,7 @@
-var keyMirror = require('react/lib/keyMirror');
+const keyMirror = require('react/lib/keyMirror');
 
 
-var Topics = keyMirror({
+const Topics = keyMirror({
   STATE_CHANGED: null,
 
   STREAM_LOCAL_RECEIVED: null,

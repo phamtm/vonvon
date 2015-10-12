@@ -1,14 +1,14 @@
-var React = require('react');
+const React = require('react');
 
-var State = require('../../State');
-var ConnectionStatus = require('../../constants/ConnectionStatus');
-var MessageUtil = require('../../utils/MessageUtil');
-var EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
+const State = require('../../State');
+const ConnectionStatus = require('../../constants/ConnectionStatus');
+const MessageUtil = require('../../utils/MessageUtil');
+const EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
 
 
 const ENTER_KEY_CODE = 13;
 
-var ChatInput = React.createClass({
+const ChatInput = React.createClass({
 
   getInitialState: function() {
     return {

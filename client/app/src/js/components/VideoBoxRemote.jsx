@@ -1,15 +1,15 @@
-var React = require('react');
-var Spinner = require('react-spinkit');
+const React = require('react');
+const Spinner = require('react-spinkit');
 
-var State = require('../State');
-var ConnectionStatus = require('../constants/ConnectionStatus');
-var Topics = require('../constants/Topics');
+const State = require('../State');
+const ConnectionStatus = require('../constants/ConnectionStatus');
+const Topics = require('../constants/Topics');
 
 
 const DARK_BACKGROUND = '#2c3e50';
 const LIGHT_BACKGROUND = '#ffffff';
 
-var VideoBoxRemote = React.createClass({
+const VideoBoxRemote = React.createClass({
 
   getInitialState: function() {
     return {

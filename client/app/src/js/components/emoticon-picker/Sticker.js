@@ -1,4 +1,4 @@
-var Sticker = {
+const Sticker = {
   'emtc.001.001': {
     src: 'img/emoticons/adore.png',
     tags: []

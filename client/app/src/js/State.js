@@ -10,7 +10,7 @@ const MessageUtil = require('./utils/MessageUtil');
 /**
  * Constructor
  */
- var State = function() {
+const State = function() {
   EventEmitter.call(this);
 
   // Connection status
@@ -149,7 +149,6 @@ State.prototype._getLocalMedia = function() {
     }.bind(this),
     function() {
       window.location.replace('not-supported.html');
-      console.log('__localstream:: null');
     }
   );
 };
@@ -330,7 +329,7 @@ State.prototype.init = function() {
   });
 };
 
-var STATE_INSTANCE = new State();
+const STATE_INSTANCE = new State();
 window.state = STATE_INSTANCE;
 
 module.exports = STATE_INSTANCE;

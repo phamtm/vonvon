@@ -1,12 +1,12 @@
-var React = require('react');
+const React = require('react');
 
-var StateInstance = require('../State');
-var VideoBox = require('./VideoBox.jsx');
-var ChatBox = require('./chatbox/ChatBox.jsx');
-var Topics = require('../constants/Topics');
+const StateInstance = require('../State');
+const VideoBox = require('./VideoBox.jsx');
+const ChatBox = require('./chatbox/ChatBox.jsx');
+const Topics = require('../constants/Topics');
 
 
-var App = React.createClass({
+const App = React.createClass({
 
   componentDidMount: function() {
     StateInstance.init();

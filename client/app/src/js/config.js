@@ -1,17 +1,16 @@
-var SERVER_IP = "trananhcuong.com";
-var PEER_KEY = "peerjs";
-var PEER_PORT = 8001;
-var SOCKET_PORT = 8002;
+const SERVER_IP = "trananhcuong.com";
+const PEER_KEY = "peerjs";
+const PEER_PORT = 8001;
+const SOCKET_PORT = 8002;
 
-var Config = {
+const Config = {
   WEBRTC_MEDIA_CONSTRAINTS: {
-    video: true,
-    // video: {
-    //   mandatory: {
-    //     maxWidth: 320,
-    //     maxHeight: 180
-    //   }
-    // },
+    video: {
+      mandatory: {
+        maxWidth: 320,
+        maxHeight: 180
+      }
+    },
     audio: true
   },
 

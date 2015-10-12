@@ -1,8 +1,8 @@
-var React = require('react');
-var VideoBoxLocal = require('./VideoBoxLocal.jsx');
-var VideoBoxRemote = require('./VideoBoxRemote.jsx');
+const React = require('react');
+const VideoBoxLocal = require('./VideoBoxLocal.jsx');
+const VideoBoxRemote = require('./VideoBoxRemote.jsx');
 
-var VideoBox = React.createClass({
+const VideoBox = React.createClass({
   render: function() {
     return (
       <div className="left">

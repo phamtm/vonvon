@@ -1,7 +1,7 @@
-var React = require('react');
+const React = require('react');
 
 
-var Spinner = React.createClass({
+const Spinner = React.createClass({
   render: function() {
     return (
       <div id="loader">

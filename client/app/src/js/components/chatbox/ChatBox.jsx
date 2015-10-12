@@ -1,11 +1,10 @@
-var React = require('react');
+const React = require('react');
 
-var ChatInput = require('./ChatInput.jsx');
-var ChatMessageList = require('./ChatMessageList.jsx');
-var EmoticonSidebar = require('../emoticon-sidebar/EmoticonSidebar.jsx');
+const ChatInput = require('./ChatInput.jsx');
+const ChatMessageList = require('./ChatMessageList.jsx');
 
 
-var ChatBox = React.createClass({
+const ChatBox = React.createClass({
   render: function() {
     return (
       <div className="right">
