@@ -105,7 +105,11 @@ State.prototype.sendChat = function(message) {
 
 State.prototype.sendMessage = function(transferableMessage) {
   // TODO: check if data channel is closed
-  if (transferableMessage && this._peerDataConn) {
+  if (message &&
+      this._peerDataConn &&
+      this._peerDataConn.open &&
+      this._state == ConnectionStatus.MATCHED &&
+      transferableMessage) {
     var serializedMessage = JSON.stringify(transferableMessage);
     this._peerDataConn.send(serializedMessage);
     var presentableMessage = MessageUtil.convertToPresentableMessage(
