@@ -105,8 +105,7 @@ State.prototype.sendChat = function(message) {
 
 State.prototype.sendMessage = function(transferableMessage) {
   // TODO: check if data channel is closed
-  if (message &&
-      this._peerDataConn &&
+  if (this._peerDataConn &&
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED &&
       transferableMessage) {
