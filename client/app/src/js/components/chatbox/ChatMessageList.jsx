@@ -29,7 +29,7 @@ var ChatMessageList = React.createClass({
   },
 
   _scrollToBottom: function() {
-    var ul = this.refs.messageList.getDOMNode();
+    var ul = this.refs.holder.getDOMNode();
     ul.scrollTop = ul.scrollHeight;
   },
 
@@ -45,9 +45,11 @@ var ChatMessageList = React.createClass({
       }
     });
     return (
-      <ul ref="messageList" className={'chat-message-ul'}>
-        {items}
-      </ul>
+      <div className="chat-messages-holder" ref="holder">
+        <ul className={'chat-message-ul'}>
+          {items}
+        </ul>
+      </div>
     );
   }
 });

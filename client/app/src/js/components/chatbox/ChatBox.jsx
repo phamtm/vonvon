@@ -11,9 +11,7 @@ var ChatBox = React.createClass({
       <div className="right">
 
         <div className="chatbox-holder">
-          <div className="chat-messages-holder">
-            <ChatMessageList />
-          </div>
+          <ChatMessageList />
           <ChatInput />
         </div>
 
