@@ -141,14 +141,13 @@ State.prototype._getLocalMedia = function() {
   navigator.getUserMedia(
     Config.WEBRTC_MEDIA_CONSTRAINTS,
     function(localStream) {
-      if (!localStream) {
-        window.location.replace('not-supported.html');
-        return;
-      }
       this._localStream = localStream;
       this.emit(Topics.STREAM_LOCAL_RECEIVED);
     }.bind(this),
-    console.log
+    function() {
+      window.location.replace('not-supported.html');
+      console.log('__localstream:: null');
+    }
   );
 };
 
@@ -214,6 +213,9 @@ State.prototype._setUpChat = function() {
 
 State.prototype.init = function() {
   var _self = this;
+
+  this._getLocalMedia();
+
   this._socket = io.connect(
     Config.WEB_SERVER,
     {'sync disconnect on unload': true}
@@ -244,8 +246,6 @@ State.prototype.init = function() {
   // //   }
   //   }.bind(this), 3000
   // );
-
-  this._getLocalMedia();
 
   this.onRequestNextPartner(function() {
     console.log('Next request');
