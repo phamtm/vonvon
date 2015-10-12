@@ -153,7 +153,10 @@ State.prototype._getLocalMedia = function() {
 };
 
 State.prototype._closeConn = function() {
-  if (!this._peerConn || this._peerConn.disconnected || this._peerConn.destroyed) {
+  // if (!this._peerConn || this._peerConn.disconnected || this._peerConn.destroyed) {
+  //   return;
+  // }
+  if (!this._peerConn) {
     return;
   }
 
@@ -204,6 +207,7 @@ State.prototype._setUpChat = function() {
 
   this._peerDataConn.on('close', function() {
     this.emit(Topics.CHAT_CHANNEL_CLOSED);
+    // potential bug: what if media connection also close at this time?
     this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
 };
