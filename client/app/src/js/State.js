@@ -6,6 +6,8 @@ const Peer = require('peerjs_fork_firefox40');
 const Topics = require('./constants/Topics');
 const MessageUtil = require('./utils/MessageUtil');
 
+const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
+
 
 /**
  * Constructor
@@ -30,6 +32,9 @@ const State = function() {
   // Video streams
   this._localStream = null;
   this._remoteStream = null;
+
+  // The last time that user request for new partner
+  this._lastRequestTime = null;
 };
 
 State.prototype = Object.create(EventEmitter.prototype);
@@ -157,10 +162,6 @@ State.prototype._closeConn = function() {
   // if (!this._peerConn || this._peerConn.disconnected || this._peerConn.destroyed) {
   //   return;
   // }
-  if (!this._peerConn) {
-    return;
-  }
-
   if (this._peerCallConn && this._peerCallConn.open) {
     this._peerCallConn.close();
   }
@@ -250,6 +251,16 @@ State.prototype.init = function() {
   // );
 
   this.onRequestNextPartner(function() {
+    if (!this._lastRequestTime) {
+      return;
+    }
+
+    const curTime = new Date();
+    const timeDelta = (curTime - this._lastRequestTime)*1.0/1000;
+    if (timeDelta < NEXT_REQUEST_INTERVAL) {
+      return;
+    }
+
     console.log('Next request');
     this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
