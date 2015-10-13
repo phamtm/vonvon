@@ -174,14 +174,16 @@ State.prototype._closeConn = function() {
     asyncTerminations.push(this._peerDataConn.close());
   }
 
-  async.parallel(
-    asyncTerminations,
-    function(err, results) {
-      console.log('Closed 2 connections');
-      console.log(err);
-      _self._requestNewPartner();
-    }
-  );
+  if (asyncTerminations.length > 0) {
+    async.parallel(
+      asyncTerminations,
+      function(err, results) {
+        console.log('Closed 2 connections');
+        console.log(err);
+        _self._requestNewPartner();
+      }
+    );
+  }
 
 };
 
