@@ -251,14 +251,15 @@ State.prototype.init = function() {
   // );
 
   this.onRequestNextPartner(function() {
+    const curTime = new Date();
     if (this._lastRequestTime) {
-      const curTime = new Date();
       const timeDelta = (curTime - this._lastRequestTime)*1.0/1000;
       if (timeDelta < NEXT_REQUEST_INTERVAL) {
         return;
       }
-      this._lastRequestTime = curTime;
     }
+
+    this._lastRequestTime = curTime;
 
     console.log('Next request');
     this._cleanUpAndRequestNewPartner(this._peerId);
