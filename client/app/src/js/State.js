@@ -162,21 +162,24 @@ State.prototype._closeConn = function() {
     return;
   }
 
-  async.parallel([
-      function() {
-        if (this._peerCallConn && this._peerCallConn.open) {
-          this._peerCallConn.close();
-        }
-      },
-      function() {
-        if (this._peerDataConn && this._peerDataConn.open) {
-          this._peerDataConn.close();
-        }
-      }
-    ],
+  const _self = this;
+
+  asyncTerminations = [];
+
+  if (this._peerCallConn && this._peerCallConn.open) {
+    asyncTerminations.push(this._peerCallConn.close());
+  }
+
+  if (this._peerDataConn && this._peerDataConn.open) {
+    asyncTerminations.push(this._peerDataConn.close());
+  }
+
+  async.parallel(
+    asyncTerminations,
     function(err, results) {
-      console.log('FAILED::Closing 2 connections');
-      console.log(e);
+      console.log('Closed 2 connections');
+      console.log(err);
+      _self._requestNewPartner();
     }
   );
 
@@ -202,7 +205,7 @@ State.prototype._cleanUpAndRequestNewPartner = function(peerId) {
   }
   this._clearMessages();
   this._closeConn();
-  this._requestNewPartner();
+  // this._requestNewPartner();
 };
 
 State.prototype._setUpChat = function() {
