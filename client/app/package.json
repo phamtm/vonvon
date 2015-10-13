@@ -4,6 +4,7 @@
   "description": "Flux step by step",
   "main": "js/app.js",
   "dependencies": {
+    "async": "^1.4.2",
     "browsernizr": "^1.1.0",
     "cssify": "^0.7.0",
     "peerjs_fork_firefox40": "^0.3.15",

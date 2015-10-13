@@ -1,3 +1,4 @@
+const async = require('async');
 const Config = require('./config.js');
 const ConnectionStatus = require('./constants/ConnectionStatus');
 const EventEmitter = require('events').EventEmitter;
@@ -161,13 +162,24 @@ State.prototype._closeConn = function() {
     return;
   }
 
-  if (this._peerCallConn && this._peerCallConn.open) {
-    this._peerCallConn.close();
-  }
+  async.parallel([
+      function() {
+        if (this._peerCallConn && this._peerCallConn.open) {
+          this._peerCallConn.close();
+        }
+      },
+      function() {
+        if (this._peerDataConn && this._peerDataConn.open) {
+          this._peerDataConn.close();
+        }
+      }
+    ],
+    function(err, results) {
+      console.log('FAILED::Closing 2 connections');
+      console.log(e);
+    }
+  );
 
-  if (this._peerDataConn && this._peerDataConn.open) {
-    this._peerDataConn.close();
-  }
 };
 
 State.prototype._clearMessages = function() {
