@@ -257,6 +257,7 @@ State.prototype.init = function() {
       if (timeDelta < NEXT_REQUEST_INTERVAL) {
         return;
       }
+      this._lastRequestTime = curTime;
     }
 
     console.log('Next request');
