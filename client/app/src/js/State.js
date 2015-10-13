@@ -251,14 +251,12 @@ State.prototype.init = function() {
   // );
 
   this.onRequestNextPartner(function() {
-    if (!this._lastRequestTime) {
-      return;
-    }
-
-    const curTime = new Date();
-    const timeDelta = (curTime - this._lastRequestTime)*1.0/1000;
-    if (timeDelta < NEXT_REQUEST_INTERVAL) {
-      return;
+    if (this._lastRequestTime) {
+      const curTime = new Date();
+      const timeDelta = (curTime - this._lastRequestTime)*1.0/1000;
+      if (timeDelta < NEXT_REQUEST_INTERVAL) {
+        return;
+      }
     }
 
     console.log('Next request');
