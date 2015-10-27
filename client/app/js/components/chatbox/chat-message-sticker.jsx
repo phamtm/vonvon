@@ -12,8 +12,7 @@ const ChatMessageSticker = React.createClass({
           <i className={'tiny material-icons'}>chat_bubble_outline</i> {message.authorName}
         </div>
         <div className={'message-sticker'}>
-          <img src={Sticker[message.content.stickerCode].src}
-               alt={message.content.stickerCode}/>
+          <i className={"emoticon-sprite " + Sticker[message.content.stickerCode].className}></i>
         </div>
       </li>
     );

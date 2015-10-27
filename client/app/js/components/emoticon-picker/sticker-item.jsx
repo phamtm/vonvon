@@ -14,8 +14,9 @@ const StickerItem = React.createClass({
 
   render: function() {
     return (
-      <div className={"emoticon-picker-popup-emoticon"} onClick={this.sendStickerMessage}>
-        <img src={this.props.sticker.src} alt="emoticon" />
+      <div className={"emoticon-picker-popup-emoticon"}
+           onClick={this.sendStickerMessage}>
+           <i className={"emoticon-sprite " + this.props.sticker.className}></i>
       </div>
     );
   }

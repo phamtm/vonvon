@@ -1,86 +1,86 @@
 const Sticker = {
   'emtc.001.001': {
-    src: 'img/emoticons/adore.png',
+    className: 'emoticon-sprite-adore',
     tags: []
   },
   'emtc.001.002': {
-    src: 'img/emoticons/after_boom.png',
+    className: 'emoticon-sprite-after_boom',
     tags: []
   },
   'emtc.001.003': {
-    src: 'img/emoticons/ah.png',
+    className: 'emoticon-sprite-ah',
     tags: []
   },
   'emtc.001.004': {
-    src: 'img/emoticons/amazed.png',
+    className: 'emoticon-sprite-amazed',
     tags: []
   },
   'emtc.001.005': {
-    src: 'img/emoticons/angry.png',
+    className: 'emoticon-sprite-angry',
     tags: []
   },
   'emtc.001.006': {
-    src: 'img/emoticons/bad_smelly.png',
+    className: 'emoticon-sprite-bad_smelly',
     tags: []
   },
   'emtc.001.007': {
-    src: 'img/emoticons/baffle.png',
+    className: 'emoticon-sprite-baffle',
     tags: []
   },
   'emtc.001.008': {
-    src: 'img/emoticons/beat_brick.png',
+    className: 'emoticon-sprite-beat_brick',
     tags: []
   },
   'emtc.001.009': {
-    src: 'img/emoticons/beat_plaster.png',
+    className: 'emoticon-sprite-beat_plaster',
     tags: []
   },
   'emtc.001.010': {
-    src: 'img/emoticons/beat_shot.png',
+    className: 'emoticon-sprite-beat_shot',
     tags: []
   },
   'emtc.001.011': {
-    src: 'img/emoticons/beauty.png',
+    className: 'emoticon-sprite-beauty',
     tags: []
   },
   'emtc.001.012': {
-    src: 'img/emoticons/big_smile.png',
+    className: 'emoticon-sprite-big_smile',
     tags: []
   },
   'emtc.001.013': {
-    src: 'img/emoticons/boss.png',
+    className: 'emoticon-sprite-boss',
     tags: []
   },
   'emtc.001.014': {
-    src: 'img/emoticons/burn_joss_stick.png',
+    className: 'emoticon-sprite-burn_joss_stick',
     tags: []
   },
   'emtc.001.015': {
-    src: 'img/emoticons/byebye.png',
+    className: 'emoticon-sprite-byebye',
     tags: []
   },
   'emtc.001.016': {
-    src: 'img/emoticons/canny.png',
+    className: 'emoticon-sprite-canny',
     tags: []
   },
   'emtc.001.017': {
-    src: 'img/emoticons/choler.png',
+    className: 'emoticon-sprite-choler',
     tags: []
   },
   'emtc.001.018': {
-    src: 'img/emoticons/cold.png',
+    className: 'emoticon-sprite-cold',
     tags: []
   },
   'emtc.001.018': {
-    src: 'img/emoticons/confident.png',
+    className: 'emoticon-sprite-confident',
     tags: []
   },
   'emtc.001.019': {
-    src: 'img/emoticons/confuse.png',
+    className: 'emoticon-sprite-confuse',
     tags: []
   },
   'emtc.001.020': {
-    src: 'img/emoticons/cool.png',
+    className: 'emoticon-sprite-cool',
     tags: []
   },
 };
