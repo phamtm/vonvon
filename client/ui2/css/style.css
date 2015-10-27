@@ -110,7 +110,7 @@ video {
     width: 80%;
     margin: 0 auto;
     margin-top: 200px;
-    padding: 40px 50px 30px 40px;
+    padding: 80px 50px 30px 40px;
   }
   .local-video-holder video {
     width: 200px;
@@ -147,7 +147,7 @@ video {
   }
   .remote-video-placeholder {
     width: 65%;
-    margin: 30px auto;
+    margin: 60px auto 0px auto;
     padding: 30px;
   }
   .local-video-holder {
@@ -159,16 +159,24 @@ video {
   }
 }
 .navbar {
-  background-color: #000000;
-  height: 30px;
-  box-sizing: border-box;
-  padding: 4px 16px;
-  font-size: 14px;
+  /* Decoration */
+  background-color: rgba(0, 0, 0, 0.75);
   color: #ffffff;
-}
-.navbar ul li {
-  display: inline-block;
-  margin-right: 16px;
+  font-size: 14px;
+  font-family: Avenir;
+  font-weight: 700;
+  text-align: center;
+  /* Shape */
+  height: 35px;
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  /* Position */
+  top: 0;
+  z-index: 1;
+  position: fixed;
 }
 .logo {
   font-weight: bold;

@@ -16,10 +16,7 @@ const App = React.createClass({
       <div className="wrapper-all" id="appComponent">
 
         <div className="navbar">
-          <ul>
-            <li className="logo">VonVon.vn</li>
-            <li>have fun!</li>
-          </ul>
+          VonVon.vn
         </div>
 
         <div className="wrapper-content">
