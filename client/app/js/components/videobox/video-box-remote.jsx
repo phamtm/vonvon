@@ -84,6 +84,14 @@ const VideoBoxRemote = React.createClass({
   render: function() {
     return (
       <div className={"remote-video-holder"}>
+        <button className="btn-justified-large"
+                style={{position: 'absolute', left: '30px', bottom:'30px'}}>
+          Next
+        </button>
+        <button className="btn-justified-large"
+                style={{position: 'absolute', left: '200px', bottom:'30px', background: '#B53F47'}}>
+          Stop chatting
+        </button>
         {this._getVideoHolder()}
       </div>
     );
