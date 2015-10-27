@@ -6,10 +6,8 @@ const VideoBox = React.createClass({
   render: function() {
     return (
       <div className="left">
-        <div className="videos-holder">
-          <VideoBoxRemote />
-          <VideoBoxLocal />
-        </div>
+        <VideoBoxRemote />
+        <VideoBoxLocal />
       </div>
     );
   }

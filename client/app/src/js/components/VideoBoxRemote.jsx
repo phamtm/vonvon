@@ -1,6 +1,10 @@
 const React = require('react');
 const Spinner = require('react-spinkit');
 
+// const FlatButton = require('material-ui/lib/flat-button');
+// const Avatar = require('material-ui/lib/avatar');
+// const CardUi = require('material-ui/lib/card/index');
+
 const State = require('../State');
 const ConnectionStatus = require('../constants/ConnectionStatus');
 const Topics = require('../constants/Topics');
@@ -69,8 +73,12 @@ const VideoBoxRemote = React.createClass({
       default:
         console.log(this.state.connectionState);
         return (
-          <div className={'remote-video-holder'}>
-            <img className="chat-video" data-src="holder.js/300x200?auto=yes&theme=vine" alt="Remote" />
+          <div className="remote-video-placeholder">
+            <span>
+              VonVon is a place where you can have video chat with random folks on the internet.
+              Be vigilant, enjoy and have fun!
+            </span>
+            <VideoBoxRemoteButtonNext />
           </div>
         );
     }
@@ -79,27 +87,7 @@ const VideoBoxRemote = React.createClass({
   render: function() {
     return (
       <div className={"remote-video-holder"}>
-
-        <div className={"card"}>
-          <div className={"card-image"}>
-            {this._getVideoHolder()}
-            <span className={"card-title"}>{this.state.connectionState}</span>
-          </div>
-
-          <div className={"card-action"}>
-            <VideoBoxRemoteButtonNext />
-            <span className={"switch"}>
-              <label>
-                No video
-                <input type="checkbox" defaultChecked />
-                <span className={"lever"}></span>
-                Video
-              </label>
-            </span>
-          </div>
-
-        </div>
-
+        {this._getVideoHolder()}
       </div>
     );
   }
@@ -138,12 +126,14 @@ var VideoBoxRemoteButtonNext = React.createClass({
   },
 
   render: function() {
-    var label = (this.state.state === ConnectionStatus.REQUESTING) ? 'Requesting..' : 'Next';
+    var label = (this.state.state === ConnectionStatus.REQUESTING) ? 'Requesting..' : 'Find someone';
     var disabled = this.state.state === ConnectionStatus.REQUESTING;
     return (
-      <a href="#" disabled={disabled} onClick={this._handleClick}>
+      <button disabled={disabled}
+              onClick={this._handleClick}
+              className="btn-justified-large">
         {label}
-      </a>
+      </button>
     );
   }
 });

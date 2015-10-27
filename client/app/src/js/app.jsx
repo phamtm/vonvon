@@ -1,5 +1,6 @@
 const App = require('./components/App.jsx');
 const React = require('react');
+const Shepherd = require('tether-shepherd');
 
 require('browsernizr/test/webrtc/getusermedia');
 require('browsernizr/test/webrtc/peerconnection');
@@ -17,3 +18,17 @@ React.render(
   document.getElementById('appComponent')
 );
 
+// const tour = new Shepherd.Tour({
+//   defaults: {
+//     classes: 'shepherd-theme-arrows'
+//   }
+// });
+
+// tour.addStep('example', {
+//   title: 'Example Shepherd',
+//   text: 'Creating a Shepherd is easy too! Just create ...',
+//   attachTo: '.remote-video-placeholder bottom',
+//   advanceOn: '.btn-justified-large click'
+// });
+
+// tour.start();

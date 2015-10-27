@@ -1,0 +1,186 @@
+.remote-video-holder {
+    width: 100%;
+    height: 100%;
+}
+
+.local-video-holder {
+    background-color: #000000;
+    .light-shadow;
+}
+
+.chat-video {
+    width: 100%;
+}
+
+.videos-holder {
+    position: relative;
+}
+
+.remote-video-holder .card {
+    margin-top: 0;
+    border-radius: 0;
+    .light-shadow;
+}
+
+.remote-video-holder .card .card-image img {
+    border-radius: 0;
+}
+
+.remote-video-holder .card-image {
+    background: @color-dark-blue;
+    display: flex;
+    min-height: 200px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.remote-video-holder .circle::before {
+    background-color: @color-background;
+}
+
+.card .card-action a {
+    color: @color-red;
+}
+
+.remote-video-placeholder {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+
+}
+
+.remote-video-placeholder span {
+    margin-bottom: 20px;
+    display: block;
+    line-height: 1.6em;
+    font-size: 1.1em;
+}
+
+.left {
+    // background-color: @color-background;
+    position: relative;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('../img/bg.jpg');
+
+    z-index: 0;
+
+    // background: -webkit-linear-gradient(0deg, #4776E6 10%, #8E54E9 90%); /* Chrome 10+, Saf5.1+ */
+    // background:    -moz-linear-gradient(0deg, #4776E6 10%, #8E54E9 90%); /* FF3.6+ */
+    // background:     -ms-linear-gradient(0deg, #4776E6 10%, #8E54E9 90%); /* IE10 */
+    // background:      -o-linear-gradient(0deg, #4776E6 10%, #8E54E9 90%); /* Opera 11.10+ */
+    // background:         linear-gradient(0deg, #4776E6 10%, #8E54E9 90%); /* W3C */
+
+}
+
+.wrapper-all {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: none;
+    justify-content: flex-start;
+}
+
+.remoteVideo, .localVideo {
+    width: 100%;
+}
+
+@media screen and (min-width: @screen-lg-min) {
+
+    .wrapper-content {
+        display: flex;
+        flex-direction: row;
+        flex: 2;
+    }
+
+    .left {
+        display: flex;
+        flex: 3;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .right {
+        flex: 1;
+        background-color: #eee;
+
+        display: flex;
+        flex-direction: row;
+        z-index: 1;
+    }
+
+    .remote-video-holder {
+        position: absolute;
+    }
+
+    .remote-video-holder video {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        z-index: -999;
+    }
+
+    .remote-video-placeholder {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 200px;
+        padding: 40px 50px 30px 40px;
+    }
+
+    .local-video-holder video {
+        width: 200px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media screen and (max-width: @screen-md-max) {
+
+    .wrapper-content {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+    }
+
+    .left {
+        width: 100%;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        box-shadow: 0 1px 5px gray;
+    }
+
+    .right {
+        width: 100%;
+        background-color: #eee;
+        display: flex;
+        flex-direction: row;
+        flex: 2;
+        overflow-y: hidden;
+    }
+
+    .remote-video-holder {
+        position: relative;
+    }
+
+    .remote-video-placeholder {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 30px;
+        padding: 30px;
+    }
+
+    .local-video-holder {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 120px;
+        border: 2px solid #666;
+    }
+}

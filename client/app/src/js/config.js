@@ -20,7 +20,7 @@ const Config = {
     key: PEER_KEY
   },
 
-  WEB_SERVER: SERVER_IP + ":" + SOCKET_PORT
+  WEB_SERVER: 'https://' + SERVER_IP + ":" + SOCKET_PORT
 
 };
 

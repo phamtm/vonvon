@@ -1,0 +1,49 @@
+@border-radius-emoticon-picker: 5px;
+
+.emoticon-picker {
+    display: inline-block;
+    position: relative;
+}
+
+.emoticon-picker-popup {
+    width: 280px;
+    height: 230px;
+    position: absolute;
+    bottom: 40px;
+    right: 0px;
+
+    border-radius: @border-radius-emoticon-picker;
+    background-color: white;
+
+    display: flex;
+    // visibility: hidden;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    overflow-y: auto;
+}
+
+.emoticon-picker-popup-emoticon {
+    cursor: pointer;
+    padding: 10px;
+    width: 70px;
+    height: 70px;
+    box-sizing: border-box;
+    border-radius: @border-radius-emoticon-picker;
+}
+
+.emoticon-picker-popup-emoticon:hover {
+    background-color: @color-background;
+}
+
+.emoticon-picker-popup-emoticon img {
+    width: 50px;
+    height: 50px;
+    .no-select;
+}
+
+.emoticon-picker i {
+    .no-select;
+}
