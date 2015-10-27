@@ -10,17 +10,6 @@ var uglify = require('gulp-uglify');
 var del = require('del');
 
 
-// // Clean
-// gulp.task('clean', function(cb) {
-// 	del(['./src/js/bundle.js'], cb);
-// });
-
-// // Copy HTML
-// gulp.task('html', function() {
-// 	gulp.src('./src/*.html')
-// 			.pipe(gulp.dest('./dist/'));
-// });
-
 // Concatenate and minify CSS
 gulp.task('css', function() {
 	gulp.src('./src/css/**/*.css')

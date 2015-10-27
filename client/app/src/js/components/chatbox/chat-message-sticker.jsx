@@ -1,6 +1,6 @@
 const React = require('react');
 
-const Sticker = require('../emoticon-picker/Sticker');
+const Sticker = require('../emoticon-picker/sticker');
 
 
 const ChatMessageSticker = React.createClass({

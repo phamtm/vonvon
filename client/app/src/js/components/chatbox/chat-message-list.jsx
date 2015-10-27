@@ -1,8 +1,8 @@
 const React = require('react');
 
-const ChatMessageText = require('./ChatMessageText.jsx');
-const ChatMessageSticker = require('./ChatMessageSticker.jsx');
-const MessageType = require('../../constants/MessageType');
+const ChatMessageText = require('./chat-message-text.jsx');
+const ChatMessageSticker = require('./chat-message-sticker.jsx');
+const MessageType = require('../../constants/message-type');
 const State = require('../../State');
 
 

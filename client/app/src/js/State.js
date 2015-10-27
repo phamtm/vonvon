@@ -1,10 +1,10 @@
 const Config = require('./config.js');
-const ConnectionStatus = require('./constants/ConnectionStatus');
+const ConnectionStatus = require('./constants/connection-status');
 const EventEmitter = require('events').EventEmitter;
 const io = require('socket.io-client');
 const Peer = require('peerjs_fork_firefox40');
-const Topics = require('./constants/Topics');
-const MessageUtil = require('./utils/MessageUtil');
+const Topics = require('./constants/topics');
+const MessageUtil = require('./utils/message-utils');
 
 const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
 

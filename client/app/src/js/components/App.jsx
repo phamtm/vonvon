@@ -1,9 +1,8 @@
 const React = require('react');
-
 const StateInstance = require('../State');
-const VideoBox = require('./VideoBox.jsx');
-const ChatBox = require('./chatbox/ChatBox.jsx');
-const Topics = require('../constants/Topics');
+const VideoBox = require('./videobox/video-box.jsx');
+const ChatBox = require('./chatbox/chat-box.jsx');
+const Topics = require('../constants/topics');
 
 
 const App = React.createClass({

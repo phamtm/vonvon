@@ -2,6 +2,7 @@ const React = require('react');
 
 
 const ChatMessageText = React.createClass({
+
   render: function() {
     const message = this.props.message;
     return (
@@ -13,6 +14,7 @@ const ChatMessageText = React.createClass({
       </li>
     );
   }
+
 });
 
 module.exports = ChatMessageText;

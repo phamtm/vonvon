@@ -1,5 +1,5 @@
 const EventEmitter = require('events').EventEmitter;
-const Topics = require('./constants/Topics');
+const Topics = require('./constants/topics');
 
 const Dispatcher = function() {
   EventEmitter.call(this);

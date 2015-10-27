@@ -1,4 +1,4 @@
-const MessageType = require('../constants/MessageType');
+const MessageType = require('../constants/message-type');
 
 
 const MessageUtil = {

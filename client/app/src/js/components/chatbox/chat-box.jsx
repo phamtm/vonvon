@@ -1,7 +1,7 @@
 const React = require('react');
 
-const ChatInput = require('./ChatInput.jsx');
-const ChatMessageList = require('./ChatMessageList.jsx');
+const ChatInput = require('./chat-input.jsx');
+const ChatMessageList = require('./chat-message-list.jsx');
 
 
 const ChatBox = React.createClass({

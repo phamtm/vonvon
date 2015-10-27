@@ -1,5 +1,5 @@
 const React = require('react');
-const State = require('../State');
+const State = require('../../State');
 
 
 const VideoBoxLocal = React.createClass({

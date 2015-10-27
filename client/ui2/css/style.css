@@ -145,7 +145,7 @@ video {
     position: relative;
   }
   .remote-video-placeholder {
-    width: 80%;
+    width: 65%;
     margin: 0 auto;
     margin-top: 30px;
     padding: 30px;
@@ -154,7 +154,7 @@ video {
     position: absolute;
     bottom: 8px;
     right: 8px;
-    width: 120px;
+    width: 60px;
     border: 2px solid #666;
   }
 }
@@ -556,6 +556,7 @@ ul.chat-actions li i:hover {
 .btn-justified-large:hover {
   background: rgba(63, 81, 181, 0.85);
   box-shadow: 1px 1px 5px #5A69BE;
+  cursor: pointer;
 }
 body {
   color: #2c3e50;

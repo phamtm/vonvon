@@ -1,9 +1,9 @@
 const React = require('react');
 
 const State = require('../../State');
-const ConnectionStatus = require('../../constants/ConnectionStatus');
-const MessageUtil = require('../../utils/MessageUtil');
-const EmoticonPicker = require('../emoticon-picker/EmoticonPicker.jsx');
+const ConnectionStatus = require('../../constants/connection-status');
+const MessageUtil = require('../../utils/message-utils');
+const EmoticonPicker = require('../emoticon-picker/emoticon-picker.jsx');
 
 
 const ENTER_KEY_CODE = 13;

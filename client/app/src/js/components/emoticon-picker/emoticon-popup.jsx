@@ -1,7 +1,7 @@
 const React = require('react');
 
-const Sticker = require('./Sticker');
-const StickerItem = require('./StickerItem.jsx');
+const Sticker = require('./sticker');
+const StickerItem = require('./sticker-item.jsx');
 
 
 const EmoticonPopup = React.createClass({

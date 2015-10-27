@@ -1,7 +1,7 @@
 const React = require('react');
 
 const Dispatcher = require('../../Dispatcher');
-const EmoticonPopup = require('./EmoticonPopup.jsx');
+const EmoticonPopup = require('./emoticon-popup.jsx');
 
 
 const EmoticonPicker = React.createClass({

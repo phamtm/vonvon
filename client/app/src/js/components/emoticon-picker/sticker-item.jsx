@@ -2,7 +2,7 @@ const React = require('react');
 
 const Dispatcher = require('../../Dispatcher');
 const State = require('../../State');
-const Topics = require('../../constants/Topics');
+const Topics = require('../../constants/topics');
 
 
 const StickerItem = React.createClass({
