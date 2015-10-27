@@ -1,6 +1,6 @@
 const React = require('react');
 const Spinner = require('react-spinkit');
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 const ConnectionStatus = require('../../constants/connection-status');
 const Topics = require('../../constants/topics');
 const VideoBoxRemoteButtonNext = require('./video-box-remote-button-next.jsx');
@@ -13,8 +13,8 @@ const VideoBoxRemote = React.createClass({
 
   getInitialState: function() {
     return {
-      connectionState: State.getState(),
-      remoteStream: State.getRemoteStream(),
+      connectionState: connectionManager.getState(),
+      remoteStream: connectionManager.getRemoteStream(),
       options: {
         'backgroundColor': '#2c3e50',
         'color': DARK_BACKGROUND
@@ -30,7 +30,7 @@ const VideoBoxRemote = React.createClass({
     }
 
     this.setState({
-      remoteStream: State.getRemoteStream(),
+      remoteStream: connectionManager.getRemoteStream(),
       options: {
         'backgroundColor': '#2c3e50',
         'color': backgroundColor
@@ -40,13 +40,13 @@ const VideoBoxRemote = React.createClass({
 
   _handleStateChange: function() {
     this.setState({
-      connectionState: State.getState()
+      connectionState: connectionManager.getState()
     });
   },
 
   componentDidMount: function() {
-    State.onStateChange(this._handleStateChange);
-    State.onStreamRemoteReceived(this._handleRemoteStreamChange);
+    connectionManager.onStateChange(this._handleStateChange);
+    connectionManager.onStreamRemoteReceived(this._handleRemoteStreamChange);
   },
 
   _getVideoHolder: function() {

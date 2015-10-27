@@ -3,6 +3,7 @@ const VideoBoxRemoteButtonNext = require('./video-box-remote-button-next.jsx');
 
 
 const VideoBoxRemoteTray = React.createClass({
+
   render: function() {
     return (
       <div>
@@ -10,6 +11,7 @@ const VideoBoxRemoteTray = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = VideoBoxRemoteTray;

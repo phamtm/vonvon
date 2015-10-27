@@ -1,14 +1,14 @@
 const React = require('react');
 
 const Dispatcher = require('../../dispatcher');
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 const Topics = require('../../constants/topics');
 
 
 const StickerItem = React.createClass({
 
   sendStickerMessage: function() {
-    State.sendStickerMessage(this.props.stickerCode);
+    connectionManager.sendStickerMessage(this.props.stickerCode);
     Dispatcher.emit(Topics.CLOSE_EMOTICON_PICKER);
   },
 

@@ -3,6 +3,7 @@ const VideoBoxLocal = require('./video-box-local.jsx');
 const VideoBoxRemote = require('./video-box-remote.jsx');
 
 const VideoBox = React.createClass({
+
   render: function() {
     return (
       <div className="left">
@@ -11,6 +12,7 @@ const VideoBox = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = VideoBox;

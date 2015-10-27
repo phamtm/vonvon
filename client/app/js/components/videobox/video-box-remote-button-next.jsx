@@ -1,6 +1,6 @@
 const React = require('react');
 const ConnectionStatus = require('../../constants/connection-status');
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 const Topics = require('../../constants/topics');
 
 
@@ -8,22 +8,22 @@ const VideoBoxRemoteButtonNext = React.createClass({
 
   getInitialState: function() {
     return {
-      state: State.getState()
+      state: connectionManager.getState()
     };
   },
 
   _handleClick: function() {
-    State.emit(Topics.REQUEST_NEW_PARTNER);
+    connectionManager.emit(Topics.REQUEST_NEW_PARTNER);
   },
 
   _handleStateChange: function() {
     this.setState({
-      state: State.getState()
+      state: connectionManager.getState()
     });
   },
 
   componentDidMount: function() {
-    State.onStateChange(this._handleStateChange);
+    connectionManager.onStateChange(this._handleStateChange);
   },
 
   render: function() {

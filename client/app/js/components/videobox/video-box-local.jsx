@@ -1,23 +1,23 @@
 const React = require('react');
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 
 
 const VideoBoxLocal = React.createClass({
 
   getInitialState: function() {
     return {
-      localStream: State.getLocalStream()
+      localStream: connectionManager.getLocalStream()
     };
   },
 
   _onStreamChange: function() {
     this.setState({
-      localStream: State.getLocalStream()
+      localStream: connectionManager.getLocalStream()
     });
   },
 
   componentDidMount: function() {
-    State.onStreamLocalReceived(this._onStreamChange);
+    connectionManager.onStreamLocalReceived(this._onStreamChange);
   },
 
   render: function() {

@@ -5,6 +5,7 @@ const ChatMessageList = require('./chat-message-list.jsx');
 
 
 const ChatBox = React.createClass({
+
   render: function() {
     return (
       <div className="right">
@@ -17,6 +18,7 @@ const ChatBox = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = ChatBox;

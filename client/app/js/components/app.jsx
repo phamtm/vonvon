@@ -1,5 +1,5 @@
 const React = require('react');
-const StateInstance = require('../State');
+const connectionManager = require('../connection-manager');
 const VideoBox = require('./videobox/video-box.jsx');
 const ChatBox = require('./chatbox/chat-box.jsx');
 const Topics = require('../constants/topics');
@@ -8,7 +8,7 @@ const Topics = require('../constants/topics');
 const App = React.createClass({
 
   componentDidMount: function() {
-    StateInstance.init();
+    connectionManager.init();
   },
 
   render: function() {

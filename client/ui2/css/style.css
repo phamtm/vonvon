@@ -146,8 +146,7 @@ video {
   }
   .remote-video-placeholder {
     width: 65%;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px auto;
     padding: 30px;
   }
   .local-video-holder {

@@ -3,24 +3,24 @@ const React = require('react');
 const ChatMessageText = require('./chat-message-text.jsx');
 const ChatMessageSticker = require('./chat-message-sticker.jsx');
 const MessageType = require('../../constants/message-type');
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 
 
 const ChatMessageList = React.createClass({
 
   getInitialState: function() {
     return {
-      chatMessages: State.getMessages()
+      chatMessages: connectionManager.getMessages()
     };
   },
 
   componentDidMount: function() {
-    State.onMessageChange(this._onChatMessageListChange);
+    connectionManager.onMessageChange(this._onChatMessageListChange);
   },
 
   _onChatMessageListChange: function() {
     this.setState({
-      chatMessages: State.getMessages()
+      chatMessages: connectionManager.getMessages()
     });
   },
 

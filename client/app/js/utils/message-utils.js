@@ -1,7 +1,7 @@
 const MessageType = require('../constants/message-type');
 
 
-const MessageUtil = {
+const MessageUtils = {
 
   convertToPresentableMessage: function(message, authorName, you) {
     return {
@@ -39,4 +39,4 @@ const MessageUtil = {
 
 };
 
-module.exports = MessageUtil;
+module.exports = MessageUtils;

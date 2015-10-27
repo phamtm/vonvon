@@ -1,8 +1,8 @@
 const React = require('react');
 
-const State = require('../../State');
+const connectionManager = require('../../connection-manager');
 const ConnectionStatus = require('../../constants/connection-status');
-const MessageUtil = require('../../utils/message-utils');
+const MessageUtils = require('../../utils/message-utils');
 const EmoticonPicker = require('../emoticon-picker/emoticon-picker.jsx');
 
 
@@ -22,9 +22,9 @@ const ChatInput = React.createClass({
       event.preventDefault();
       this.setState({
         message: '',
-        disabled: State.getState() !== ConnectionStatus.MATCHED
+        disabled: connectionManager.getState() !== ConnectionStatus.MATCHED
       });
-      State.sendTextMessage(this.state.message);
+      connectionManager.sendTextMessage(this.state.message);
     }
   },
 
@@ -40,11 +40,11 @@ const ChatInput = React.createClass({
 
   handleClick: function() {
     if (this.state.message && this.state.message.length) {
-      State.sendTextMessage(this.state.message);
+      connectionManager.sendTextMessage(this.state.message);
     }
     this.setState({
       message: '',
-      disabled: State.getState() !== ConnectionStatus.MATCHED
+      disabled: connectionManager.getState() !== ConnectionStatus.MATCHED
     });
   },
 
@@ -63,9 +63,9 @@ const ChatInput = React.createClass({
   },
 
   componentDidMount: function() {
-    State.onStateChange(this.handleStateChange);
-    State.onChatChannelOpened(this.handleChatChannelOpened);
-    State.onChatChannelClosed(this.handleChatChannelClosed);
+    connectionManager.onStateChange(this.handleStateChange);
+    connectionManager.onChatChannelOpened(this.handleChatChannelOpened);
+    connectionManager.onChatChannelClosed(this.handleChatChannelClosed);
   },
 
   render: function() {
