@@ -13,6 +13,7 @@ video {
 .remote-video-holder {
   width: 100%;
   height: 100%;
+  display: flex;
 }
 .local-video-holder {
   background-color: #000000;
@@ -63,6 +64,7 @@ video {
   background-repeat: no-repeat;
   background-image: url('../img/bg.jpg');
   background-size: cover;
+  overflow: hidden;
   z-index: 0;
 }
 .wrapper-all {
@@ -75,6 +77,7 @@ video {
 .remoteVideo,
 .localVideo {
   width: 100%;
+  object-fit: cover;
 }
 @media screen and (min-width: 1200px) {
   .wrapper-content {
@@ -110,7 +113,7 @@ video {
     width: 80%;
     margin: 0 auto;
     margin-top: 200px;
-    padding: 80px 50px 30px 40px;
+    padding: 30px 50px 30px 40px;
   }
   .local-video-holder video {
     width: 200px;
@@ -123,7 +126,7 @@ video {
   .wrapper-content {
     display: flex;
     flex-direction: column;
-    flex: 2;
+    flex: 1;
   }
   .left {
     width: 100%;
@@ -133,17 +136,20 @@ video {
     justify-content: flex-start;
     position: relative;
     box-shadow: 0 1px 5px gray;
+    max-height: 50vh;
   }
   .right {
     width: 100%;
     background-color: #eee;
     display: flex;
     flex-direction: row;
-    flex: 2;
+    flex: 1;
+    max-height: 50vh;
     overflow-y: hidden;
   }
   .remote-video-holder {
     position: relative;
+    flex: 1;
   }
   .remote-video-placeholder {
     width: 65%;

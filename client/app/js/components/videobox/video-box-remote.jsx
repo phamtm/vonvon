@@ -25,7 +25,7 @@ const VideoBoxRemote = React.createClass({
   _handleRemoteStreamChange: function() {
     var backgroundColor = DARK_BACKGROUND;
 
-    if (state === ConnectionStatus.MATCHED) {
+    if (connectionManager.getState() === ConnectionStatus.MATCHED) {
       backgroundColor = LIGHT_BACKGROUND;
     }
 

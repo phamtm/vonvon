@@ -1,6 +1,5 @@
 const App = require('./components/app.jsx');
 const React = require('react');
-const Shepherd = require('tether-shepherd');
 
 require('browsernizr/test/webrtc/getusermedia');
 require('browsernizr/test/webrtc/peerconnection');
