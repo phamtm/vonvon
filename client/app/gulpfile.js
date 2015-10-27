@@ -1,67 +1,53 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var minifyCss = require('gulp-minify-css');
-var browserify = require('browserify');
-var reactify = require('reactify');
-var source = require('vinyl-source-stream');
-var rename = require('gulp-rename');
-var streamify = require('gulp-streamify');
-var uglify = require('gulp-uglify');
-var del = require('del');
+const browserify = require('browserify');
+const concat = require('gulp-concat');
+const del = require('del');
+const gulp = require('gulp');
+const minifyCss = require('gulp-minify-css');
+const reactify = require('reactify');
+const rename = require('gulp-rename');
+const source = require('vinyl-source-stream');
+const streamify = require('gulp-streamify');
+const uglify = require('gulp-uglify');
 
 
 // Concatenate and minify CSS
 gulp.task('css', function() {
 	gulp.src('./src/css/**/*.css')
-			.pipe(concat('style.css'))
-			.pipe(minifyCss())
-			.pipe(gulp.dest('./dist/css/'));
+ .pipe(concat('style.css'))
+ .pipe(minifyCss())
+ .pipe(gulp.dest('./dist/css/'));
 });
 
-// Browserify and compress JS
-gulp.task('js', function() {
-  var bundleStream = browserify('./src/js/app.jsx').bundle()
-
-  bundleStream
-    .pipe(source('app.js'))
-    .pipe(streamify(uglify()))
-    .pipe(rename('bundle.js'))
-    .pipe(gulp.dest('./dist/js/'));
-});
-
-// gulp.task('dist', ['clean', 'copy-static', 'html', 'css', 'js']);
-
-// // Default task
-// gulp.task('default', ['dist']);
-
-var browserify = require('browserify');
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var reactify = require('reactify');
-
-gulp.task('browserify', function () {
-    return browserify('./src/js/app.jsx', {
+// Browserify
+gulp.task('js', function () {
+  const bundleStream = browserify('./src/js/app.jsx', {
         debug: true,
         transform: [reactify]
-    })
-    .bundle()
+      }).bundle();
+
+  return bundleStream
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('./dist/js'));
 });
 
+// Copy HTML
 gulp.task('html', function () {
-    return gulp.src('./src/**/*.html')
-        .pipe(gulp.dest('./dist'));
+  return gulp.src('./static/**/*.html')
+  .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build', function () {
-    gulp.start(['browserify', 'html']);
+  gulp.start(['js', 'html']);
+});
+
+gulp.task('dist', function() {
+  // TODO: build, compress js and copy html
 });
 
 gulp.task('watch', ['build'], function () {
-    gulp.watch(['./src/**/*.js', './src/**/*.jsx'], ['browserify']);
-    gulp.watch(['./src/**/*.html'], ['html']);
-    gulp.watch(['./src/**/*.css'], ['css']);
+  gulp.watch(['./src/**/*.js', './src/**/*.jsx'], ['js']);
+  gulp.watch(['./src/**/*.html'], ['html']);
+  gulp.watch(['./src/**/*.css'], ['css']);
 });
 
 gulp.task('default', ['watch']);

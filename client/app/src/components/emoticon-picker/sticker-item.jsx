@@ -1,6 +1,6 @@
 const React = require('react');
 
-const Dispatcher = require('../../Dispatcher');
+const Dispatcher = require('../../dispatcher');
 const State = require('../../State');
 const Topics = require('../../constants/topics');
 
