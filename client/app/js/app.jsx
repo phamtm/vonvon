@@ -1,4 +1,4 @@
-const App = require('./components/App.jsx');
+const App = require('./components/app.jsx');
 const React = require('react');
 const Shepherd = require('tether-shepherd');
 

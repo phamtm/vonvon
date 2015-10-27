@@ -20,7 +20,7 @@ gulp.task('css', function() {
 
 // Browserify
 gulp.task('js', function () {
-  const bundleStream = browserify('./src/js/app.jsx', {
+  const bundleStream = browserify('./js/app.jsx', {
         debug: true,
         transform: [reactify]
       }).bundle();
@@ -45,9 +45,9 @@ gulp.task('dist', function() {
 });
 
 gulp.task('watch', ['build'], function () {
-  gulp.watch(['./src/**/*.js', './src/**/*.jsx'], ['js']);
-  gulp.watch(['./src/**/*.html'], ['html']);
-  gulp.watch(['./src/**/*.css'], ['css']);
+  gulp.watch(['./**/*.js', './**/*.jsx'], ['js']);
+  gulp.watch(['./static/**/*.html'], ['html']);
+  gulp.watch(['./**/*.css'], ['css']);
 });
 
 gulp.task('default', ['watch']);
