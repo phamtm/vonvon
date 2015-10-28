@@ -32,34 +32,32 @@ const VideoBoxRemote = React.createClass({
     connectionManager.onStreamRemoteReceived(this._handleRemoteStreamChange);
   },
 
-  _getVideoHolder: function() {
-  },
-
   render: function() {
     switch (this.state.connectionState) {
       case ConnectionStatus.REQUESTING:
         return (
           <div className={"remote-video-holder"}>
-            <Spinner spinnerName="circle" noFadeIn/>;
+            <div className={"loader"}>
+              Loading…
+            </div>
             <button className="btn-justified-large button-next" disabled >
-                Requesting..
+              Requesting..
             </button>
           </div>
         );
 
       case ConnectionStatus.MATCHED:
+        console.log('video received');
         var remoteStream = this.state.remoteStream;
         var remoteStreamSrc = null;
         if (remoteStream !== null) {
           remoteStreamSrc = window.URL.createObjectURL(remoteStream);
         }
-
-        console.log('video received');
         return (
           <div className={"remote-video-holder"}>
             <video autoPlay className={"responsive-video remoteVideo"}
                    src={remoteStreamSrc} />
-            <ButtonNext />
+            <ButtonNext />;
           </div>
         );
 

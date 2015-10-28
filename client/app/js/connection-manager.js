@@ -6,7 +6,7 @@ const Peer = require('peerjs_fork_firefox40');
 const Topics = require('./constants/topics');
 const MessageUtil = require('./utils/message-utils');
 
-const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
+const NEXT_REQUEST_INTERVAL = 3; // 10 seconds between each request
 
 
 /**
@@ -340,4 +340,5 @@ ConnectionManager.prototype.init = function() {
   });
 };
 
-module.exports = new ConnectionManager();
+const CONNECTION_MANAGER_INSTANCE = new ConnectionManager();
+module.exports = CONNECTION_MANAGER_INSTANCE;
