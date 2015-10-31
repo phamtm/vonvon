@@ -11,5 +11,8 @@ Dispatcher.prototype.addChatCloseListener = function(cb) {
   this.addListener(Topics.CLOSE_EMOTICON_PICKER, cb);
 };
 
+Dispatcher.prototype.addOnNewMessageListener = function(cb) {
+  this.addListener(Topics.CLOSE_EMOTICON_PICKER, cb);
+};
 
 module.exports = new Dispatcher();

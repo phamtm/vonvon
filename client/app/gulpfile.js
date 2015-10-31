@@ -55,7 +55,12 @@ gulp.task('images', function() {
              .pipe(gulp.dest('./dist/img/'));
 });
 
-gulp.task('static', ['html', 'images']);
+gulp.task('sound', function() {
+  return gulp.src('../ui2/sound/**/*')
+             .pipe(gulp.dest('./dist/sound/'));
+});
+
+gulp.task('static', ['html', 'images', 'sound']);
 
 
 /* Build for release */

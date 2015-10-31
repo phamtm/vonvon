@@ -7,6 +7,9 @@ const Topics = require('./constants/topics');
 const MessageUtil = require('./utils/message-utils');
 
 const NEXT_REQUEST_INTERVAL = 3; // 10 seconds between each request
+const $window = $(window);
+const pingSound= new Audio('../sound/ping.ogg');
+
 
 
 /**
@@ -35,6 +38,10 @@ const ConnectionManager = function() {
 
   // The last time that user request for new partner
   this._lastRequestTime = null;
+
+  // Notification sound
+  this._isTabFocused = true;
+  this._alreadyPlaySound = false;
 };
 
 ConnectionManager.prototype = Object.create(EventEmitter.prototype);
@@ -204,6 +211,14 @@ ConnectionManager.prototype._setUpChat = function() {
     var presentableMessage = MessageUtil.convertToPresentableMessage(
        deserializedMessage, this._peerId, false);
     this._messages.push(presentableMessage);
+
+    // if first message and the tab is not focused, the play a 'ping' sound
+    if (!this._isTabFocused && !this._alreadyPlaySound) {
+      pingSound.currentTime = 0;
+      pingSound.play();
+      this._alreadyPlaySound = true;
+    }
+
     this.emit(Topics.MESSAGE_CHANGED);
   }.bind(this));
 
@@ -266,6 +281,15 @@ ConnectionManager.prototype.init = function() {
   }.bind(this));
 
   this._socket.on('socket-io::connection-created', function(data) {
+    $(window).blur(function() {
+      _self._isTabFocused = false;
+    });
+
+    $(window).focus(function() {
+      _self._isTabFocused = true;
+      _self._alreadyPlaySound = false;
+    });
+
     _self._localId = data.id;
     _self.emit(Topics.ID_LOCAL_CHANGED);
     var PARTNER_ID;
