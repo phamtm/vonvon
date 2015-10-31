@@ -109,7 +109,7 @@ ConnectionManager.prototype.sendChat = function(message) {
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED) {
     this._peerDataConn.send(message);
-    var authoredMessage = Message.convertRawMessage(message, this._localId + ' (You)');
+    const authoredMessage = Message.convertRawMessage(message, this._localId + ' (You)');
     this._messages.push(authoredMessage);
     this.emit(Topics.MESSAGE_CHANGED);
   }
@@ -121,9 +121,9 @@ ConnectionManager.prototype.sendMessage = function(transferableMessage) {
       this._peerDataConn.open &&
       this._state == ConnectionStatus.MATCHED &&
       transferableMessage) {
-    var serializedMessage = JSON.stringify(transferableMessage);
+    const serializedMessage = JSON.stringify(transferableMessage);
     this._peerDataConn.send(serializedMessage);
-    var presentableMessage = MessageUtil.convertToPresentableMessage(
+    const presentableMessage = MessageUtil.convertToPresentableMessage(
         transferableMessage, this._localId, true);
     presentableMessage.authorName = 'You';
     this._messages.push(presentableMessage);
@@ -134,14 +134,14 @@ ConnectionManager.prototype.sendMessage = function(transferableMessage) {
 
 ConnectionManager.prototype.sendTextMessage = function(text) {
   if (text) {
-    var transferableMessage = MessageUtil.convertToTransferableTextMessage(text);
+    const transferableMessage = MessageUtil.convertToTransferableTextMessage(text);
     this.sendMessage(transferableMessage);
   }
 };
 
 ConnectionManager.prototype.sendStickerMessage = function(stickerCode) {
   if (stickerCode) {
-    var transferableMessage = MessageUtil.convertToTransferableStickerMessage(stickerCode);
+    const transferableMessage = MessageUtil.convertToTransferableStickerMessage(stickerCode);
     this.sendMessage(transferableMessage);
   }
 };
@@ -207,8 +207,8 @@ ConnectionManager.prototype._setUpChat = function() {
       return;
     }
 
-    var deserializedMessage = JSON.parse(data);
-    var presentableMessage = MessageUtil.convertToPresentableMessage(
+    const deserializedMessage = JSON.parse(data);
+    const presentableMessage = MessageUtil.convertToPresentableMessage(
        deserializedMessage, this._peerId, false);
     this._messages.push(presentableMessage);
 
@@ -230,7 +230,7 @@ ConnectionManager.prototype._setUpChat = function() {
 };
 
 ConnectionManager.prototype.init = function() {
-  var _self = this;
+  const _self = this;
 
   this._getLocalMedia();
 
@@ -243,7 +243,7 @@ ConnectionManager.prototype.init = function() {
   //   // Re-retrieved local stream
   //   if (this._localStream && this._localStream.getVideoTracks() &&
   //       this._localStream.getVideoTracks().length) {
-  //     var videoTrack = this._localStream.getVideoTracks()[0];
+  //     const videoTrack = this._localStream.getVideoTracks()[0];
   //     if (videoTrack.readyState !== 'live') {
   //       this._getLocalMedia();
   //       this.emit(Topics.STREAM_LOCAL_CHANGED);
