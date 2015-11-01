@@ -98,6 +98,11 @@ ConnectionManager.prototype.onStreamRemoteReceived = function(cb) {
   this.addListener(Topics.STREAM_REMOTE_RECEIVED, cb);
 };
 
+// Partner's ID changed event
+ConnectionManager.prototype.onPartnerIdChanged = function(cb) {
+  this.addListener(Topics.ID_PARTNER_CHANGED, cb);
+};
+
 // Next event
 ConnectionManager.prototype.onRequestNextPartner = function(cb) {
   this.addListener(Topics.REQUEST_NEW_PARTNER, cb);

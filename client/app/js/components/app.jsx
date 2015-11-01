@@ -15,10 +15,6 @@ const App = React.createClass({
     return (
       <div className="wrapper-all" id="appComponent">
 
-        <div className="navbar">
-          VonVon.vn
-        </div>
-
         <div className="wrapper-content">
           <VideoBox />
           <ChatBox />

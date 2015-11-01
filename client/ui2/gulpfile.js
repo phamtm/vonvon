@@ -1,6 +1,6 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var path = require('path');
+const gulp = require('gulp');
+const less = require('gulp-less');
+const path = require('path');
 
 // Concatenate and minify CSS
 gulp.task('less', function() {

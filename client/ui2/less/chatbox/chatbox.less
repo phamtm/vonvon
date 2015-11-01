@@ -41,13 +41,11 @@
 
 .chat-message-ul {
     overflow-y: scroll;
-    .apply-padding;
 }
 
 .chat-message-li {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #efefef;
+  .apply-padding;
+  border-bottom: 1px solid #CAE7FD;
 
   display: flex;
   flex-direction: column;
@@ -83,14 +81,14 @@
 }
 
 .chat-message-li-you {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #efefef;
+  .apply-padding;
+  border-bottom: 1px solid #CAE7FD;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  background-color: rgba(177, 220, 251, 0.12);
 
   .message-author {
     width: 100%;
@@ -186,4 +184,9 @@ ul.chat-actions li i:hover {
 .chat-message-li i {
   font-size: 13px;
   .no-select;
+}
+
+.chat-message-li.chat-info {
+  background-color: ghostwhite;
+  padding: 16px;
 }

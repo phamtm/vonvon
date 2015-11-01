@@ -21,7 +21,7 @@ const VideoBoxLocal = React.createClass({
   },
 
   render: function() {
-    var localStream = this.state.localStream;
+    const localStream = this.state.localStream;
     var localStreamSrc = null;
     if (localStream !== null) {
       localStreamSrc = window.URL.createObjectURL(localStream);

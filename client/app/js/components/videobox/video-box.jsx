@@ -7,6 +7,9 @@ const VideoBox = React.createClass({
   render: function() {
     return (
       <div className="left">
+        <div className="navbar">
+          <span className="logo">VonVon.vn</span>
+        </div>
         <VideoBoxRemote />
         <VideoBoxLocal />
       </div>

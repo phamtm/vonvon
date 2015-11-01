@@ -14,7 +14,7 @@ const MessageUtils = {
   },
 
   convertToTransferableTextMessage: function(text) {
-    var timestamp = Date.now();
+    const timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
       timestamp: timestamp,
@@ -26,7 +26,7 @@ const MessageUtils = {
   },
 
   convertToTransferableStickerMessage: function(stickerCode) {
-    var timestamp = Date.now();
+    const timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
       timestamp: timestamp,
