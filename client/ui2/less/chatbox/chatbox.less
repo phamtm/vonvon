@@ -11,7 +11,7 @@
 }
 
 .chat-input-area {
-    background: #fefefe;
+    background: steelblue;
     height: @chat-input-height;
     border-top: 1px solid lighten(@color-dark-blue, 40%);
     display: flex;
@@ -36,6 +36,7 @@
     box-shadow: none;
     box-sizing: border-box;
     transition: all .3s;
+    color: #ffffff;
     .no-select;
 }
 
@@ -157,7 +158,7 @@ ul.chat-actions li {
   display: inline-block;
   padding-top: 10px;
   margin-right: 5px;
-  color: darken(@color-background, 30%);
+  color: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -165,7 +166,7 @@ ul.chat-actions li {
 
 ul.chat-actions li i:hover {
   cursor: pointer;
-  color: @color-light-blue;
+  color: #F9C935;
 }
 
 .card-panel.noti {
@@ -189,4 +190,20 @@ ul.chat-actions li i:hover {
 .chat-message-li.chat-info {
   background-color: ghostwhite;
   padding: 16px;
+}
+
+#chat-input::-webkit-input-placeholder {
+  color: @color-placeholder-light;
+}
+
+#chat-input:-moz-placeholder { /* Firefox 18- */
+  color: @color-placeholder-light;
+}
+
+#chat-input::-moz-placeholder {  /* Firefox 19+ */
+  color: @color-placeholder-light;
+}
+
+#chat-input:-ms-input-placeholder {
+  color: @color-placeholder-light;
 }

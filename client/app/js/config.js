@@ -7,8 +7,8 @@ const Config = {
   WEBRTC_MEDIA_CONSTRAINTS: {
     video: {
       mandatory: {
-        maxWidth: 320,
-        maxHeight: 180
+        // maxWidth: 640,
+        // maxHeight: 360
       }
     },
     audio: true
