@@ -1,13 +1,13 @@
 const React = require('react');
 
-const Sticker = require('../emoticon-picker/sticker');
+const StickerPacks = require('../emoticon-picker/sticker-packs');
 
 
 const ChatMessageSticker = React.createClass({
   render: function() {
     return (
       <div className={'message-sticker'}>
-        <i className={"emoticon-sprite " + Sticker[this.props.stickerCode].className}></i>
+        <i className={'emoticon-sprite ' + StickerPacks['pack01'][this.props.stickerCode]['className'] }></i>
       </div>
     );
   }

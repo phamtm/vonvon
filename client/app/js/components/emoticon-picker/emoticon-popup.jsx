@@ -1,25 +1,37 @@
 const React = require('react');
 
-const Sticker = require('./sticker');
+const StickerPacks = require('./sticker-packs');
 const StickerItem = require('./sticker-item.jsx');
 
 
 const EmoticonPopup = React.createClass({
 
   render: function() {
-    var stickers = [];
+    const stickerPack = StickerPacks[1];
+    const stickers = stickerPack.stickers;
+    var stickersDom = [];
 
-    for (var stickerCode in Sticker) {
-      if (Sticker.hasOwnProperty(stickerCode)) {
-        var sticker = <StickerItem key={stickerCode} stickerCode={stickerCode}
-                                   sticker={Sticker[stickerCode]} />;
-        stickers.push(sticker);
+    for (var stickerCode in stickers) {
+      if (stickers.hasOwnProperty(stickerCode)) {
+        const stickerDom = <StickerItem key={stickerCode} sticker={stickers[stickerCode]} />;
+        stickersDom.push(stickerDom);
       }
     }
 
     return (
       <div className={"emoticon-picker-popup z-depth-1"}>
-        {stickers}
+        <div className="emoticon-tab">
+          <ul className="emoticon-tab-ul">
+            <li className="emoticon-tab-li">Pack 1</li>
+            <li className="emoticon-tab-li">Pack 2</li>
+            <li className="emoticon-tab-li">Pack 3</li>
+            <li className="emoticon-tab-li">Pack 4</li>
+            <li className={"emoticon-tab-li reveal-more"}>&gt;&gt;</li>
+          </ul>
+        </div>
+        <div className="emoticon-pack">
+          {stickersDom}
+        </div>
       </div>
     );
   }

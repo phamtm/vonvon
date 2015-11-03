@@ -1,4 +1,5 @@
 const App = require('./components/app.jsx');
+const ReactDOM = require('react-dom');
 const React = require('react');
 
 require('browsernizr/test/webrtc/getusermedia');
@@ -11,7 +12,7 @@ if (!Modernizr.getusermedia && !Modernizr.peerconnection) {
   window.location.replace('not-supported.html');
 }
 
-React.render(
+ReactDOM.render(
   <App />,
   document.getElementById('appComponent')
 );

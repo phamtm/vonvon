@@ -1,8 +1,6 @@
-const keyMirror = require('react/lib/keyMirror');
-
-const MessageType = keyMirror({
+const MessageType = {
   TEXT: null,
   STICKER: null
-});
+};
 
 module.exports = MessageType;

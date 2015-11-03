@@ -30,8 +30,8 @@ const ChatMessageList = React.createClass({
   },
 
   _scrollToBottom: function() {
-    const ul = this.refs.holder.getDOMNode();
-    ul.scrollTop = ul.scrollHeight;
+    // const ul = this.refs.holder.getDOMNode();
+    // ul.scrollTop = ul.scrollHeight;
   },
 
   render: function() {
@@ -48,7 +48,7 @@ const ChatMessageList = React.createClass({
       };
     }
 
-    for (let i = 1; i < messages.length; i++) {
+    for (var i = 1; i < messages.length; i++) {
       messages[i].content.id = messages[i].id;
       if (messages[i].authorName !== curMsg.authorName) {
         coalescedMessages.push(curMsg);

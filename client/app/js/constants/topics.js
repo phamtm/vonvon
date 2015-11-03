@@ -1,7 +1,4 @@
-const keyMirror = require('react/lib/keyMirror');
-
-
-const Topics = keyMirror({
+const Topics = {
   STATE_CHANGED: null,
 
   STREAM_LOCAL_RECEIVED: null,
@@ -20,6 +17,6 @@ const Topics = keyMirror({
 
   CHAT_CHANNEL_OPENED: null,
   CHAT_CHANNEL_CLOSED: null,
-});
+};
 
 module.exports = Topics;

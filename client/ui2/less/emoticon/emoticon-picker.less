@@ -7,7 +7,7 @@
 
 .emoticon-picker-popup {
     width: 280px;
-    height: 250px;
+    height: 300px;
     position: fixed;
     bottom: 40px;
     right: 18px;
@@ -16,13 +16,10 @@
     background-color: white;
 
     display: flex;
-    // visibility: hidden;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-
-    overflow-y: auto;
 }
 
 .emoticon-picker-popup-emoticon {
@@ -47,3 +44,57 @@
 .emoticon-picker i {
     .no-select;
 }
+
+.emoticon-tab {
+    height: 40px;
+    width: 100%;
+    display: flex;
+
+    .emoticon-tab-ul {
+        overflow-x: scroll;
+        height: 100%;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0;
+
+    }
+
+    li.emoticon-tab-li {
+        padding: 10px;
+        display: flex;
+        border-right: 1px solid #eee;
+        margin: 0;
+    }
+
+    li.reveal-more {
+        position: absolute;
+        right: 0;
+        width: 40px;
+        border-right: none;
+        border-left: 1px solid #eee;
+        font-weight: 700;
+        background-color: #ffffff;
+    }
+
+    li.emoticon-tab-li:hover {
+        cursor: pointer;
+        background-color: #eee;
+    }
+}
+
+.emoticon-pack {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    overflow-y: auto;
+    color: black;
+}
+
+

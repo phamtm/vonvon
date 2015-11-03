@@ -1,5 +1,4 @@
 const React = require('react');
-const Spinner = require('react-spinkit');
 const connectionManager = require('../../connection-manager');
 const ConnectionStatus = require('../../constants/connection-status');
 const Topics = require('../../constants/topics');
@@ -47,10 +46,10 @@ const VideoBoxRemote = React.createClass({
         );
 
       case ConnectionStatus.MATCHED:
-        console.log('video received');
         var remoteStream = this.state.remoteStream;
         var remoteStreamSrc = null;
         if (remoteStream !== null) {
+          console.log('VideoBoxRemote::video received');
           remoteStreamSrc = window.URL.createObjectURL(remoteStream);
         }
         return (
