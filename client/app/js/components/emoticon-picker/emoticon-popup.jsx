@@ -13,7 +13,7 @@ const EmoticonPopup = React.createClass({
 
     for (var stickerCode in stickers) {
       if (stickers.hasOwnProperty(stickerCode)) {
-        const stickerDom = <StickerItem key={stickerCode} stickerCode={stickerCode}
+        const stickerDom = <StickerItem key={StickerPacks[0].packname + stickerCode} stickerCode={stickerCode}
                                         sticker={stickers[stickerCode]} />;
         stickersDom.push(stickerDom);
       }
