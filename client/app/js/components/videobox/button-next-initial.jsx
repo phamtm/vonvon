@@ -2,12 +2,13 @@ const React = require('react');
 const ConnectionStatus = require('../../constants/connection-status');
 const connectionManager = require('../../connection-manager');
 const Topics = require('../../constants/topics');
+const log = require('../../utils/log');
 
 
 const ButtonNextInitial = React.createClass({
 
   _handleClick: function() {
-    console.log('initClick');
+    log.debug('initClick');
     connectionManager.emit(Topics.REQUEST_NEW_PARTNER);
   },
 

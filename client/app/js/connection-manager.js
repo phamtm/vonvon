@@ -4,7 +4,9 @@ const EventEmitter = require('events').EventEmitter;
 const io = require('socket.io-client');
 const Peer = require('peerjs_fork_firefox40');
 const Topics = require('./constants/topics');
+const MessageType = require('./constants/message-type');
 const MessageUtil = require('./utils/message-utils');
+const log = require('./utils/log');
 
 const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
 const $window = $(window);
@@ -34,6 +36,9 @@ const ConnectionManager = function() {
   // Video streams
   this._localStream = null;
   this._remoteStream = null;
+
+  // Show/hide webcam preference, default to true
+  this._enableMediaStream = true;
 
   // The last time that user request for new partner
   this._lastRequestTime = null;
@@ -120,19 +125,30 @@ ConnectionManager.prototype.onRequestNextPartner = function(cb) {
   this.addListener(Topics.REQUEST_NEW_PARTNER, cb);
 };
 
+// Toggle webcam event
+ConnectionManager.prototype.notifyWebcamToggled = function() {
+  log.debug('webcam clicked');
+  this._enableMediaStream = !this._enableMediaStream;
+  this.sendMediaStreamControllMessage(this._enableMediaStream);
+};
+
 ConnectionManager.prototype.sendMessage = function(transferableMessage) {
-  // TODO: check if data channel is closed
   if (!!this._peerDataConn &&
       !!this._peerDataConn.open &&
       this._state === ConnectionStatus.MATCHED &&
       !!transferableMessage) {
     const serializedMessage = JSON.stringify(transferableMessage);
     this._peerDataConn.send(serializedMessage);
-    const presentableMessage = MessageUtil.convertToPresentableMessage(
-        transferableMessage, this._localId, true);
-    presentableMessage.authorName = 'You';
-    this._messages.push(presentableMessage);
-    this.emit(Topics.MESSAGE_CHANGED);
+
+    // TODO: check if this is media control message
+    if (transferableMessage.content.type === MessageType.TEXT
+        || transferableMessage.content.type === MessageType.STICKER) {
+      const presentableMessage = MessageUtil.convertToPresentableMessage(
+          transferableMessage, this._localId, true);
+      presentableMessage.authorName = 'You';
+      this._messages.push(presentableMessage);
+      this.emit(Topics.MESSAGE_CHANGED);
+    }
   }
 };
 
@@ -149,6 +165,14 @@ ConnectionManager.prototype.sendStickerMessage = function(stickerCode) {
     const transferableMessage = MessageUtil.convertToTransferableStickerMessage(stickerCode);
     this.sendMessage(transferableMessage);
   }
+};
+
+ConnectionManager.prototype.sendMediaStreamControllMessage = function(turnMediaStreamOn) {
+  if (turnMediaStreamOn !== true && turnMediaStreamOn !== false) {
+    return;
+  }
+  const mediaStreamControlMessage = MessageUtil.convertToMediaStreamControlMessage(turnMediaStreamOn);
+  this.sendMessage(mediaStreamControlMessage);
 };
 
 navigator.getUserMedia = navigator.getUserMedia ||
@@ -176,7 +200,7 @@ ConnectionManager.prototype._clearMessages = function() {
 
 ConnectionManager.prototype._requestNewPartner = function() {
   if (this._state !== ConnectionStatus.REQUESTING) {
-    console.log('Requesting new partner..');
+    log.debug('Requesting new partner..');
     this._state = ConnectionStatus.REQUESTING;
     this.emit(Topics.STATE_CHANGED);
     this._socket.emit('socket-io::request-new-partner');
@@ -254,7 +278,7 @@ ConnectionManager.prototype._initConnections = function() {
 
   // //   if (this._state === ConnectionStatus.MATCHED) {
   // //     if (!this._peerMediaConn.open || !this._peerDataConn.open) {
-  // //       console.log("YAHOOOOOOOOOOOOOOOO");
+  // //       log.debug("YAHOOOOOOOOOOOOOOOO");
   // //       this._cleanUpAndRequestNewPartner();
   // //     }
   // //   }
@@ -272,7 +296,7 @@ ConnectionManager.prototype._initConnections = function() {
 
     this._lastRequestTime = curTime;
 
-    console.log('Next request');
+    log.debug('Next request');
     this._cleanUpAndRequestNewPartner(this._peerId);
   }.bind(this));
 
@@ -291,7 +315,7 @@ ConnectionManager.prototype._initConnections = function() {
     var PARTNER_ID;
 
     // Create a new connection to the PeerJs-server
-    console.log('Connection created, id::' + _self._localId);
+    log.debug('Connection created, id::' + _self._localId);
     _self._peerConn = new Peer(data.id, Config.PEER_SERVER_OPTIONS);
 
     // Received a call
@@ -302,7 +326,7 @@ ConnectionManager.prototype._initConnections = function() {
         _self._cleanUpAndRequestNewPartner();
       });
 
-      console.log("Receiving a call..")
+      log.debug("Receiving a call..")
       remoteCall.answer(_self._localStream); // Answer the call with an A/V stream.
       remoteCall.on('stream', function(remoteStream) {
         _self._remoteStream = remoteStream;
@@ -311,7 +335,7 @@ ConnectionManager.prototype._initConnections = function() {
     });
 
     _self._peerConn.on('disconnected', function() {
-      console.log('PeerConn:disconnected');
+      log.debug('PeerConn:disconnected');
     });
 
     // Received chat data
@@ -328,7 +352,7 @@ ConnectionManager.prototype._initConnections = function() {
       if (!data || !data.hasOwnProperty('partnerId')) {
         return;
       }
-      console.log('Partner matched, partner-id::' + data.partnerId);
+      log.debug('Partner matched, partner-id::' + data.partnerId);
       PARTNER_ID = data.partnerId;
       _self._peerId = PARTNER_ID;
       _self.emit(Topics.ID_PARTNER_CHANGED);
@@ -336,7 +360,7 @@ ConnectionManager.prototype._initConnections = function() {
       _self.emit(Topics.STATE_CHANGED, ConnectionStatus.MATCHED);
 
       if (_self._localId.localeCompare(PARTNER_ID) < 0) {
-        console.log("Calling peer::" + PARTNER_ID);
+        log.debug("Calling peer::" + PARTNER_ID);
         _self._peerDataConn = _self._peerConn.connect(PARTNER_ID);
         _self._announceWhenDataChannelOpened();
         _self._setUpChat(_self._peerDataConn);
@@ -346,7 +370,7 @@ ConnectionManager.prototype._initConnections = function() {
 
         if (_self._peerMediaConn) {
           _self._peerMediaConn.on('close', function() {
-            console.log('ending your call');
+            log.debug('ending your call');
             _self._cleanUpAndRequestNewPartner(PARTNER_ID);
           });
 

@@ -5,6 +5,7 @@ const Topics = require('../../constants/topics');
 const ButtonNext = require('./button-next.jsx');
 const ButtonWebcam = require('./button-webcam.jsx');
 const ButtonNextInitial = require('./button-next-initial.jsx');
+const log = require('../../utils/log');
 
 const VideoBoxRemote = React.createClass({
 
@@ -50,7 +51,7 @@ const VideoBoxRemote = React.createClass({
         var remoteStream = this.state.remoteStream;
         var remoteStreamSrc = null;
         if (remoteStream !== null) {
-          console.log('VideoBoxRemote::video received');
+          log.debug('VideoBoxRemote::video received');
           remoteStreamSrc = window.URL.createObjectURL(remoteStream);
         }
         return (

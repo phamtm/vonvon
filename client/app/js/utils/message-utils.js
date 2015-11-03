@@ -35,6 +35,18 @@ const MessageUtils = {
         stickerCode: stickerCode,
       }
     };
+  },
+
+  convertToMediaStreamControlMessage: function(turnMediaStreamOn) {
+    const timestamp = Date.now();
+    return {
+      id: 'm_' + timestamp,
+      timestamp: timestamp,
+      content: {
+        type: MessageType.MEDIA_STREAM_CONTROL,
+        mediaStreamOn: !!turnMediaStreamOn
+      }
+    };
   }
 
 };

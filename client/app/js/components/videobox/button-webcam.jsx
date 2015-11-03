@@ -1,10 +1,12 @@
 const React = require('react');
+const connectionManager = require('../../connection-manager');
+const log = require('../../utils/log');
 
 
 const ButtonWebcam = React.createClass({
 
   _handleClick: function() {
-    console.log('webcam button clicked');
+    connectionManager.notifyWebcamToggled();
   },
 
   render: function() {
