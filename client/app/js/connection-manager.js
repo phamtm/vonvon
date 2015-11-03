@@ -110,6 +110,11 @@ ConnectionManager.prototype.onPartnerIdChanged = function(cb) {
   this.addListener(Topics.ID_PARTNER_CHANGED, cb);
 };
 
+// Local's ID changed event
+ConnectionManager.prototype.onLocalIdChanged = function(cb) {
+  this.addListener(Topics.ID_LOCAL_CHANGED, cb);
+};
+
 // Next event
 ConnectionManager.prototype.onRequestNextPartner = function(cb) {
   this.addListener(Topics.REQUEST_NEW_PARTNER, cb);

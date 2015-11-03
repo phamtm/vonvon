@@ -5,30 +5,50 @@ const ChatInfo = React.createClass({
 
   getInitialState: function() {
     return {
+      localId: connectionManager._localId,
       partnerId: connectionManager._peerId
     };
   },
 
   componentDidMount: function() {
     connectionManager.onPartnerIdChanged(function() {
-      this.setState({
-        partnerId: connectionManager._peerId
-      });
+      this.setState(this._getLocalAndPeerIds());
+    }.bind(this));
+
+    connectionManager.onLocalIdChanged(function() {
+      this.setState(this._getLocalAndPeerIds());
     }.bind(this));
   },
 
+  _getLocalAndPeerIds: function() {
+    return {
+      localId: connectionManager._localId,
+      partnerId: connectionManager._peerId
+    };
+  },
+
   render: function() {
-    var msg = null;
+    var msgPartnerId = null;
     if (!!this.state.partnerId) {
-      msg = <span>You're chatting with <strong>{this.state.partnerId}</strong></span>;
+      msgPartnerId = <span>You're chatting with <strong>{this.state.partnerId}</strong></span>;
     } else {
-      msg = <span>You're not matched. <strong>Press next to find a partner</strong></span>;
+      msgPartnerId = <span>You're not matched. <strong>Press next to find a partner</strong></span>;
+    }
+
+    var msgLocalId = null;
+    if (!!this.state.localId) {
+      msgLocalId = <span>Hello <strong>{this.state.localId}</strong></span>;
+    } else {
+      msgLocalId = <span>Retrieving your chatname...</span>;
     }
 
     return (
       <li className={'chat-message-li chat-info'}>
         <div className='message-text'>
-          {msg}
+          {msgLocalId}
+        </div>
+        <div className='message-text'>
+          {msgPartnerId}
         </div>
       </li>
     );
