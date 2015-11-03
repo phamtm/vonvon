@@ -1,6 +1,6 @@
 const MessageType = {
-  TEXT: null,
-  STICKER: null
+  TEXT: 'MSG_TEXT',
+  STICKER: 'MSG_STICKER'
 };
 
 module.exports = MessageType;

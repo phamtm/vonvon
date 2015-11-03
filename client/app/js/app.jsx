@@ -1,6 +1,7 @@
 const App = require('./components/app.jsx');
 const ReactDOM = require('react-dom');
 const React = require('react');
+const connectionManager = require('./connection-manager');
 
 require('browsernizr/test/webrtc/getusermedia');
 require('browsernizr/test/webrtc/peerconnection');
@@ -12,22 +13,9 @@ if (!Modernizr.getusermedia && !Modernizr.peerconnection) {
   window.location.replace('not-supported.html');
 }
 
+connectionManager.initApp();
+
 ReactDOM.render(
   <App />,
   document.getElementById('appComponent')
 );
-
-// const tour = new Shepherd.Tour({
-//   defaults: {
-//     classes: 'shepherd-theme-arrows'
-//   }
-// });
-
-// tour.addStep('example', {
-//   title: 'Example Shepherd',
-//   text: 'Creating a Shepherd is easy too! Just create ...',
-//   attachTo: '.remote-video-placeholder bottom',
-//   advanceOn: '.btn-justified-large click'
-// });
-
-// tour.start();

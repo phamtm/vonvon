@@ -34,8 +34,16 @@ const ChatInput = React.createClass({
 
   handleStateChange: function() {
     this.setState({
-      message: ''
+      message: '',
+      disabled: !connectionManager.isDataConnectionOpen()
     });
+  },
+
+  handleDataConnectionOpened: function() {
+    this.setState({
+      message: '',
+      disabled: false
+    })
   },
 
   handleClick: function() {

@@ -8,7 +8,6 @@ const Topics = require('../constants/topics');
 const App = React.createClass({
 
   componentDidMount: function() {
-    connectionManager.init();
   },
 
   render: function() {

@@ -6,10 +6,9 @@ const Peer = require('peerjs_fork_firefox40');
 const Topics = require('./constants/topics');
 const MessageUtil = require('./utils/message-utils');
 
-const NEXT_REQUEST_INTERVAL = 3; // 10 seconds between each request
+const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
 const $window = $(window);
 const pingSound= new Audio('../sound/ping.ogg');
-
 
 
 /**
@@ -29,7 +28,7 @@ const ConnectionManager = function() {
   this._peerId = null;
   this._socket = null;
   this._peerConn = null;
-  this._peerCallConn = null;
+  this._peerMediaConn = null;
   this._peerDataConn = null;
 
   // Video streams
@@ -63,6 +62,14 @@ ConnectionManager.prototype.getRemoteStream = function() {
   return this._remoteStream;
 };
 
+ConnectionManager.prototype.isDataConnectionOpen = function() {
+  return (!!this._peerDataConn && !!this._peerDataConn.open);
+};
+
+ConnectionManager.prototype.isMediaConnectionOpen = function() {
+  return (!!this._peerMediaConn && !!this._peerMediaConn.open);
+};
+
 // State events
 ConnectionManager.prototype.onStateChange = function(cb) {
   this.addListener(Topics.STATE_CHANGED, cb);
@@ -82,7 +89,7 @@ ConnectionManager.prototype.onMessageChange = function(cb) {
 };
 
 ConnectionManager.prototype.onChatChannelOpened = function(cb) {
-  this.addListener(Topics.CHAT_CHANNEL_OPENED, cb);
+  this.addListener(Topics.DATA_CHANNEL_OPENED, cb);
 };
 
 ConnectionManager.prototype.onChatChannelClosed = function(cb) {
@@ -108,24 +115,12 @@ ConnectionManager.prototype.onRequestNextPartner = function(cb) {
   this.addListener(Topics.REQUEST_NEW_PARTNER, cb);
 };
 
-ConnectionManager.prototype.sendChat = function(message) {
-  if (message &&
-      this._peerDataConn &&
-      this._peerDataConn.open &&
-      this._state == ConnectionStatus.MATCHED) {
-    this._peerDataConn.send(message);
-    const authoredMessage = Message.convertRawMessage(message, this._localId + ' (You)');
-    this._messages.push(authoredMessage);
-    this.emit(Topics.MESSAGE_CHANGED);
-  }
-};
-
 ConnectionManager.prototype.sendMessage = function(transferableMessage) {
   // TODO: check if data channel is closed
-  if (this._peerDataConn &&
-      this._peerDataConn.open &&
-      this._state == ConnectionStatus.MATCHED &&
-      transferableMessage) {
+  if (!!this._peerDataConn &&
+      !!this._peerDataConn.open &&
+      this._state === ConnectionStatus.MATCHED &&
+      !!transferableMessage) {
     const serializedMessage = JSON.stringify(transferableMessage);
     this._peerDataConn.send(serializedMessage);
     const presentableMessage = MessageUtil.convertToPresentableMessage(
@@ -156,26 +151,12 @@ navigator.getUserMedia = navigator.getUserMedia ||
                          navigator.mozGetUserMedia ||
                          navigator.msGetUserMedia;
 
-ConnectionManager.prototype._getLocalMedia = function() {
-  // Capture local media
-  navigator.getUserMedia(
-    Config.WEBRTC_MEDIA_CONSTRAINTS,
-    function(localStream) {
-      this._localStream = localStream;
-      this.emit(Topics.STREAM_LOCAL_RECEIVED);
-    }.bind(this),
-    function() {
-      window.location.replace('not-supported.html');
-    }
-  );
-};
-
 ConnectionManager.prototype._closeConn = function() {
   // if (!this._peerConn || this._peerConn.disconnected || this._peerConn.destroyed) {
   //   return;
   // }
-  if (this._peerCallConn && this._peerCallConn.open) {
-    this._peerCallConn.close();
+  if (this._peerMediaConn && this._peerMediaConn.open) {
+    this._peerMediaConn.close();
   }
 
   if (this._peerDataConn && this._peerDataConn.open) {
@@ -206,6 +187,14 @@ ConnectionManager.prototype._cleanUpAndRequestNewPartner = function(peerId) {
   this._requestNewPartner();
 };
 
+ConnectionManager.prototype._announceWhenDataChannelOpened = function() {
+  if (!!this._peerDataConn) {
+    this._peerDataConn.on('open', function() {
+      this.emit(Topics.DATA_CHANNEL_OPENED);
+    }.bind(this));
+  }
+};
+
 ConnectionManager.prototype._setUpChat = function() {
   this._peerDataConn.on('data', function(data) {
     if (this._state !== ConnectionStatus.MATCHED) {
@@ -234,11 +223,8 @@ ConnectionManager.prototype._setUpChat = function() {
   }.bind(this));
 };
 
-ConnectionManager.prototype.init = function() {
+ConnectionManager.prototype._initConnections = function() {
   const _self = this;
-
-  this._getLocalMedia();
-
   this._socket = io.connect(
     Config.WEB_SERVER,
     {'sync disconnect on unload': true}
@@ -262,7 +248,7 @@ ConnectionManager.prototype.init = function() {
   //   );
 
   // //   if (this._state === ConnectionStatus.MATCHED) {
-  // //     if (!this._peerCallConn.open || !this._peerDataConn.open) {
+  // //     if (!this._peerMediaConn.open || !this._peerDataConn.open) {
   // //       console.log("YAHOOOOOOOOOOOOOOOO");
   // //       this._cleanUpAndRequestNewPartner();
   // //     }
@@ -305,7 +291,7 @@ ConnectionManager.prototype.init = function() {
 
     // Received a call
     _self._peerConn.on('call', function(remoteCall) {
-      _self._peerCallConn = remoteCall;
+      _self._peerMediaConn = remoteCall;
 
       remoteCall.on('close', function() {
         _self._cleanUpAndRequestNewPartner();
@@ -325,9 +311,10 @@ ConnectionManager.prototype.init = function() {
 
     // Received chat data
     _self._peerConn.on('connection', function(dataConnection) {
-      _self.emit(Topics.CHAT_CHANNEL_OPENED);
       _self._peerDataConn = dataConnection;
+      _self._announceWhenDataChannelOpened();
       _self._setUpChat(dataConnection);
+      _self.emit(Topics.DATA_CHANNEL_OPENED);
     });
 
     // When received a new partner id
@@ -346,20 +333,20 @@ ConnectionManager.prototype.init = function() {
       if (_self._localId.localeCompare(PARTNER_ID) < 0) {
         console.log("Calling peer::" + PARTNER_ID);
         _self._peerDataConn = _self._peerConn.connect(PARTNER_ID);
-        _self.emit(Topics.CHAT_CHANNEL_OPENED);
+        _self._announceWhenDataChannelOpened();
         _self._setUpChat(_self._peerDataConn);
 
         // If the user disable localStream, or no device -> do not call media
-        _self._peerCallConn = _self._peerConn.call(PARTNER_ID, _self._localStream);
+        _self._peerMediaConn = _self._peerConn.call(PARTNER_ID, _self._localStream);
 
-        if (_self._peerCallConn) {
-          _self._peerCallConn.on('close', function() {
+        if (_self._peerMediaConn) {
+          _self._peerMediaConn.on('close', function() {
             console.log('ending your call');
             _self._cleanUpAndRequestNewPartner(PARTNER_ID);
           });
 
           // user with lower id call user with higher id
-          _self._peerCallConn.on('stream', function(remoteStream) {
+          _self._peerMediaConn.on('stream', function(remoteStream) {
             _self._remoteStream = remoteStream;
             _self.emit(Topics.STREAM_REMOTE_RECEIVED);
           });
@@ -369,5 +356,32 @@ ConnectionManager.prototype.init = function() {
   });
 };
 
+ConnectionManager.prototype._getLocalMedia = function(next) {
+  // Capture local media
+  navigator.getUserMedia(
+    Config.WEBRTC_MEDIA_CONSTRAINTS,
+    function(localStream) {
+      if (localStream.getVideoTracks().length < 1) {
+        // TODO: proper error message
+        window.location.replace('not-supported.html');
+      }
+      this._localStream = localStream;
+      this.emit(Topics.STREAM_LOCAL_RECEIVED);
+      next();
+    }.bind(this),
+    function() {
+      window.location.replace('not-supported.html');
+    }
+  );
+};
+
+ConnectionManager.prototype.initApp = function() {
+  var _self = this;
+  this._getLocalMedia(function() {
+    _self._initConnections();
+  });
+};
+
 const CONNECTION_MANAGER_INSTANCE = new ConnectionManager();
+window.cm = CONNECTION_MANAGER_INSTANCE;
 module.exports = CONNECTION_MANAGER_INSTANCE;

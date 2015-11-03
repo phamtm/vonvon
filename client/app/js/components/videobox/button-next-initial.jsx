@@ -7,6 +7,7 @@ const Topics = require('../../constants/topics');
 const ButtonNextInitial = React.createClass({
 
   _handleClick: function() {
+    console.log('initClick');
     connectionManager.emit(Topics.REQUEST_NEW_PARTNER);
   },
 
