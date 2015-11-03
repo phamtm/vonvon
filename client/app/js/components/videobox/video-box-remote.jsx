@@ -3,6 +3,7 @@ const connectionManager = require('../../connection-manager');
 const ConnectionStatus = require('../../constants/connection-status');
 const Topics = require('../../constants/topics');
 const ButtonNext = require('./button-next.jsx');
+const ButtonWebcam = require('./button-webcam.jsx');
 const ButtonNextInitial = require('./button-next-initial.jsx');
 
 const VideoBoxRemote = React.createClass({
@@ -56,7 +57,8 @@ const VideoBoxRemote = React.createClass({
           <div className={"remote-video-holder"}>
             <video autoPlay className={"responsive-video remoteVideo"}
                    src={remoteStreamSrc} />
-            <ButtonNext />;
+            <ButtonNext />
+            <ButtonWebcam />
           </div>
         );
 

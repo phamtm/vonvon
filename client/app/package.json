@@ -7,8 +7,10 @@
     "browsernizr": "^2.0.0",
     "fbjs": "^0.4.0",
     "peerjs_fork_firefox40": "^0.3.15",
+    "perfect-scrollbar": "^0.6.7",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-gemini-scrollbar": "^2.0.1",
     "react-tap-event-plugin": "^0.2.1",
     "socket.io-client": "^1.3.7",
     "tether-shepherd": "^1.2.0"
