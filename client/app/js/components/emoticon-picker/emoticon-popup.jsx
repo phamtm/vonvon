@@ -7,13 +7,14 @@ const StickerItem = require('./sticker-item.jsx');
 const EmoticonPopup = React.createClass({
 
   render: function() {
-    const stickerPack = StickerPacks[1];
+    const stickerPack = StickerPacks[0];
     const stickers = stickerPack.stickers;
     var stickersDom = [];
 
     for (var stickerCode in stickers) {
       if (stickers.hasOwnProperty(stickerCode)) {
-        const stickerDom = <StickerItem key={stickerCode} sticker={stickers[stickerCode]} />;
+        const stickerDom = <StickerItem key={stickerCode} stickerCode={stickerCode}
+                                        sticker={stickers[stickerCode]} />;
         stickersDom.push(stickerDom);
       }
     }
