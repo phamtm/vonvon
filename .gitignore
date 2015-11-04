@@ -10,6 +10,7 @@ bundle.js
 # Project specific
 dist/
 style.css
+client/ui2/css/style.css
 
 # Config file
 client/app/src/js/config.js

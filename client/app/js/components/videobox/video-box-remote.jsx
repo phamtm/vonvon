@@ -37,9 +37,9 @@ const VideoBoxRemote = React.createClass({
     switch (this.state.connectionState) {
       case ConnectionStatus.REQUESTING:
         return (
-          <div className={"remote-video-holder"}>
+          <div className={"remote-video-holder bouncer"}>
             <div className={"loader"}>
-              Loading…
+              Matching…
             </div>
             <button className="btn-justified-large button-next" disabled >
               Requesting..
