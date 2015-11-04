@@ -1,38 +1,40 @@
 const React = require('react');
 
-const StickerPacks = require('./sticker-packs');
 const StickerItem = require('./sticker-item.jsx');
+const EmoticonPack = require('./emoticon-pack.jsx');
+const EmoticonPackTab = require('./emoticon-pack-tab.jsx');
+const StickerPacks = require('./sticker-packs');
 
 
 const EmoticonPopup = React.createClass({
 
-  render: function() {
-    const stickerPack = StickerPacks[0];
-    const stickers = stickerPack.stickers;
-    var stickersDom = [];
+  getInitialState: function() {
+    return {
+      activePackName: StickerPacks[0].packname
+    };
+  },
 
-    for (var stickerCode in stickers) {
-      if (stickers.hasOwnProperty(stickerCode)) {
-        const stickerDom = <StickerItem key={StickerPacks[0].packname + stickerCode} stickerCode={stickerCode}
-                                        sticker={stickers[stickerCode]} />;
-        stickersDom.push(stickerDom);
-      }
-    }
+  changeActiveTab: function(packname) {
+    this.setState({
+      activePackName: packname
+    });
+  },
+
+  render: function() {
+    const activePackName = this.state.activePackName;
+    const stickerPacksDom = StickerPacks.map(function(pack) {
+      const active = (activePackName === pack.packname);
+      return (
+        <EmoticonPack key={pack.packname} stickers={pack.stickers}
+                      packname={pack.packname} active={active} />
+        );
+    });
 
     return (
       <div className={"emoticon-picker-popup z-depth-1"}>
-        <div className="emoticon-tab">
-          <ul className="emoticon-tab-ul">
-            <li className="emoticon-tab-li">Pack 1</li>
-            <li className="emoticon-tab-li">Pack 2</li>
-            <li className="emoticon-tab-li">Pack 3</li>
-            <li className="emoticon-tab-li">Pack 4</li>
-            <li className={"emoticon-tab-li reveal-more"}>&gt;&gt;</li>
-          </ul>
-        </div>
-        <div className="emoticon-pack">
-          {stickersDom}
-        </div>
+        <EmoticonPackTab initialActivePackName={this.state.activePackName}
+                         onClick={this.changeActiveTab} />
+        { stickerPacksDom }
       </div>
     );
   }
