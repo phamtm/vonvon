@@ -91,7 +91,8 @@ const ChatInput = React.createClass({
         </div>
         <ul className={"chat-actions"}>
           <li>
-            <i className={"small material-icons"} onClick={this.handleClick}
+            <i className={"small material-icons"}
+               onClick={this.handleClick}
                disabled={this.state.disabled || !this.state.message.length}>
               send
             </i>

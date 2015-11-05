@@ -1,4 +1,5 @@
 const React = require('react');
+const classNames = require('classnames');
 
 const StickerItem = require('./sticker-item.jsx');
 const EmoticonPack = require('./emoticon-pack.jsx');
@@ -10,13 +11,13 @@ const EmoticonPopup = React.createClass({
 
   getInitialState: function() {
     return {
-      activePackName: StickerPacks[0].packname
+      activePackName: StickerPacks[0].packname,
     };
   },
 
   changeActiveTab: function(packname) {
     this.setState({
-      activePackName: packname
+      activePackName: packname,
     });
   },
 
@@ -30,8 +31,12 @@ const EmoticonPopup = React.createClass({
         );
     });
 
+    const popupClass = classNames('emoticon-picker-popup', 'z-depth-1', {
+      'active': this.props.active
+    });
+
     return (
-      <div className={"emoticon-picker-popup z-depth-1"}>
+      <div className={popupClass}>
         <EmoticonPackTab initialActivePackName={this.state.activePackName}
                          onClick={this.changeActiveTab} />
         { stickerPacksDom }

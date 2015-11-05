@@ -36,7 +36,7 @@ const EmoticonPicker = React.createClass({
     return (
       <li className={"emoticon-picker"}>
         <i className={"small material-icons"} onClick={this.togglePopup}>mood</i>
-        { this.state.popupActive ? <EmoticonPopup /> : null }
+        <EmoticonPopup active={this.state.popupActive} />
       </li>
     );
   }

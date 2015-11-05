@@ -15,11 +15,16 @@
     border-radius: @border-radius-emoticon-picker;
     background-color: white;
 
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+
+}
+
+.emoticon-picker-popup.active {
+    display: flex;
 }
 
 .emoticon-picker-popup-emoticon {
