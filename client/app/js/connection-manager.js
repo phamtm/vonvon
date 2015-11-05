@@ -423,7 +423,7 @@ ConnectionManager.prototype.initApp = function() {
     success: function (data, status) {
       // data.d is where the iceServers object lives
       iceServers = data.d.iceServers;
-      this._getLocalMedia(function() {
+      _self._getLocalMedia(function() {
         _self._initConnections();
       });
     },
