@@ -410,7 +410,7 @@ ConnectionManager.prototype.initApp = function() {
   var _self = this;
   // Call XirSys ICE servers
   $.ajax({
-    url: "https://service.xirsys.com/ice&quot",
+    url: "https://service.xirsys.com/ice",
     data: {
       ident: "frank",
       secret: "b13a5078-8200-11e5-904c-ba30a081df71",
@@ -422,13 +422,12 @@ ConnectionManager.prototype.initApp = function() {
 
     success: function (data, status) {
       // data.d is where the iceServers object lives
-      iceServers = data.iceServers;
-      console.log(iceServers);
+      iceServers = data.d.iceServers;
+      this._getLocalMedia(function() {
+        _self._initConnections();
+      });
     },
     async: false
-  });
-  this._getLocalMedia(function() {
-    _self._initConnections();
   });
 };
 
