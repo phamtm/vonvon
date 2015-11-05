@@ -11,6 +11,7 @@ const log = require('./utils/log');
 const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
 const $window = $(window);
 const pingSound= new Audio('../sound/ping.ogg');
+var iceServers = [];
 
 
 /**
@@ -316,6 +317,7 @@ ConnectionManager.prototype._initConnections = function() {
 
     // Create a new connection to the PeerJs-server
     log.debug('Connection created, id::' + _self._localId);
+    Config.PEER_SERVER_OPTIONS.iceServers = iceServers;
     _self._peerConn = new Peer(data.id, Config.PEER_SERVER_OPTIONS);
 
     // Received a call
@@ -406,6 +408,25 @@ ConnectionManager.prototype._getLocalMedia = function(next) {
 
 ConnectionManager.prototype.initApp = function() {
   var _self = this;
+  // Call XirSys ICE servers
+  $.ajax({
+    url: "https://service.xirsys.com/ice&quot",
+    data: {
+      ident: "frank",
+      secret: "b13a5078-8200-11e5-904c-ba30a081df71",
+      domain: "www.trananhcuong.com",
+      application: "default",
+      room: "default",
+      secure: 1
+    },
+
+    success: function (data, status) {
+      // data.d is where the iceServers object lives
+      iceServers = data.iceServers;
+      console.log(iceServers);
+    },
+    async: false
+  });
   this._getLocalMedia(function() {
     _self._initConnections();
   });
