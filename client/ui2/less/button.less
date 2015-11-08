@@ -4,7 +4,7 @@
     max-width: 250px;
     display: block;
     margin: 1em 0 auto;
-    padding: 8px 10px;
+    padding: 0px 10px;
 
     /* Decoration */
     background-color: #3F51B5;
@@ -40,6 +40,31 @@
     background-color: rgba(63, 81, 181, 0.85);
 }
 
+/* Progress */
+.btn-content {
+    display: block;
+    padding: 11px 0px 8px 0px;
+}
+
+.btn-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background-color: white;
+    width: 0%;
+}
+
+.btn-progress-transition-appear {
+    width: 0%;
+}
+
+.btn-progress-transition-appear.btn-progress-transition-appear-active {
+    width: 100%;
+    transition: width 10s;
+}
+
+/* Webcam button */
 .button-webcam, .button-webcam:focus {
     position: absolute;
     left: 180px;

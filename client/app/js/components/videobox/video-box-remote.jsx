@@ -42,7 +42,7 @@ const VideoBoxRemote = React.createClass({
               Matching…
             </div>
             <button className="btn-justified-large button-next" disabled >
-              Requesting..
+              <span className="btn-content">Requesting..</span>
             </button>
           </div>
         );
@@ -67,7 +67,7 @@ const VideoBoxRemote = React.createClass({
         return (
           <div className={"remote-video-holder"}>
             <div className="remote-video-placeholder">
-              <span>
+              <span className="intro">
                 VonVon is a place where you can have video chat with random folks on the internet.
                 Be vigilant, enjoy and have fun!
               </span>

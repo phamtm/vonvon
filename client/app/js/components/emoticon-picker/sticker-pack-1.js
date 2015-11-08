@@ -1,5 +1,5 @@
 const StickerPack1 = {
-  packname: 'pack01',
+  packname: 'popo',
   stickers: {
     'emtc.001.001': {
       className: 'emoticon-sprite-adore',

@@ -8,7 +8,6 @@ const MessageType = require('./constants/message-type');
 const MessageUtil = require('./utils/message-utils');
 const log = require('./utils/log');
 
-const NEXT_REQUEST_INTERVAL = 10; // 10 seconds between each request
 const $window = $(window);
 const pingSound= new Audio('../sound/ping.ogg');
 var iceServers = [];
@@ -66,6 +65,10 @@ ConnectionManager.prototype.getLocalStream = function() {
 
 ConnectionManager.prototype.getRemoteStream = function() {
   return this._remoteStream;
+};
+
+ConnectionManager.prototype.getState = function() {
+  return this._state;
 };
 
 ConnectionManager.prototype.isDataConnectionOpen = function() {
@@ -226,6 +229,11 @@ ConnectionManager.prototype._announceWhenDataChannelOpened = function() {
 };
 
 ConnectionManager.prototype._setUpChat = function() {
+  if (!this._peerDataConn && !this._peerDataConn.open) {
+    log.debug('peerDataConn:error:: cannot setup chat, already closed');
+    return;
+  }
+
   this._peerDataConn.on('data', function(data) {
     if (this._state !== ConnectionStatus.MATCHED) {
       return;
@@ -290,7 +298,7 @@ ConnectionManager.prototype._initConnections = function() {
     const curTime = new Date();
     if (this._lastRequestTime) {
       const timeDelta = (curTime - this._lastRequestTime)*1.0/1000;
-      if (timeDelta < NEXT_REQUEST_INTERVAL) {
+      if (timeDelta < Config.MIN_CHAT_INTERVAL) {
         return;
       }
     }
@@ -350,6 +358,7 @@ ConnectionManager.prototype._initConnections = function() {
 
     // When received a new partner id
     _self._socket.on('socket-io::matched', function (data) {
+      _self._lastRequestTime = new Date();
       // Matched with a partner
       if (!data || !data.hasOwnProperty('partnerId')) {
         return;
@@ -427,7 +436,7 @@ ConnectionManager.prototype.initApp = function() {
         _self._initConnections();
       });
     },
-    async: false
+    async: true
   });
 };
 

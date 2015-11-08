@@ -16,7 +16,7 @@ const ButtonNextInitial = React.createClass({
     return (
       <button className="btn-justified-large"
               onClick={this._handleClick} >
-        Find someone
+        <span className="btn-content">Find someone</span>
       </button>
     );
   }
