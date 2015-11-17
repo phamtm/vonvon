@@ -19,7 +19,13 @@ const Config = {
     host: SERVER_IP,
     port: PEER_PORT,
     key: PEER_KEY,
-    // debug: 3
+    // debug: 3,
+    customConfig: {
+      'iceServers': [
+        { url: 'stun:52.76.144.20:3478'},
+        { url: 'turn:frank@52.76.144.20:3478', credential: 'test' },
+      ]
+    }
   },
 
   WEB_SERVER: 'https://' + SERVER_IP + ":" + SOCKET_PORT,

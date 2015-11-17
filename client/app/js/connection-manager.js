@@ -326,6 +326,7 @@ ConnectionManager.prototype._initConnections = function() {
     // Create a new connection to the PeerJs-server
     log.debug('Connection created, id::' + _self._localId);
     Config.PEER_SERVER_OPTIONS.iceServers = iceServers;
+    log.debug('Connection created, id::' + _self._localId);
     _self._peerConn = new Peer(data.id, Config.PEER_SERVER_OPTIONS);
 
     // Received a call
